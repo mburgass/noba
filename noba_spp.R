@@ -94,3 +94,52 @@ region_prop_df <- region_prop_df %>%
 
 message(sprintf('Writing loiczid/csq/cell proportions/cell areas by region to: \n  %s', rgn_prop_file))
 write_csv(region_prop_df, 'noba_prop_file.csv')
+
+
+
+#####Working out what species are in each regions#############
+iucn_cells_spp<- read_csv('/home/shares/ohi/git-annex/globalprep/spp_ico/v2016/int/iucn_cells_spp.csv')
+am_cells_spp<- read_csv('/home/shares/ohi/git-annex/globalprep/spp_ico/v2016/int/am_cells_spp_prob0.csv')
+am_namecheck<-read_csv('/home/shares/ohi/git-annex/globalprep/spp_ico/v2016/int/namecheck_am.csv')
+region_prop_df<- read_csv('noba_prop_file.csv')
+sp_summary<- iucn_cells_spp %>%
+  left_join(region_prop_df, by = 'loiczid')
+sp_summary2<-sp_summary %>% drop_na(rgn_id)
+sp_summary2<- sp_summary2 %>%
+  group_by(rgn_id) %>%
+  dplyr::select(sciname, iucn_sid, rgn_id, rgn_name) %>%
+  ungroup()
+sp_summary3<- sp_summary2 %>% distinct()
+sp_summary3<- arrange(sp_summary3, rgn_id)
+write_csv(sp_summary3, 'iucn_spp_summary.csv')
+
+am_sp_summary<- am_cells_spp %>%
+  left_join(region_prop_df, by = 'loiczid')
+am_summary<-am_sp_summary %>% drop_na(rgn_id)
+am_summary2<- am_summary %>%
+  group_by(rgn_id) %>%
+  dplyr::select(am_sid, rgn_id, rgn_name) %>%
+  ungroup()
+am_summary3<- am_summary2 %>% distinct()
+am_summary3<- arrange(am_summary3, rgn_id)
+am_summary4<- am_summary3 %>%
+  left_join(am_namecheck, by='am_sid') %>%
+  select(-sciname2)
+am_summary5<- am_summary4 %>%
+  dplyr::select(am_sid, rgn_id, rgn_name, sciname)
+write_csv(am_summary5, 'am_spp_summary.csv')
+
+am_spp<-read_csv('/home/burgass/github/noba/am_spp_summary.csv')
+iucn_spp<- read_csv('/home/burgass/github/noba/iucn_spp_summary.csv')
+all_spp<- read_csv('/home/shares/ohi/git-annex/globalprep/spp_ico/v2016/int/spp_all_cleaned.csv')
+am_iucn<- full_join(am_spp, iucn_spp, by=c('sciname', 'rgn_id', 'rgn_name'))# this doesn't work - means IUCN ID doesn't align
+test<- left_join(all_spp, am_iucn, by='sciname') %>%
+  select(-am_sid.y, -iucn_sid.y)
+#all_spp_iucn<- full_join(all_spp, iucn_spp, by=c('iucn_sid', 'sciname'))
+#all_spp_iucn_am<- semi_join(all_spp_iucn, am_spp, by=c('am_sid', 'sciname', 'rgn_id', 'rgn_name'))
+all_spp3<- test %>% drop_na(rgn_id)
+write_csv(all_spp3, file.path('spp_summary_final_rgns.csv'))
+
+spp_noba<- select(all_spp3, -rgn_id, -rgn_name)
+spp_noba<- subset(spp_noba,!duplicated(spp_noba$sciname))
+write_csv(spp_noba, 'spp_noba_summary.csv')
