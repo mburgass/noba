@@ -1,0 +1,69 @@
+FGnum,Functional group,TL,LivingBiomass,Vertebrates,LandedSpp,Include-in-MTI?,TeleostFish,LandedFish+Elasmobranchs,NontargetFish+ElasmobranchsInclDiscard,Elasmobranchs,DemersalFauna,PelagicFauna,Mammals,Birds,non-fishElasmobranchVertebrates,Cetaceans,InvertsPlants
+1,Baleen whales,4.44,1,1,0,1,0,0,0,0,0,1,1,0,1,1,0
+2,Toothed whales,4.66,1,1,0,1,0,0,0,0,0,1,1,0,1,1,0
+3,Seals,4.99,1,1,0,1,0,0,0,0,0,1,1,0,1,0,0
+4,Seabirds,3.43,1,1,0,1,0,0,0,0,0,1,0,1,1,0,0
+5,Juvenile sharks,4.29,1,1,0,1,0,0,1,1,1,1,0,0,0,0,0
+6,Spurdog,4.76,1,1,1,1,0,1,0,1,1,1,0,0,0,0,0
+7,Large piscivorous sharks,4.93,1,1,1,1,0,1,0,1,1,1,0,0,0,0,0
+8,Small sharks,4.34,1,1,1,1,0,1,0,1,1,0,0,0,0,0,0
+9,Juvenile rays,4.24,1,1,0,1,0,0,1,1,1,0,0,0,0,0,0
+10,Starry ray + others,4.46,1,1,1,1,0,1,0,1,1,0,0,0,0,0,0
+11,Thornback & Spotted ray,4.51,1,1,1,1,0,1,0,1,1,0,0,0,0,0,0
+12,Skate + cuckoo ray,4.44,1,1,1,1,0,1,0,1,1,0,0,0,0,0,0
+13,"Juvenile Cod(0-2, 0-40cm)",4.32,1,1,0,1,1,0,1,0,1,1,0,0,0,0,0
+14,Cod (adult),4.82,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+15,"Juvenile Whiting (0-1, 0-20cm)",4.26,1,1,0,1,1,0,1,0,1,1,0,0,0,0,0
+16,Whiting (adult),4.36,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0
+17,"Juvenile Haddock (0-1, 0-20cm)",4.07,1,1,0,1,1,0,1,0,1,0,0,0,0,0,0
+18,Haddock (adult),4.27,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+19,"Juvenile Saithe (0-3, 0-40cm)",4.03,1,1,0,1,1,0,1,0,1,0,0,0,0,0,0
+20,Saithe (adult),4.35,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+21,Hake,4.91,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+22,Blue whiting,4.1,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0
+23,Norway pout,3.6,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0
+24,Other gadoids (large),4.53,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0
+25,Other gadoids (small),3.84,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0
+26,Monkfish,4.84,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+27,Gurnards,4.46,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+28,"Herring (juvenile 0, 1)",3.43,1,1,0,1,1,0,1,0,0,1,0,0,0,0,0
+29,Herring (adult),3.45,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0
+30,Sprat,2.97,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0
+31,Mackerel,3.89,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0
+32,Horse mackerel,4.28,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0
+33,Sandeels,3.35,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0
+34,Plaice,3.99,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+35,Dab,4.02,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+36,Long-rough dab,4.19,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+37,Flounder,4.39,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+38,Sole,4,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+39,Lemon sole,3.94,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+40,Witch,4.05,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+41,Turbot and brill,4.55,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+42,Megrim,4.47,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+43,Halibut,4.53,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+44,Dragonets,3.98,1,1,0,1,1,0,1,0,1,0,0,0,0,0,0
+45,Catfish (Wolf-fish),4.28,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+46,Large demersal fish,4.22,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+47,Small demersal fish,4.22,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0
+48,Miscellaneous filterfeeding pelagic fish,3.44,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0
+49,Squid & cuttlefish,3.84,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1
+50,Fish larvae,2.85,1,1,0,1,1,0,1,0,0,1,0,0,0,0,0
+51,Carnivorous zooplankton,3.24,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1
+52,Herbivorous & Omnivorous zooplankton (copepods),2.06,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1
+53,Gelatinous zooplankton,3.58,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1
+54,Large crabs,3.78,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1
+55,Nephrops,3.52,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1
+56,Epifaunal macrobenthos (mobile grazers),3.32,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1
+57,Infaunal macrobenthos,2.88,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1
+58,Shrimp,3.06,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1
+59,Small mobile epifauna (swarming crustaceans),2.92,1,1,0,1,0,0,0,0,1,0,0,0,0,0,0
+60,Small infauna (polychaetes),2.96,1,0,0,1,0,0,0,0,1,0,0,0,0,0,1
+61,Sessile epifauna,2.81,1,0,1,1,0,0,0,0,1,0,0,0,0,0,1
+62,Meiofauna,3.04,1,0,0,1,0,0,0,0,1,0,0,0,0,0,1
+63,"Benthic microflora (incl. Bacteria, protozoa))",2.24,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+64,"Planktonic microflora (incl. Bacteria, protozoa)",2.14,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+65,Phytoplankton,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+66,Detritus - DOM -water column,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+67,Detritus - POM - sediment,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+68,Discards,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

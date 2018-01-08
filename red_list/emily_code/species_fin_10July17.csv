@@ -1,0 +1,384 @@
+sppid,fg,spp,FGname,CommonName,RLI,RLstatus,LPI,GenLength,model
+1,1,Balaenoptera borealis,Baleen whales,Sei whale ,1,EN,1,23.3,0
+2,1,Cetorhinus maximus,Baleen whales,Basking shark,1,VU,1,61.5,1
+3,1,Balaenoptera physalus,Baleen whales,Fin whale,1,EN,1,25.9,0
+4,1,Balaenoptera musculus,Baleen whales,Blue whale,1,EN,1,31,0
+5,1,Balaenoptera acutorostrata,Baleen whales,Minke whale,1,LC,1,22,1
+6,2,Tursiops truncatus,Toothed whales,Common bottlenose dolphin,1,LC,1,17.6,0
+7,2,Lagenorhynchus acutus,Toothed whales,Atlantic white-sided dolphin ,1,LC,1,12.7,1
+8,2,Globicephala melas,Toothed whales,Long finned pilot whale ,1,DD,1,24,0
+9,2,Kogia breviceps,Toothed whales,Pygmy sperm whale,1,DD,0,12,0
+10,2,Ziphius cavirostris,Toothed whales,Cuvier's beaked whale,1,LC,1,17.7,0
+11,2,Pseudorca crassidens,Toothed whales,False killer whale ,1,DD,1,19.8,0
+12,2,Lagenorhynchus albirostris,Toothed whales,White beaked dolphin,1,LC,0,15.5,1
+13,2,Grampus griseus,Toothed whales,Risso's dolphin,1,LC,1,20,0
+14,2,Orcinus orca,Toothed whales,Orca,1,DD,1,25.6,0
+15,2,Phocoena phocoena,Toothed whales,Harbour porpoise,1,LC,1,8.3,1
+16,2,Stenella coeruleoalba,Toothed whales,Striped dolphin ,1,LC,1,21.7,0
+17,2,Hyperoodon ampullatus,Toothed whales,North atlantic bottlenose whale,1,DD,1,17.6,0
+18,2,Delphinus delphis,Toothed whales,Short beaked common dolphin ,1,LC,1,9.7,0
+19,3,Halichoerus grypus,Seals,Grey seal,1,LC,1,14,1
+20,3,Phoca vitulina,Seals,Harbour seal,1,LC,1,13.5,1
+21,4,Catharacta skua,Seabirds,Great skua,1,LC,1,17.5,1
+22,4,Hydrobates pelagicus,Seabirds,European storm petrol,1,LC,1,15.7,0
+23,4,Hydrobates leucorhous,Seabirds,Leech's storm petrol,1,VU,1,13,0
+24,4,Gelochelidon nilotica,Seabirds,Gull-billed tern,1,LC,1,11.7,0
+25,4,Gavia stellata,Seabirds,Red throated loon,1,LC,1,9.8,0
+26,4,Rissa tridactyla,Seabirds,Kittiwake,1,LC,1,12.9,1
+27,4,Larus argentatus,Seabirds,Herring gull,1,LC,1,13,1
+28,4,Ardenna grisea,Seabirds,Sooty shearwater,1,NT,1,21.2,0
+29,4,Morus bassanus,Seabirds,Gannet,1,LC,1,20.7,1
+30,4,Larus fuscus,Seabirds,Lesser black backed gull,1,LC,1,13.9,1
+31,4,Larus hyperboreus,Seabirds,Glaucous gull,1,LC,1,12.4,0
+32,4,Puffinus puffinus,Seabirds,Manx shearwater,1,LC,1,16.5,0
+33,4,Sternula albifrons,Seabirds,Little tern,1,LC,1,10.9,0
+34,4,Alca torda,Seabirds,Razorbill,1,NT,1,13.6,1
+35,4,Fratercula arctica,Seabirds,Puffin,1,VU,1,21.6,1
+36,4,Vanellus vanellus,Seabirds,Northern lapwing,1,NT,1,9,0
+37,4,Somateria mollissima,Seabirds,Common eider,1,NT,1,9,0
+38,4,Sterna hirundo,Seabirds,Common tern,1,LC,1,11.5,0
+39,4,Uria aalge,Seabirds,Guillemot,1,LC,1,15.1,1
+40,4,Phalacrocorax aristotelis,Seabirds,Shag,1,LC,1,8.8,1
+41,4,Puffinus mauretanicus,Seabirds,Balearic shearwater,1,CR,1,18,0
+42,4,Stercorarius pomarinus,Seabirds,Pomarine jaeger,1,LC,1,13.5,0
+43,4,Alle alle,Seabirds,Little auk,1,LC,1,15,0
+44,4,Tringa totanus,Seabirds,Common redshank,1,LC,1,6.2,0
+45,4,Larus michahellis,Seabirds,Yellow-legged gull,1,LC,0,11.5,0
+46,4,Tachybaptus ruficollis,Seabirds,Little grebe,1,LC,1,5.4,0
+47,4,Ardenna gravis,Seabirds,Great shearwater,1,LC,1,18.3,0
+48,4,Cepphus grylle,Seabirds,Black guillemot,1,LC,1,10.9,0
+49,4,Hydrocoloeus minutus,Seabirds,Little gull,1,LC,1,10.5,0
+50,4,Larus ridibundus,Seabirds,Black-headed gull,1,LC,1,9.6,0
+51,4,Fulmarus glacialis,Seabirds,Fulmer,1,LC,1,30.7,1
+52,4,Larus marinus,Seabirds,Great black backed gull,1,LC,1,12,1
+53,4,Larus canus,Seabirds,Mew gull,1,LC,1,9.8,0
+54,4,Thalasseus sandvicensis,Seabirds,Sandwich tern,1,LC,1,10.8,0
+55,6,Squalus acanthias,Spurdog,Spurdog,1,VU,1,44,1
+56,7,Centroselachus crepidater,Large piscivorous sharks,Longnose velvet dogfish ,1,LC,0,16,0
+57,7,Prionace glauca,Large piscivorous sharks,Blue shark ,1,NT,1,13.8,1
+58,7,Somniosus microcephalus,Large piscivorous sharks,Greenland shark,1,NT,0,16,1
+59,7,Isurus oxyrinchus,Large piscivorous sharks,Shortfin mako ,1,VU,1,22.8,0
+60,7,Lamna nasus,Large piscivorous sharks,porbeagle,1,VU,1,20.8,1
+61,7,Alopias vulpinus,Large piscivorous sharks,Thresher shark,1,VU,1,15,1
+62,7,Centroscymnus coelolepis,Large piscivorous sharks,Portugese dogfish ,1,NT,0,16,0
+63,7,Hexanchus griseus,Large piscivorous sharks,Bluntnose sixgill shark ,1,NT,1,16,0
+64,7,Echinorhinus brucus,Large piscivorous sharks,bramble shark,1,DD,0,16,0
+65,7,Galeorhinus galeus,Large piscivorous sharks,Tope shark ,1,VU,1,12.7,1
+66,7,Dalatias licha,Large piscivorous sharks,Kitefin shark ,1,NT,1,16,0
+67,7,Squatina squatina,Large piscivorous sharks,Angelshark ,1,CR,0,11,0
+68,8,Scyliorhinus stellaris,Small sharks,Nursehound ,1,NT,0,14.4,1
+69,8,Galeus melastomus,Small sharks,Blackmouth catshark,1,LC,1,14.4,0
+70,8,Etmopterus spinax,Small sharks,velvet belly,1,LC,0,14.4,1
+71,8,Mustelus mustelus,Small sharks,common smoothhound,1,VU,1,17.8,1
+72,8,Scyliorhinus canicula,Small sharks,lesser spotted dogfish,1,LC,1,7.6,1
+73,8,Mustelus asterias,Small sharks,Starry smoothhound,1,LC,0,17.8,1
+74,8,Scymnodon ringens,Small sharks,Knifetooth dogfish,1,DD,0,14.4,0
+75,8,Oxynotus paradoxus,Small sharks,Sailfin roughshark,1,DD,0,14.4,0
+76,8,Etmopterus princeps,Small sharks,Great lanternshark ,1,DD,0,14.4,0
+77,10,Amblyraja radiata,Starry ray & others,Starry ray,1,VU,1,11.8,1
+78,10,Leucoraja fullonica,Starry ray & others,Shagreen ray,1,VU,0,9.7,1
+79,10,Tetronarce nobiliana,Starry ray & others,Great torpedo ray ,1,DD,0,10.8,0
+80,10,Torpedo marmorata,Starry ray & others,Spotted torpedo,1,DD,1,10.8,0
+81,11,Raja montagui,Thornback & spotted ray ,Spotted ray,1,LC,1,6.6,1
+82,11,Raja clavata,Thornback & spotted ray ,Thornback ray,1,NT,1,8.2,1
+83,12,Dipturus batis,Skate & Cuckoo ray,Common skate,1,CR,0,13.9,1
+84,12,Myliobatis aquila,Skate & Cuckoo ray,Common eagle ray ,1,DD,1,11,0
+85,12,Pteroplatytrygon violacea,Skate & Cuckoo ray,Pelagic stingray ,1,LC,0,11,0
+86,12,Dipturus oxyrinchus,Skate & Cuckoo ray,Longnosed skate,1,NT,0,10,1
+87,12,Dipturus nidarosiensis,Skate & Cuckoo ray,Norwegian skate,1,NT,0,10,0
+88,12,Leucoraja naevus,Skate & Cuckoo ray,Cuckoo ray,1,LC,1,11.4,1
+89,12,Dasyatis pastinaca,Skate & Cuckoo ray,Common stingray,1,DD,0,11,0
+90,12,Leucoraja circularis,Skate & Cuckoo ray,Sandy skate ,1,EN,0,9.7,0
+91,12,Rajella lintea,Skate & Cuckoo ray,Sailray,1,LC,0,11,0
+92,14,Gadus morhua,Adult cod,cod,1,VU,1,15,1
+93,16,Merlangius merlangus,Adult whiting,north sea whiting ,1,LC,1,11.2,1
+94,18,Melanogrammus aeglefinus,Adult haddock,Haddock,1,VU,1,13.2,1
+95,20,Pollachius virens,Adult saithe,Saithe,0,NE,1,15.8,1
+96,21,Merluccius merluccius,Hake,Hake ,1,LC,1,3,1
+97,22,Micromesistius poutassou,Blue whiting,Blue whiting,0,NE,1,11.5,1
+98,23,Trisopterus esmarkii,Norway Pout,Norway pout ,1,LC,1,3,1
+99,24,Phycis blennoides,Other gadoids (large),greater forkbeard,0,NE,0,5.3,1
+100,24,Pollachius pollachius,Other gadoids (large),pollack,1,LC,1,6,1
+101,24,Brosme brosme,Other gadoids (large),tusk,0,NE,1,14.5,1
+102,24,Molva dypterygia,Other gadoids (large),Blue ling,0,NE,0,11.6,1
+103,24,Molva molva,Other gadoids (large),ling,0,NE,1,15.2,1
+104,25,Gaidropsarus vulgaris,Other gadoids (small),three-bearded rockling,1,LC,0,3.2,1
+105,25,Ciliata septentrionalis,Other gadoids (small),Northern rockling ,1,LC,0,1.5,0
+106,25,Gaidropsarus mediterraneus,Other gadoids (small),shore rockling,0,NE,0,3.2,1
+107,25,Trisopterus minutus,Other gadoids (small),poor cod,0,NE,1,3,1
+108,25,Gadiculus argenteus,Other gadoids (small),silvery pout,0,NE,0,3.2,1
+109,25,Raniceps raninus,Other gadoids (small),Tadpole fish ,1,LC,0,3.2,0
+110,25,Trisopterus luscus,Other gadoids (small),Bib,0,NE,1,2.8,1
+111,25,Enchelyopus cimbrius,Other gadoids (small),four-bearded rockling,1,LC,1,3.5,1
+112,25,Ciliata mustela,Other gadoids (small),five-bearded rockling,1,LC,0,1.5,1
+113,25,Argentina silus,Other gadoids (small),Greater argentine,0,NE,1,6.9,1
+114,26,Lophius piscatorius,Anglerfish (monkfish),Monkfish,1,LC,1,14.6,1
+115,27,Chelidonichthys cuculus,Gurnards,red gurnard,1,LC,0,4.4,1
+116,27,Chelidonichthys lastoviza,Gurnards,Streaked gurnard,1,LC,0,4.3,0
+117,27,Chelidonichthys lucerna,Gurnards,tub gurnard,1,LC,1,3.6,1
+118,27,Trigla lyra,Gurnards,Piper,1,LC,0,4.3,0
+119,27,Eutrigla gurnardus,Gurnards,grey gurnard,0,NE,0,4.9,1
+120,29,Clupea harengus,Adult herring,North sea herring ,1,LC,1,7,1
+121,30,Sprattus sprattus,Sprat,sprat,0,NE,1,4.2,1
+122,31,Scomber scombrus,Mackerel,Atlantic mackerel,1,LC,1,9.5,1
+123,32,Trachurus trachurus,Horse mackerel,horse makerel ,1,VU,1,7,1
+124,33,Ammodytes marinus,Sandeels,Sand eel,0,NE,1,6,0
+125,33,Gymnammodytes semisquamatus,Sandeels,Smooth sandeel,1,LC,0,4.5,0
+126,33,Ammodytes tobianus,Sandeels,Small sandeel ,1,DD,1,4.8,0
+127,33,Hyperoplus lanceolatus,Sandeels,Great sandeel,1,LC,0,2.6,0
+128,34,Pleuronectes platessa,Plaice ,European plaice,1,LC,1,28.2,1
+129,35,Limanda limanda,Dab,Dab,1,LC,1,4.2,1
+130,36,Hippoglossoides platessoides,Long-rough dab,Long-rough dab,0,NE,1,18.2,1
+131,37,Platichthys flesus,Flounder,Flounder,1,LC,1,12,1
+132,38,Solea solea,Sole,Sole,1,DD,1,14.9,1
+133,39,Microstomus kitt,Lemon sole,Lemon sole,0,NE,0,5.2,1
+134,40,Glyptocephalus cynoglossus,Witch,witch,0,NE,1,16.4,1
+135,41,Phrynorhombus norvegicus,Turbot & Brill,Norwegian topknot,1,LC,1,10,0
+136,41,Scophthalmus rhombus,Turbot & Brill,brill,0,NE,1,5.5,1
+137,41,Psetta maxima,Turbot & Brill,turbot,0,NE,1,14.5,1
+138,42,Lepidorhombus whiffiagonis,Megrim,Megrim,0,NE,1,9.2,1
+139,43,Reinhardtius hippoglossoides,Halibut,greenland halibut,0,NE,1,19.8,1
+140,43,Hippoglossus hippoglossus,Halibut,Halibut,1,EN,1,14.2,1
+141,44,Callionymus maculatus,Dragonets,Spotted dragonet,1,LC,1,5,0
+142,44,Callionymus reticulatus,Dragonets,Reticulated dragonet,1,LC,0,5,0
+143,44,Callionymus lyra,Dragonets,Dragonet,1,LC,1,5,0
+144,45,Anarhichas lupus,Catfish (wolf-fish),catfish ,0,NE,1,14.2,1
+145,46,Dicentrarchus labrax,Large demersal fish,European seabass,1,LC,1,10.9,1
+146,46,Argyrosomus regius,Large demersal fish ,Meagre ,1,LC,0,13.5,0
+147,46,Pagellus bogaraveo,Large demersal fish ,Blackspot seabream ,1,NT,0,11,0
+148,46,Auxis thazard,Large demersal fish,Frigate tuna,1,LC,0,13.5,0
+149,46,Entelurus aequoreus,Large demersal fish ,Snake pipefish ,1,LC,1,2.5,0
+150,46,Salmo salar,Large demersal fish,Atlantic salmon,1,LC,1,8.5,1
+151,46,Conger conger,Large demersal fish,European conger,1,LC,0,17.9,1
+152,46,Deania calcea,Large demersal fish ,Birdbeak dogfish,1,LC,1,32.9,0
+153,46,Auxis rochei,Large demersal fish,Bullet tuna ,1,LC,0,9.9,0
+154,46,Katsuwonus pelamis,Large demersal fish,Skipjack tuna,1,LC,0,10.9,0
+155,46,Beryx decadactylus,Large demersal fish ,Alfonsino,1,LC,0,13.5,0
+156,46,Acipenser sturio,Large demersal fish ,Sturgeon ,1,CR,0,18.9,0
+157,46,Campogramma glaycos,Large demersal fish ,Vadigo,1,LC,0,13.5,0
+158,46,Aphanopus carbo,Large demersal fish,Black scabbard,0,NE,0,13.5,1
+159,46,Petromyzon marinus,Large demersal fish ,Sea lamprey,1,LC,1,9.8,0
+160,46,Helicolenus dactylopterus,Large demersal fish,bluemouth redfish,1,LC,1,20.9,1
+161,46,Myxine glutinosa,Large demersal fish ,Atlantic hagfish ,1,LC,1,13.5,0
+162,46,Belone belone,Large demersal fish,Garfish,1,LC,0,9.9,1
+163,46,Sebastes viviparous,Large demersal fish,norway haddock ,0,NE,0,13.5,1
+164,46,Sebastes norvegicus,Large demersal fish ,Golden redfish ,0,NE,1,18.9,1
+165,46,Osmerus eperlanus,Large demersal fish ,European smelt,1,LC,0,9.9,1
+166,46,Salvelinus alpinus,Large demersal fish ,Arctic char,1,LC,1,13.5,0
+167,46,Anguilla anguilla,Large demersal fish,European eel,1,CR,1,15,1
+168,46,Mullus surmuletus,Large demersal fish,Red mullet ,1,LC,1,9.4,1
+169,46,Spondyliosoma cantharus,Large demersal fish,Black seabream,1,LC,0,10.7,1
+170,46,Cepola macrophthalma,Large demersal fish ,Red bandfish,1,LC,0,13.5,0
+171,46,Thunnus thynnus,Large demersal fish,Atlantic bluefin tuna,1,EN,1,13,0
+172,46,Lepidopus caudatus,Large demersal fish ,Silver scabbardfish ,1,DD,0,13.5,0
+173,46,Zeus faber,Large demersal fish,John dory,1,DD,1,11.6,1
+174,46,Lophius budegassa,Large demersal fish,Black-bellied angler,1,DD,1,19,0
+175,46,Sparus aurata,Large demersal fish ,Gilthead seabream ,1,LC,1,9.9,0
+176,46,Coryphaenoides rupestris,Large demersal fish,roundnose grenadier,1,CR,1,20,1
+177,46,Liza ramada,Large demersal fish ,Thinlip grey mullet,1,LC,1,10.9,0
+178,46,Centrophorus squamosus,Large demersal fish ,Leafscale gulper shark ,1,VU,1,13.5,0
+179,46,Centrolophus niger,Large demersal fish ,Rudderfish,1,LC,0,13.5,0
+180,46,Pagellus erythrinus,Large demersal fish ,Common pandora,1,LC,0,10.9,0
+181,46,Chimaera monstrosa,Large demersal fish,rabbitfish,1,NT,0,19.1,1
+182,46,Liza aurata,Large demersal fish,Golden grey mullet,1,LC,1,11.4,0
+183,46,Chelon labrosus,Large demersal fish,Thicklip grey mullet,1,LC,0,10.9,0
+184,46,Sebastes fasciatus,Large demersal fish,Redfish,1,EN,1,13.4,1
+185,47,Thorogobius ephippiatus,Small demersal fish ,Leopard-spotted goby ,1,LC,0,4.5,0
+186,47,Alepocephalus bairdii,Small demersal fish ,Baird's slickhead,1,DD,0,3.9,1
+187,47,Myoxocephalus scorpius,Small demersal fish ,bullrout,0,NE,1,3,1
+188,47,Triglops murrayi,Small demersal fish ,Moustache sculpin,0,NE,1,3.9,0
+189,47,Centrolabrus exoletus,Small demersal fish ,Rock cook,1,LC,0,3.9,0
+190,47,Acantholabrus palloni,Small demersal fish ,Scale-rayed Wrasse,1,LC,0,3.9,0
+191,47,Gasterosteus aculeatus,Small demersal fish ,Three-spined stickleback ,1,LC,1,3,0
+192,47,Labrus mixtus,Small demersal fish ,Cuckoo wrasse ,1,LC,0,3,0
+193,47,Pomatoschistus microps,Small demersal fish ,Common goby ,1,LC,1,1.8,0
+194,47,Gobius niger,Small demersal fish ,Black goby ,1,LC,0,3,0
+195,47,Symphodus melops,Small demersal fish ,Corkwing wrasse,1,LC,0,4,0
+196,47,Hippocampus guttulatus,Small demersal fish ,Long-snouted seahorse,1,DD,0,2,0
+197,47,Trachinus draco,Small demersal fish ,greater weever,1,LC,0,3.9,1
+198,47,Argentina sphyraena,Small demersal fish ,Lesser argentine,0,NE,1,3.9,0
+199,47,Pagellus acarne,Small demersal fish ,Axillary seabream,1,LC,0,3.5,0
+200,47,Arnoglossus laterna,Small demersal fish ,scaldfish,1,LC,1,4,1
+201,47,Hoplostethus atlanticus,Small demersal fish ,Orangy roughy ,0,NE,1,32.7,1
+202,47,Pungitius pungitius,Small demersal fish ,Ninespine stickleback,1,LC,1,2.3,0
+203,47,Mullus barbatus,Small demersal fish ,Red mullet,1,LC,1,3.9,0
+204,47,Pomatoschistus norvegicus,Small demersal fish ,Norway goby ,1,LC,0,3.9,0
+205,47,Liparis liparis,Small demersal fish ,sea snail,1,LC,0,3,1
+206,47,Liparis montagui,Small demersal fish ,Montagu's sea snail,1,LC,0,3.9,0
+207,47,Perca fluviatilis,Small demersal fish ,European perch,1,LC,1,3.6,1
+208,47,Lesueurigobius friesii,Small demersal fish ,Frie's goby ,1,LC,0,3,0
+209,47,Syngnathus acus,Small demersal fish ,Common pipefish,1,LC,0,3.9,0
+210,47,Nerophis lumbriciformis,Small demersal fish ,Worm pipefish,1,LC,0,1,0
+211,47,Syngnathus typhle,Small demersal fish ,Broadnose pipefish  ,1,LC,0,4,0
+212,47,Myctophum punctatum,Small demersal fish ,Spotted lanternfish ,1,LC,0,3.9,0
+213,47,Taurulus bubalis,Small demersal fish ,Sea scorpian,1,LC,0,3.9,1
+214,47,Boops boops,Small demersal fish ,Bogue ,1,LC,1,2.5,0
+215,47,Brevoortia tyrannus,Small demersal fish ,Atlantic menhaden,1,LC,1,6,0
+216,47,Crystallogobius linearis,Small demersal fish ,Crystal goby ,1,LC,0,2,0
+217,47,Buenia jeffreysii,Small demersal fish ,Jeffrey's goby ,1,LC,0,3.9,0
+218,47,Buglossidium luteum,Small demersal fish ,solenette,1,LC,1,3,1
+219,47,Lycodes vahlii,Small demersal fish ,Vahl's eelpout,0,NE,0,3.9,1
+220,47,Solea lascaris,Small demersal fish ,Sand sole,0,NE,0,3.9,1
+221,47,Lipophrys pholis,Small demersal fish ,Shanny ,1,LC,0,3.9,0
+222,47,Zoarces viviparous,Small demersal fish ,viviparous eelpout,0,NE,0,3.9,1
+223,47,Spinachia spinachia,Small demersal fish ,Sea stickleback ,1,LC,0,2,0
+224,47,Capros aper,Small demersal fish ,Boar-fish,1,LC,1,4.3,0
+225,47,Macroramphosus scolopax,Small demersal fish ,Longspine snipefish,1,LC,0,3.9,0
+226,47,Nerophis ophidion,Small demersal fish ,Straightnose pipefish,1,LC,0,1,0
+227,47,Polyprion americanus,Small demersal fish ,Wreckfish ,1,DD,0,3.9,0
+228,47,Gobiusculus flavescens,Small demersal fish ,Two-spotted goby ,1,LC,0,2,0
+229,47,Pomatoschistus lozanoi,Small demersal fish ,Lozano's goby,1,LC,0,2,0
+230,47,Leptoclinus maculatus,Small demersal fish ,Daubed shanny,0,NE,1,3.9,0
+231,47,Echiichthys vipera,Small demersal fish ,lesser weever,0,NE,1,3.9,1
+232,47,Pomatoschistus pictus,Small demersal fish ,Painted goby ,1,LC,0,3.9,0
+233,47,Labrus bergylta,Small demersal fish ,Ballan wrasse,1,LC,0,3,1
+234,47,Diplecogaster bimaculata,Small demersal fish ,Two-spotted clingfish,1,LC,0,3.9,0
+235,47,Microchirus variegatus,Small demersal fish ,thickback sole,1,LC,0,4,1
+236,47,Ctenolabrus rupestris,Small demersal fish ,Goldsinny wrasse,1,LC,0,3,0
+237,47,Hippocampus hippocampus,Small demersal fish ,Short-snouted seahorse,1,DD,0,2,0
+238,47,Mugil cephalus,Small demersal fish ,Grey mullet,1,LC,1,5,1
+239,47,Syngnathus rostellatus,Small demersal fish ,Nilsson's pipefish ,1,LC,1,3.9,0
+240,47,Micrenophrys lilljeborgii,Small demersal fish ,Norway bullhead ,1,LC,0,3.9,0
+241,47,Mullus surmuletus,Small demersal fish ,Red mullet,1,LC,1,2.5,1
+242,47,Coris julis,Small demersal fish ,Mediterranean rainbow wrasse,1,LC,1,2,0
+243,47,Agonus cataphractus,Small demersal fish ,pogge,1,LC,1,3.5,1
+244,47,Pomatoschistus minutus,Small demersal fish ,Sand goby,1,LC,1,2,0
+245,47,Cyclopterus lumpus,Small demersal fish ,Lumpfish ,0,NE,1,6,1
+246,47,Lumpenus lampretaeformis,Small demersal fish ,snake blenny,0,NE,1,4,1
+247,48,Atherina presbyter,Filterfeeding pelagic fish,Sand smelt,1,LC,0,3.5,0
+248,48,Alosa fallax,Filterfeeding pelagic fish,Twaite shad,1,LC,1,2.8,0
+249,48,Benthosema glaciale,Filterfeeding pelagic fish,Glacier lantern fish ,1,LC,0,2.8,0
+250,48,Luvarus imperialis,Filterfeeding pelagic fish,Louvar ,1,LC,0,3.5,0
+251,48,Sardina pilchardus,Filterfeeding pelagic fish,sardine,1,LC,1,8.2,1
+252,48,Maurolicus muelleri,Filterfeeding pelagic fish,lanternfish,0,NE,0,1.3,1
+253,48,Alosa alosa,Filterfeeding pelagic fish,Allis shad,1,LC,0,3.8,0
+254,48,Engraulis encrasicolus,Filterfeeding pelagic fish,anchovy,1,LC,1,2,1
+255,48,Scomberesox saurus,Filterfeeding pelagic fish,Atlantic saury,1,LC,0,3.5,0
+256,48,Cheilopogon heterurus,Filterfeeding pelagic fish,Blotchwing flyingfish ,1,LC,0,3.5,0
+257,49,Sepia elegans,Squid & Cuttlefish,Elegant cuttlefish ,1,DD,0,9,0
+258,49,Loligo vulgaris,Squid & Cuttlefish,European squid,0,NE,0,9,1
+259,49,Sepia officinalis,Squid & Cuttlefish,Common cuttlefish,1,LC,0,9,1
+260,49,Loligo forbesi,Squid & Cuttlefish,Veined squid,0,NE,0,9,1
+261,49,Todaropsis eblanae,Squid & Cuttlefish,Soft squid,1,LC,0,9,0
+262,49,Rossia palpebrosa,Squid & Cuttlefish,Warty bobtail squid,1,LC,0,9,0
+263,49,Sepiola rondeleti,Squid & Cuttlefish,Dwarf bobtail squid,1,DD,0,9,0
+264,49,Onychoteuthis banksii,Squid & Cuttlefish,,1,DD,0,9,0
+265,49,Ommastrephes bartramii,Squid & Cuttlefish,Red squid,1,LC,0,9,0
+266,49,Sepiola atlantica,Squid & Cuttlefish,Little cuttlefish,1,DD,0,9,1
+267,49,Vitreledonella richardi,Squid & Cuttlefish,Glass octopus,1,LC,0,9,0
+268,49,Eledone cirrhosa,Squid & Cuttlefish,Curled octopus,0,NE,0,9,1
+269,49,Octopus vulgaris,Squid & Cuttlefish,Octopuses,0,NE,0,9,1
+270,49,Illex coindetii,Squid & Cuttlefish,Southern shortfin squid,1,LC,0,9,0
+271,49,Rossia macrosoma,Squid & Cuttlefish,Stout bobtailed squid,1,DD,0,9,1
+272,49,Todarodes sagittatus,Squid & Cuttlefish,European flying squid,1,LC,0,9,0
+273,54,Liocarcinus arcuatus,Large crabs,arch fronted swimming crab ,0,NE,0,9,1
+274,54,Liocarcinus depurator,Large crabs,harbour swimming crab,0,NE,0,9,1
+275,54,Maja brachydactyla,Large crabs,Common spider crab,0,NE,0,9,1
+276,54,Homarus gammarus,Large crabs,European lobster,1,LC,0,9,1
+277,54,Inachus phalangium,Large crabs,Leach's spider crab,0,NE,0,9,1
+278,54,Hyas araneus,Large crabs,great spider crab,0,NE,0,9,1
+279,54,Inachus leptochirus,Large crabs,slender-legged spider crab,0,NE,0,9,1
+280,54,Carcinus maenas,Large crabs,shore crab ,0,NE,0,9,1
+281,54,Carcinus maenas,Large crabs,Green crab ,0,NE,0,9,1
+282,54,Macropipus tuberculatus,Large crabs,swimming crab,0,NE,0,9,1
+283,54,Cancer pagurus,Large crabs,Edible crab,0,NE,0,9,1
+284,54,Inachus dorsettensis,Large crabs,Scorpian spider crab,0,NE,0,9,1
+285,54,Macropodia deflexa,Large crabs,Decorated spider crab,0,NE,0,9,1
+286,54,Geryon trispinosus,Large crabs,deep sea crab,0,NE,0,9,1
+287,54,Pisa tetraodon,Large crabs,four-horned spider crab,0,NE,0,9,1
+288,54,Hyas coarctatus,Large crabs,Lyre crab,0,NE,0,9,1
+289,54,Macropodia tenuirostris,Large crabs,Slender spider crab,0,NE,0,9,1
+290,54,Necora puber,Large crabs,Velvet swimming crab,0,NE,0,9,1
+291,54,Liocarcinus holsatus,Large crabs,Flying crab,0,NE,0,9,1
+292,54,Pisidia longicornis,Large crabs,Squat lobster,0,NE,0,9,1
+293,54,Liocarcinus pusillus,Large crabs,dwarf swimming crab ,0,NE,0,9,1
+294,54,Palinurus elephas,Large crabs,Common spiny lobster ,1,VU,0,9,0
+295,54,Lithodes maia,Large crabs,Northern stone crab,0,NE,0,9,1
+296,54,Macropodia linaresi,Large crabs,spider crab,0,NE,0,9,1
+297,54,Liocarcinus marmoreus,Large crabs,Marbled swimming crab,0,NE,0,9,1
+298,54,Macropodia rostrata,Large crabs,longlegged spider crab,0,NE,0,9,1
+299,54,Munida sarsi,Large crabs,squat lobster spp. ,0,NE,0,9,1
+300,54,Munida rugosa,Large crabs,rugose squat lobster ,0,NE,0,9,1
+301,54,Dorhynchus thomsoni,Large crabs,deep sea spider crab,0,NE,0,9,1
+302,55,Nephrops norvegicus,Nephrops,Norway lobster,1,LC,0,3,1
+303,56,Chlamys opercularis,Epifaunal macrobenthos,Queen scallop,0,NE,0,3.3,1
+304,56,Asterias Rubens,Epifaunal macrobenthos,Common starfish,0,NE,0,3.3,1
+305,56,Hyala vitrea,Epifaunal macrobenthos,Mollusca,0,NE,0,3.3,1
+306,56,Ophiura affinis,Epifaunal macrobenthos,brittle star,0,NE,0,3.3,1
+307,56,Anomia ephippium,Epifaunal macrobenthos,Saddle star (Bivalve),0,NE,0,3.3,1
+308,56,Ophirua albida,Epifaunal macrobenthos,brittle star,0,NE,0,3.3,1
+309,56,Corystes cassivelaunus,Epifaunal macrobenthos,Masked crab,0,NE,0,3.3,1
+310,56,Euspira pulchellus,Epifaunal macrobenthos,mollusca,0,NE,0,3.3,1
+311,56,Pectin maximus,Epifaunal macrobenthos,Great atlantic scallop,0,NE,0,3.3,1
+312,56,Euspira montagui,Epifaunal macrobenthos,Mollusca,0,NE,0,3.3,1
+313,56,Philine quadrata,Epifaunal macrobenthos,mollusca,0,NE,0,3.3,1
+314,56,Leptochiton asellus,Epifaunal macrobenthos,chiton,0,NE,0,3.3,1
+315,57,Abra prismatica,Infaunal macrobenthos,Mollusca,0,NE,0,3.3,1
+316,57,Amphiura filiformis,Infaunal macrobenthos,brittle star,0,NE,0,3.3,1
+317,57,Gari fervensis,Infaunal macrobenthos,Faroe sunset shell,0,NE,0,3.3,1
+318,57,Mysella bidentata,Infaunal macrobenthos,bivalve,0,NE,0,3.3,1
+319,57,Echinocardium cordatum,Infaunal macrobenthos,Sea potato,0,NE,0,3.3,1
+320,57,Aphrodita aculeata,Infaunal macrobenthos,sea mouse (polychaete),0,NE,0,3.3,1
+321,57,Arctica islandica,Infaunal macrobenthos,Icelandic cyprine,0,NE,0,3.3,1
+322,57,Dosinia lupinus,Infaunal macrobenthos,Smooth artemis,0,NE,0,3.3,1
+323,57,Nuculoma tenuis,Infaunal macrobenthos,Mollusca,0,NE,0,3.3,1
+324,57,Chamelea gallina,Infaunal macrobenthos,Striped venus clam (bivalve),0,NE,0,3.3,1
+325,57,Phaxas pellucidus,Infaunal macrobenthos,razor shell (bivalve),0,NE,0,3.3,1
+326,57,Echinus esculentus,Infaunal macrobenthos,European edible sea urchin ,1,NT,0,3.3,0
+327,57,Antalis entalis,Infaunal macrobenthos,Tusk shell (mollusc),0,NE,0,3.3,1
+328,57,Echinocardium flavescens,Infaunal macrobenthos,heart urchin ,0,NE,0,3.3,1
+329,58,Spirontocaris lilljeborgi,Shrimp,decapod ,0,NE,0,3.3,1
+330,58,Crangon allmanni,Shrimp,crustacean ,0,NE,0,3.3,1
+331,58,Crangon crangon,Shrimp,Brown shrimp ,0,NE,0,3.3,1
+332,58,Processa nouveli,Shrimp,Processid shrimp spp (decapod).,0,NE,0,3.3,1
+333,58,Pandalus montagui,Shrimp,Aseop shrimp,0,NE,0,3.3,1
+334,58,Pandalus borealis,Shrimp,Northern shrimp,0,NE,0,3.3,1
+335,58,Eualus pusiolus,Shrimp,crustacean ,0,NE,0,3.3,1
+336,59,Eudorella emarginata,small mobile epifauna ,Arthropoda,0,NE,0,3.3,1
+337,59,Philine scabra,small mobile epifauna ,Mollusca,0,NE,0,3.3,1
+338,59,Urothoe poseidonis,small mobile epifauna ,Arthropoda,0,NE,0,3.3,1
+339,59,Bathyporeia elegans,small mobile epifauna ,Arthropoda,0,NE,0,3.3,1
+340,59,Harpinia antennaria,small mobile epifauna ,Arthropoda,0,NE,0,3.3,1
+341,59,Eudorellopsis deformis,small mobile epifauna ,Arthropoda,0,NE,0,3.3,1
+342,59,Bathyporeia guilliamsoniana,small mobile epifauna ,Arthropoda,0,NE,0,3.3,1
+343,60,Anobothrus gracilis,Small infauna,Annelida,0,NE,0,3.3,1
+344,60,Diplocirrus glaucus,Small infauna,Annelida,0,NE,0,3.3,1
+345,60,Notomastus latericeus,Small infauna,Annelida,0,NE,0,3.3,1
+346,60,Nephtys longosetosa,Small infauna,catworm (polychaete),0,NE,0,3.3,1
+347,60,Exogene hebes,Small infauna,Annelida,0,NE,0,3.3,1
+348,60,Amphictene auricoma,Small infauna,Polychaete,0,NE,0,3.3,1
+349,60,Lumbrineris latreilli,Small infauna,Annelida,0,NE,0,3.3,1
+350,60,Owenia fusiformis,Small infauna,Tubeworm (polychaete),0,NE,0,3.3,1
+351,60,Glycinde nordmanni,Small infauna,Annelida,0,NE,0,3.3,1
+352,60,Sthenelais limicola,Small infauna,Annelida,0,NE,0,3.3,1
+353,60,Laonice sarsi,Small infauna,Annelida,0,NE,0,3.3,1
+354,60,Paramphinome jeffreysii,Small infauna,Annelida,0,NE,0,3.3,1
+355,60,Scalibregma inflatum,Small infauna,Annelida,0,NE,0,3.3,1
+356,60,Nephtys paradoxa,Small infauna,Catworm (Annelida),0,NE,0,3.3,1
+357,60,Goniadella bobretzkii,Small infauna,Annelida,0,NE,0,3.3,1
+358,60,Levinsenia gracilis,Small infauna,Annelida,0,NE,0,3.3,1
+359,60,Gattyana cirrosa,Small infauna,Polychaete,0,NE,0,3.3,1
+360,60,Nephtys caeca,Small infauna,Catworm (polychaete),0,NE,0,3.3,1
+361,60,Scoloplos armiger,Small infauna,Annelida,0,NE,0,3.3,1
+362,60,Ophelia borealis,Small infauna,Ploychaete,0,NE,0,3.3,1
+363,60,Poecilochaetus serpens,Small infauna,Annelida,0,NE,0,3.3,1
+364,60,Minuspio cirrifera,Small infauna,Annelida,0,NE,0,3.3,1
+365,60,Nephtys cirrosa,Small infauna,polychaete,0,NE,0,3.3,1
+366,60,Pisione remota,Small infauna,Annelida,0,NE,0,3.3,1
+367,60,Goniada maculata,Small infauna,polychaete,0,NE,0,3.3,1
+368,60,Prionospio malmgreni,Small infauna,Annelida,0,NE,0,3.3,1
+369,60,Spio filicornis,Small infauna,Bristleworm (Annelida),0,NE,0,3.3,1
+370,60,Aonides paucibranchiata,Small infauna,Annelida,0,NE,0,3.3,1
+371,60,Protodorvillea kefersteini,Small infauna,Annelida,0,NE,0,3.3,1
+372,60,Nephtys hombergii,Small infauna,Catworm (polychaete),0,NE,0,3.3,1
+373,61,Chaetopterus variopedatus,Sessile epifauna ,Parchment worm ,0,NE,0,3.3,1
+374,61,Sabellaria spinulosa,Sessile epifauna ,Ross worm ,0,NE,0,3.3,1
+375,61,Ostrea edulis,Sessile epifauna ,European flat oyster,0,NE,0,3.3,1
+376,61,Musculus niger,Sessile epifauna ,Black mussel ,0,NE,0,3.3,1
+377,61,Modiolus barbatus,Sessile epifauna ,Bearded horse mussel,0,NE,0,3.3,1
+378,61,Modiolus modiolus,Sessile epifauna ,Horse mussel,0,NE,0,3.3,1
+379,61,Mytilus edulis,Sessile epifauna ,Blue mussel,0,NE,0,3.3,1
+380,61,Pododesmus patelliformis,Sessile epifauna ,Ribbed saddle oyster,0,NE,0,3.3,1
+381,61,Musculus discors,Sessile epifauna ,Green crenella,0,NE,0,3.3,1
+382,61,Crassostrea gigas,Sessile epifauna ,Pacific cupped oyster,0,NE,0,3.3,1
+383,61,Serpula vermicularis,Sessile epifauna ,Tube worm ,0,NE,0,3.3,1

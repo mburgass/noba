@@ -1,0 +1,258 @@
+#biodiversity indicators 24/11/2015 Emily Nicholson
+========================================================
+
+## Species and analyses
+To generate a 'true (model)' RLI and LPI, we are planning to get all the species associated with each FG as described in the model documentation. We will then match these for the 'current' RLI and LPI species.  
+
+
+
+For the LPI, we need only biomass trends (ie relative change in abundance or biomass).  
+
+
+
+```{r setup}
+library(rdatacite)
+library(taxize)
+library(letsR) #this isn't working for my species lists?
+library(rfishbase)
+library(ggplot2)
+library(dplyr)
+library(plyr)
+library(rredlist)
+install.packages("devtools")
+library(devtools)
+# Install from main ZSL repository online
+#install_github("Zoological-Society-of-London/rlpi", dependencies=TRUE)
+library(rlpi) 
+
+setwd("~/Documents/Papers in progress/Fisheries indicators/2014analyses/fisheries-indicators-Nov2014")
+
+lme<-list("NthSea","Aleutians","Benguela","GulfCalif","China","GBR","Florida","NthAdriatic")
+#make a list? either now or at the end
+#template <- data.frame that I need to work out the structure for
+#ll<-as.list(b0,b50,c0,c50)
+#lme[[1]]<-ll
+#str(lme[1])
+#lme[1]<-list(b0=b0,b50=b50,c0=c0,c50=c50)
+#is.list(lme)
+#lme[1]<-b0
+#nthsea["b0"",]
+
+```
+
+
+### Bring in data:  
+1 species list  
+2 functional group lists  
+3 Ecopath scenarios   
+  (no fg names, rows=fg by number, col=years starting at yr20 of simulation @policy implementation, transformed from ecopath output)  
+1 biomass (EwE6-Ecosim_annual_biomass.csv  
+2 trophic level (EwE6-Ecosim_annual_TL.csv)  
+3 catch (EwE6-Ecosim_annual_yield.csv)  
+4 landings (from files Alberto modified and sent: Landings discards areas 020513eveningAB-1)  
+
+```{r import data}
+
+m<-8
+lme[m]
+
+spp <- read.csv(file=paste0(lme[m],"/species_fin_6July17.csv")) 
+
+fg <- read.csv(file=paste0(lme[m],"/functionalgroups.csv"))
+# columns needed are named: fg  spp	RLI	RLstatus	GenLength	LPI
+#spp$RLI<-spp$RLI*1
+spp$RLI<-as.numeric(as.character(spp$RLI))
+  #sum(spp$RLI, na.rm = TRUE)
+spp$RLI[is.na(spp$RLI)]<-0  #d[is.na(d)] <- 0
+spp$LPI<-as.numeric(as.character(spp$LPI))
+  #sum(spp$LPI, na.rm = TRUE)
+spp$LPI[is.na(spp$LPI)]<-0  #d[is.na(d)] <- 0
+
+#see previous versions of file imports in Indicators24112015
+#Biomass, catch, landings and trophic lengths per functional group, from Ecopath
+startyear<-21 #this means starting at year 20, year before implementation
+
+b0 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort0/EwE6-Ecosim_annual_biomass.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  b0 <- b0[-nrow(b0),] #need to delete last row - an extra one is in the csv file
+b50 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort50/EwE6-Ecosim_annual_biomass.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  b50 <- b50[-nrow(b50),] #need to delete last row - an extra one is in the csv file
+  
+c0 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort0/EwE6-Ecosim_annual_yield.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  c0 <- c0[-nrow(c0),] #need to delete last row - an extra one is in the csv file
+c50 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort50/EwE6-Ecosim_annual_yield.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  c50 <- c50[-nrow(c50),] #need to delete last row - an extra one is in the csv file
+
+l0 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort0/landings.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  #l0 <- l0[-nrow(l0),] #need to delete last row - an extra one is in the csv file
+l50 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort50/landings.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  #l50 <- l50[-nrow(l50),] #need to delete last row - an extra one is in the csv file
+
+tl0 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort0/EwE6-Ecosim_annual_TL.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  tl0 <- tl0[-nrow(tl0),] #need to delete last row - an extra one is in the csv file
+tl50 <- as.data.frame(t(read.table(file=paste0(lme[m],"/",lme[m],"_v2_effort50/EwE6-Ecosim_annual_TL.csv"), header=FALSE, sep=",", skip=startyear,nrows=50)))
+  tl50 <- tl50[-nrow(tl50),] #need to delete last row - an extra one is in the csv file  
+
+#write.table(tl0, file=paste0(lme[m],"/","tl0.csv"), sep=",", row.names = FALSE, col.names=FALSE)
+#sum(l0-c0)
+
+```
+
+
+
+##LPI
+
+A species forms a LPI time-series. The 'true' LPI uses a larger set of species (includes verts and inverts but can be readily changed!), while the sampled LPI is based on the subset of species currently sampled by the LPI
+
+```{r LPI}
+
+years <- ncol(b0)
+
+spp.LPI.0<-spp[,c("sppid","fg","LPI")]
+spp.LPI.0[,(ncol(spp.LPI.0)+1):(years+ncol(spp.LPI.0))]<- b0[spp.LPI.0$fg,]
+spp.sampleLPI.0 <- spp.LPI.0[spp.LPI.0$LPI==1,]
+
+spp.LPI.50<-spp[,c("sppid","fg","LPI")]
+spp.LPI.50[,(ncol(spp.LPI.50)+1):(years+ncol(spp.LPI.50))]<- b50[spp.LPI.50$fg,]
+spp.sampleLPI.50 <- spp.LPI.50[spp.LPI.50$LPI==1,]
+
+# same as above but doing lambdas before - not really needed
+spp.LPIlambda.0<-spp.LPI.0
+spp.LPIlambda.0[,5:ncol(spp.LPI.0)] <- log10(spp.LPI.0[,5:ncol(spp.LPI.0)]/spp.LPI.0[,4:(ncol(spp.LPI.0)-1)])
+spp.LPIlambda.0[,4]<-0 
+spp.LPIlambda.0.2<-spp.LPI.0
+spp.LPIlambda.0.2[,5:ncol(spp.LPI.0)] <- log10(spp.LPI.0[,5:ncol(spp.LPI.0)]/spp.LPI.0[,4:(ncol(spp.LPI.0)-1)])
+
+#files for LPI
+LPIs<-c("true.0","true.50","sample.0", "sample.50")
+LPI <- array(dim=c(length(LPIs),years))
+rownames(LPI)<-LPIs
+LPI[,1]<-1  #each LPI starts at 1
+LPI2<-LPI  #this is if I just want to calculate with lambdas, which I don't need to actually
+
+#Calculating the LPI, starting in y2, because y1=1
+for (y in 2:years) {
+  yy<- y+3  #change this if more columns before biomass values start
+  LPI["true.0",y] <-LPI["true.0",y-1]*(10^(mean(log10(spp.LPI.0[,yy])-log10(spp.LPI.0[,yy-1]))))
+  LPI["true.50",y] <-LPI["true.50",y-1]*(10^(mean(log10(spp.LPI.50[,yy])-log10(spp.LPI.50[,yy-1]))))
+  LPI["sample.0",y] <-LPI["sample.0",y-1]*(10^(mean(log10(spp.sampleLPI.0[,yy])-log10(spp.sampleLPI.0[,yy-1]))))
+  LPI["sample.50",y] <-LPI["sample.50",y-1]*(10^(mean(log10(spp.sampleLPI.50[,yy])-log10(spp.sampleLPI.50[,yy-1]))))
+
+  LPI2["true.0",y] <-LPI2["true.0",y-1]* (10^mean(spp.LPIlambda.0[,yy]))  ##this works
+  }
+
+
+#===bootstrapping LPI======
+
+#start for loop
+numboots<-100
+LPIboots.true.0<-array(dim=c(numboots,years))   #files for LPI
+LPIboots.true.0[,1]<-1  #each LPI starts at 1
+  LPIboots.true.50<-LPIboots.true.0
+  LPIboots.sample.0<-LPIboots.true.0
+  LPIboots.sample.50<-LPIboots.true.0
+  
+for (bindex in 1:numboots) {
+#bindex<-1
+
+bootLPI <- sample(spp.LPI.0$sppid,replace=T)    #random list of sppids
+    #match sppids to make new spp.lpi files
+spp.LPI.0.boot<-spp.LPI.0[bootLPI,]
+spp.LPI.50.boot<-spp.LPI.50[bootLPI,]
+spp.sampleLPI.0.boot<-spp.LPI.0.boot[spp.LPI.0.boot$LPI==1,]
+spp.sampleLPI.50.boot<-spp.LPI.50.boot[spp.LPI.50.boot$LPI==1,]
+
+for (y in 2:years) {
+  yy<- y+3  #change this if more columns before biomass values start
+  LPIboots.true.0[bindex,y] <- LPIboots.true.0[bindex,y-1]*(10^(mean(log10(spp.LPI.0.boot[,yy])-log10(spp.LPI.0.boot[,yy-1]))))
+  LPIboots.true.50[bindex,y] <-LPIboots.true.50[bindex,y-1]*(10^(mean(log10(spp.LPI.50.boot[,yy])-log10(spp.LPI.50.boot[,yy-1]))))
+  LPIboots.sample.0[bindex,y] <-LPIboots.sample.0[bindex,y-1]*(10^(mean(log10(spp.sampleLPI.0.boot[,yy])-log10(spp.sampleLPI.0.boot[,yy-1]))))
+  LPIboots.sample.50[bindex,y] <-LPIboots.sample.50[bindex,y-1]*(10^(mean(log10(spp.sampleLPI.50.boot[,yy])-log10(spp.sampleLPI.50.boot[,yy-1]))))
+  }
+
+}  #end bootstrap loop
+  
+# get confidence intervals from bootstraps
+LPIsCIs<-c("true.0.u","true.0.l","true.50.u","true.50.l","sample.0.u","sample.0.l", "sample.50.u","sample.50.l")
+  LPI.CIs <- array(dim=c(length(LPIsCIs),years))
+  rownames(LPI.CIs)<-LPIsCIs
+lowerCI<-0.125  #for 95% CIs 0.025, for 90% 0.05, for 75% 0.125
+upperCI<-0.875  #for 95% CIs 0.975, for 90% 0.95, for 75% 0.875
+
+for (i in 1:years) {
+  #i<-1
+  LPI.CIs["true.0.l",i] = quantile(LPIboots.true.0[,i], lowerCI, names = FALSE) 
+  LPI.CIs["true.0.u",i] = quantile(LPIboots.true.0[,i], upperCI, names = FALSE) 
+  LPI.CIs["true.50.l",i] = quantile(LPIboots.true.50[,i], lowerCI, names = FALSE) 
+  LPI.CIs["true.50.u",i] = quantile(LPIboots.true.50[,i], upperCI, names = FALSE)
+  LPI.CIs["sample.0.l",i] = quantile(LPIboots.sample.0[,i], lowerCI, names = FALSE) 
+  LPI.CIs["sample.0.u",i] = quantile(LPIboots.sample.0[,i], upperCI, names = FALSE) 
+  LPI.CIs["sample.50.l",i] = quantile(LPIboots.sample.50[,i], lowerCI, names = FALSE) 
+  LPI.CIs["sample.50.u",i] = quantile(LPIboots.sample.50[,i], upperCI, names = FALSE) 
+}
+
+
+  
+```
+Black is 'true' LPI, or as close as possible, with each species mentioned in the model documentation, versus one represenatative per functional group. The difference lies in the number of times each FG is sampled, with black being closer to representative of the number of species in each group. 
+
+```{r plot LPI}
+
+
+# plot =====================================
+
+#no bootstraps
+plot(LPI[1,], ylim=c(min(LPI),max(LPI)), xlim=c(0,40), type="l",col="black",lwd=2, ann=FALSE)
+  lines(LPI[2,],lty=2,col="black",lwd=2)
+  lines(LPI[3,],lty=1,col="red",lwd=2)
+  lines(LPI[4,],lty=2,col="red",lwd=2) 
+  title(ylab="LPI", xlab="Years")
+
+  # plot with ALL bootstraps - from LPI github site
+  
+  # With CIs as fill for just halting
+plot(LPI["true.0",], ylim=c(min(LPI,LPI.CIs),max(LPI,LPI.CIs)), xlim=c(0,40), type="l",col="black",lwd=2, ann=FALSE)
+polygon(c(1:50,rev(1:50)),c(LPI.CIs["sample.0.l",],rev(LPI.CIs["sample.0.u",])),density = 50,col = "pink", border = "red")
+polygon(c(1:50,rev(1:50)),c(LPI.CIs["true.0.l",],rev(LPI.CIs["true.0.u",])),density = 50, col = "darkgrey", border = "black")
+  lines(LPI["true.0",],lty=1,col="black",lwd=2) 
+  lines(LPI["sample.0",],lty=1,col="red",lwd=2) 
+  
+  
+  
+# With CIs as fill for all
+plot(LPI["true.0",], ylim=c(min(LPI,LPI.CIs),max(LPI,LPI.CIs)), xlim=c(0,40), type="l",col="black",lwd=2, ann=FALSE)
+polygon(c(1:50,rev(1:50)),c(LPI.CIs["true.50.l",],rev(LPI.CIs["true.50.u",])),density = 25, col = "darkgrey", border = "black",lwd=0.5)
+polygon(c(1:50,rev(1:50)),c(LPI.CIs["sample.50.l",],rev(LPI.CIs["sample.50.u",])),density =25,col = "pink", border = "red",lwd=0.5)
+polygon(c(1:50,rev(1:50)),c(LPI.CIs["sample.0.l",],rev(LPI.CIs["sample.0.u",])),density = 50,col = "pink", border = "red",lwd=0.5)
+polygon(c(1:50,rev(1:50)),c(LPI.CIs["true.0.l",],rev(LPI.CIs["true.0.u",])),density = 50, col = "darkgrey", border = "black",lwd=0.5)
+  lines(LPI["true.0",],lty=1,col="black",lwd=2) 
+  lines(LPI["sample.0",],lty=1,col="red",lwd=2) 
+  lines(LPI["true.50",],lty=2,col="black",lwd=2) 
+  lines(LPI["sample.50",],lty=2,col="red",lwd=2) 
+  
+  
+#This is really messy
+plot(LPI["true.0",], ylim=c(min(LPI,LPI.CIs),max(LPI,LPI.CIs)), xlim=c(0,40), type="l",col="black",lwd=2, ann=FALSE)
+    lines(LPI.CIs["true.0.l",],lty=1,col="black",lwd=0.5)
+    lines(LPI.CIs["true.0.u",],lty=1,col="black",lwd=0.5)  
+  lines(LPI["true.50",],lty=2,col="black",lwd=2)
+    lines(LPI.CIs["true.50.l",],lty=2,col="black",lwd=0.5)
+    lines(LPI.CIs["true.50.u",],lty=2,col="black",lwd=0.5)   
+  lines(LPI["sample.0",],lty=1,col="red",lwd=2)
+    lines(LPI.CIs["sample.0.l",],lty=1,col="red",lwd=0.5)
+    lines(LPI.CIs["sample.0.u",],lty=1,col="red",lwd=0.5)  
+  lines(LPI["sample.50",],lty=2,col="red",lwd=2) 
+    lines(LPI.CIs["sample.50.l",],lty=2,col="red",lwd=0.5)
+    lines(LPI.CIs["sample.50.u",],lty=2,col="red",lwd=0.5)  
+  title(ylab="LPI", xlab="Years")
+  
+
+
+  
+    #lines(LPI["true.0",],lty=1,col="black",lwd=2) 
+      #for (i in 1:numboots){lines(LPIboots.true.0[i,],lty=1,col = "lightgrey",lwd=0.2)}
+         #for (i in 1:numboots){lines(LPIboots.sample.0[i,],lty=1,col = "pink",lwd=0.2)}
+
+```
+
+
+ 
