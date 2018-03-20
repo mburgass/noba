@@ -52,7 +52,7 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
   
 #FMSY0
 
-  df<- fmsy0_data %>% dplyr::filter(ID<36)
+  df<- fmsy0_data %>% dplyr::filter(ID<30)
   rm(fmsy0_data)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
   index_vector[1:155] = TRUE #change to number of rows as above
@@ -67,7 +67,7 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
   #print(fmsy0_plot)
   
 #FMSY05  
-  df<- fmsy05_data %>% dplyr::filter(ID<36)
+  df<- fmsy05_data %>% dplyr::filter(ID<30)
   rm(fmsy05_data)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
   index_vector[1:155] = TRUE #change to number of rows as above
@@ -82,7 +82,7 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
   #print(fmsy05_plot)
   
 #FMSY1  
-  df<- fmsy1_data %>% dplyr::filter(ID<36)
+  df<- fmsy1_data %>% dplyr::filter(ID<30)
   rm(fmsy1_data)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
   index_vector[1:155] = TRUE #change to number of rows as above
@@ -94,7 +94,7 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
   fmsy1_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
   
 #FMSY2
-  df<- fmsy2_data %>% dplyr::filter(ID<36)
+  df<- fmsy2_data %>% dplyr::filter(ID<30)
   rm(fmsy2_data)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
   index_vector[1:155] = TRUE #change to number of rows as above
@@ -109,7 +109,7 @@ fmsy_lpis<- list(bc_lpi, fmsy0_lpi, fmsy05_lpi, fmsy1_lpi, fmsy2_lpi)
 ggplot_multi_lpi(fmsy_lpis, names=c("Base Case","FMSY0", "FMSY05", "FMSY1", "FMSY2"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
 
 #MPA10
-df<- mpa10_data %>% dplyr::filter(ID<36)
+df<- mpa10_data %>% dplyr::filter(ID<30)
 rm(mpa10_data)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:155] = TRUE #change to number of rows as above
@@ -121,7 +121,7 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 mpa10_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
 #MPA25
-df<- mpa25_data %>% dplyr::filter(ID<36)
+df<- mpa25_data %>% dplyr::filter(ID<30)
 rm(mpa25_data)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:155] = TRUE #change to number of rows as above
@@ -133,7 +133,7 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 mpa25_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
 #MPA50
-df<- mpa50_data %>% dplyr::filter(ID<36)
+df<- mpa50_data %>% dplyr::filter(ID<30)
 rm(mpa50_data)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:155] = TRUE #change to number of rows as above
@@ -148,7 +148,7 @@ mpa_lpis<- list(bc_lpi, mpa10_lpi, mpa25_lpi, mpa50_lpi)
 mpa_plot<- ggplot_multi_lpi(mpa_lpis, names=c("Base Case","MPA10", "MPA25", "MPA50"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
 
 #cc2
-df<- cc2_data %>% dplyr::filter(ID<36)
+df<- cc2_data %>% dplyr::filter(ID<30)
 rm(cc2_data)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:155] = TRUE #change to number of rows as above
@@ -160,7 +160,7 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 cc2_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
 #CC3
-df<- cc3_data %>% dplyr::filter(ID<36)
+df<- cc3_data %>% dplyr::filter(ID<30)
 rm(cc3_data)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:155] = TRUE #change to number of rows as above
@@ -172,7 +172,7 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 cc3_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
 #oa005
-df<- oa005_data %>% dplyr::filter(ID<36)
+df<- oa005_data %>% dplyr::filter(ID<30)
 rm(oa005_data)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:155] = TRUE #change to number of rows as above
@@ -184,7 +184,7 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 oa005_lpi <- arctic_lpi[complete.cases(arctic_lpi), ] 
 
 #oa01
-df<- oa01_data %>% dplyr::filter(ID<36)
+df<- oa01_data %>% dplyr::filter(ID<30)
 rm(oa01_data)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:155] = TRUE #change to number of rows as above
@@ -196,4 +196,4 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 oa01_lpi <- arctic_lpi[complete.cases(arctic_lpi), ] 
 
 cc_lpis<- list(bc_lpi, cc2_lpi, cc3_lpi, oa005_lpi, oa01_lpi)
-cc_plot<- ggplot_multi_lpi(cc_lpis, names=c("Base Case","MPA10", "MPA25", "MPA50"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
+ggplot_multi_lpi(cc_lpis, names=c("Base Case","CC2", "CC3", "OA005", "OA01"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
