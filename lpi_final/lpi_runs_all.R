@@ -145,7 +145,7 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 mpa50_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
 mpa_lpis<- list(bc_lpi, mpa10_lpi, mpa25_lpi, mpa50_lpi)
-mpa_plot<- ggplot_multi_lpi(mpa_lpis, names=c("Base Case","MPA10", "MPA25", "MPA50"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
+ggplot_multi_lpi(mpa_lpis, names=c("Base Case","MPA10", "MPA25", "MPA50"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
 
 #cc2
 df<- cc2_data
@@ -196,4 +196,4 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, 
 oa01_lpi <- arctic_lpi[complete.cases(arctic_lpi), ] 
 
 cc_lpis<- list(bc_lpi, cc2_lpi, cc3_lpi, oa005_lpi, oa01_lpi)
-cc_plot<- ggplot_multi_lpi(cc_lpis, names=c("Base Case","MPA10", "MPA25", "MPA50"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
+ggplot_multi_lpi(cc_lpis, names=c("Base Case","CC2", "CC3", "OA005", "OA01"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
