@@ -4,8 +4,8 @@ library(rlpi)
 
 #Base Case
 read.csv("biomass/lpi_files/bc_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
-  filter(year>1980, year<2101) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
-  rename(species=Binomial)%>% mutate(scenario="base_case") ->bc_ts
+  filter(year>1980, year<2016) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
+  rename(species=Binomial)%>% mutate(scenario="fmsy1") ->bc_ts
 bc_ts$species<- as.character(bc_ts$species)
 bc_ts$year<- as.integer(bc_ts$year)
 ggplot(bc_ts, aes(year, biomass)) + geom_line() +
@@ -15,7 +15,7 @@ ggplot(bc_ts, aes(year, biomass)) + geom_line() +
 
 #FMSY0
 read.csv("biomass/lpi_files/fmsy0_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
-  filter(year>1980, year<2101) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
+  filter(year>1980, year<2016) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
   rename(species=Binomial)%>% mutate(scenario="fmsy0") ->fmsy0_ts
 fmsy0_ts$species<- as.character(fmsy0_ts$species)
 fmsy0_ts$year<- as.integer(fmsy0_ts$year)
@@ -24,38 +24,95 @@ ggplot(fmsy0_ts, aes(year, biomass)) + geom_line() +
 
 #FMSY05
 read.csv("biomass/lpi_files/fmsy05_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
-  filter(year>1980, year<2101) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
-  rename(species=Binomial) %>% mutate(scenario="fmsy05")->fmsy05_ts
+  filter(year>1980, year<2016) %>% #filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
+  rename(species=Binomial)%>% mutate(scenario="fmsy05") ->fmsy05_ts
 fmsy05_ts$species<- as.character(fmsy05_ts$species)
 fmsy05_ts$year<- as.integer(fmsy05_ts$year)
-ggplot(fmsy05_ts, aes(year, biomass)) + geom_line() +
-  facet_wrap(~species, scales="free")
-
-#FMSY1
-read.csv("biomass/lpi_files/fmsy1_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
-  filter(year>1980, year<2101) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
-  rename(species=Binomial) %>% mutate(scenario="fmsy1") ->fmsy1_ts
-fmsy1_ts$species<- as.character(fmsy1_ts$species)
-fmsy1_ts$year<- as.integer(fmsy1_ts$year)
-ggplot(fmsy1_ts, aes(year, biomass)) + geom_line() +
-  facet_wrap(~species, scales="free")
 
 #FMSY2
 read.csv("biomass/lpi_files/fmsy2_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
-  filter(year>1980, year<2101) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
+  filter(year>1980, year<2016) %>% filter(Binomial %in% c('DEL', 'FWH', 'HAD', 'HOS', 'NCO', 'POB', 'RED', 'SHO', 'SSK', 'SWH')) %>%
   rename(species=Binomial) %>% mutate(scenario="fmsy2")->fmsy2_ts
 fmsy2_ts$species<- as.character(fmsy2_ts$species)
 fmsy2_ts$year<- as.integer(fmsy2_ts$year)
 ggplot(fmsy2_ts, aes(year, biomass)) + geom_line() +
   facet_wrap(~species, scales="free")
 
-fmsy_ts<- rbind(bc_ts, fmsy0_ts, fmsy05_ts, fmsy1_ts, fmsy2_ts)
+fmsy_ts<- rbind(fmsy0_ts,bc_ts, fmsy2_ts)
 
 ggplot(fmsy_ts, aes(year, biomass)) +geom_line(aes(colour=species))+
   facet_wrap(~scenario)
 
 ggplot(fmsy_ts, aes(year, biomass)) + geom_line(aes(colour=scenario)) +
   facet_wrap(~species, scales="free")
+
+
+#Base Case
+read.csv("biomass/lpi_files/bc_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
+  filter(year>1980, year<2016) %>% filter(Binomial %in% c('CAP', 'GRH', 'HAD', 'NCO', 'RED', 'REO', 'SAI')) %>%
+  rename(species=Binomial)%>% mutate(scenario="fmsy1") ->bc_ts
+bc_ts$species<- as.character(bc_ts$species)
+bc_ts$year<- as.integer(bc_ts$year)
+
+
+#Commercial Fish biomass - Fisheries scenarios
+
+
+#FMSY0
+read.csv("biomass/lpi_files/fmsy0_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
+  filter(year>1980, year<2016) %>% filter(Binomial %in% c('CAP', 'GRH', 'HAD', 'NCO', 'RED', 'REO', 'SAI')) %>%
+  rename(species=Binomial)%>% mutate(scenario="fmsy0") ->fmsy0_ts
+fmsy0_ts$species<- as.character(fmsy0_ts$species)
+fmsy0_ts$year<- as.integer(fmsy0_ts$year)
+
+
+#FMSY05
+read.csv("biomass/lpi_files/fmsy05_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
+  filter(year>1980, year<2016) %>% filter(Binomial %in% c('CAP', 'GRH', 'HAD', 'NCO', 'RED', 'REO', 'SAI')) %>%
+  rename(species=Binomial)%>% mutate(scenario="fmsy05") ->fmsy05_ts
+fmsy05_ts$species<- as.character(fmsy05_ts$species)
+fmsy05_ts$year<- as.integer(fmsy05_ts$year)
+
+#FMSY2
+read.csv("biomass/lpi_files/fmsy2_lpi.csv", check.names = FALSE) %>% select(-ID) %>% gather ("year", "biomass", 2:154) %>%
+  filter(year>1980, year<2016) %>% filter(Binomial %in% c('CAP', 'GRH', 'HAD', 'NCO', 'RED', 'REO', 'SAI')) %>%
+  rename(species=Binomial) %>% mutate(scenario="fmsy2")->fmsy2_ts
+fmsy2_ts$species<- as.character(fmsy2_ts$species)
+fmsy2_ts$year<- as.integer(fmsy2_ts$year)
+
+
+fmsy_ts<- rbind(fmsy0_ts, fmsy05_ts, bc_ts, fmsy2_ts)
+
+ggplot(fmsy_ts, aes(year, biomass)) +geom_line(aes(colour=species))+
+  facet_wrap(~scenario)
+
+ggplot(fmsy_ts, aes(year, biomass)) + geom_line(aes(colour=scenario)) +
+  facet_wrap(~species, scales="free")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##MPA Scenarios
 #MPA10

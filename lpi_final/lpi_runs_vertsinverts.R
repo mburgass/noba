@@ -8,13 +8,12 @@ library(rlpi)
 closeAllConnections()
 
 #Read base case
-bc_data<- read.csv("biomass/lpi_files/bc_lpi.csv")
+fmsy1_data<- read.csv("lpi_final/biomass_new/fmsy1_biomass.csv")
 
 #Read fisheries scenarios
-fmsy2_data<- read.csv("biomass/lpi_files/fmsy2_lpi.csv")
-fmsy1_data<- read.csv("biomass/lpi_files/fmsy1_lpi.csv")
-fmsy05_data<- read.csv("biomass/lpi_files/fmsy05_lpi.csv")
-fmsy0_data<- read.csv("biomass/lpi_files/fmsy0_lpi.csv")
+fmsy2_data<- read.csv("lpi_final/biomass_new/fmsy2_biomass.csv")
+#fmsy05_data<- read.csv("biomass/lpi_files/fmsy05_lpi.csv")
+fmsy0_data<- read.csv("lpi_final/biomass_new/fmsy0_biomass.csv")
 
 #Read MPA
 mpa10_data<- read.csv("biomass/lpi_files/mpa10_lpi.csv")
@@ -34,21 +33,16 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
 
 
 
-
-
-
-
 #BC
-  df<- bc_data %>% dplyr::filter(ID<36)
-  rm(bc_data)
+  df<- fmsy1_data %>% dplyr::filter(ID<36)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-  index_vector[1:155] = TRUE #change to number of rows as above
+  index_vector[1:37] = TRUE #change to number of rows as above
   
   example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
   # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, PLOT_MAX = 2101, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
+  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
   # Remove NAs (trailing years with no data)
-  bc_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
+  fmsy1_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
   # Plot the resulting index
   #bc_plot<- ggplot_lpi(bc_lpi, title = 'base_case', xlims=c(1970, 2101), ylim=c(0, 2))
   #print(bc_plot)
@@ -56,60 +50,46 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
 #FMSY0
 
   df<- fmsy0_data %>% dplyr::filter(ID<36)
-  rm(fmsy0_data)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
   index_vector[1:155] = TRUE #change to number of rows as above
   
   example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
   # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, PLOT_MAX = 2101, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
+  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
   # Remove NAs (trailing years with no data)
   fmsy0_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
   # Plot the resulting index
-  #fmsy0_plot<- ggplot_lpi(fmsy0_lpi, title = 'fmsy0', xlims=c(1970, 2101), ylim=c(0, 2))
+  #fmsy0_plot<- ggplot_lpi(fmsy0_lpi, title = 'fmsy0', xlims=c(1970, 2015), ylim=c(0, 2))
   #print(fmsy0_plot)
   
 #FMSY05  
-  df<- fmsy05_data %>% dplyr::filter(ID<36)
-  rm(fmsy05_data)
-  index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-  index_vector[1:155] = TRUE #change to number of rows as above
+  #df<- fmsy05_data %>% dplyr::filter(ID<36)
+  #rm(fmsy05_data)
+  #index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
+  #index_vector[1:155] = TRUE #change to number of rows as above
   
-  example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
+  #example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
   # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, PLOT_MAX = 2101, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
+  #arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, PLOT_MAX = 2101, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
   # Remove NAs (trailing years with no data)
-  fmsy05_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
+  #fmsy05_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
   # Plot the resulting index
   #fmsy05_plot<- ggplot_lpi(fmsy05_lpi, title = 'fmsy05', xlims=c(1970, 2101), ylim=c(0, 2))
   #print(fmsy05_plot)
   
-#FMSY1  
-  df<- fmsy1_data %>% dplyr::filter(ID<36)
-  rm(fmsy1_data)
-  index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-  index_vector[1:155] = TRUE #change to number of rows as above
-  
-  example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
-  # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, PLOT_MAX = 2101, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
-  # Remove NAs (trailing years with no data)
-  fmsy1_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
-  
 #FMSY2
   df<- fmsy2_data %>% dplyr::filter(ID<36)
-  rm(fmsy2_data)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
   index_vector[1:155] = TRUE #change to number of rows as above
   
   example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
   # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1970, PLOT_MAX = 2101, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
+  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
   # Remove NAs (trailing years with no data)
   fmsy2_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
-fmsy_lpis<- list(bc_lpi, fmsy0_lpi, fmsy05_lpi, fmsy1_lpi, fmsy2_lpi)
-ggplot_multi_lpi(fmsy_lpis, names=c("Base Case","FMSY0", "FMSY05", "FMSY1", "FMSY2"), xlims=c(1970, 2101), ylims=c(0, 2), facet=TRUE)
+fmsy_lpis<- list(fmsy0_lpi,fmsy1_lpi,fmsy2_lpi)
+ggplot_multi_lpi(fmsy_lpis, names=c("FMSY0","FMSY1", "FMSY2"), xlims=c(1981, 2015), ylims=c(0, 2), facet=TRUE)
 
 #MPA10
 df<- mpa10_data %>% dplyr::filter(ID<36)

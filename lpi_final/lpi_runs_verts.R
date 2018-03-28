@@ -2,7 +2,7 @@ library(ncdf4)
 library(tidyverse)
 library(devtools)
 # Install from main ZSL repository online
-install_github("mburgass/rlpi", dependencies=TRUE)
+#install_github("mburgass/rlpi", dependencies=TRUE)
 library(rlpi)
 closeAllConnections()
 
@@ -11,8 +11,7 @@ bc_data<- read.csv("biomass/lpi_files/bc_lpi.csv")
 
 #Read fisheries scenarios
 fmsy2_data<- read.csv("biomass/lpi_files/fmsy2_lpi.csv")
-fmsy1_data<- read.csv("biomass/lpi_files/fmsy1_lpi.csv")
-fmsy05_data<- read.csv("biomass/lpi_files/fmsy05_lpi.csv")
+#fmsy05_data<- read.csv("biomass/lpi_files/fmsy05_lpi.csv")
 fmsy0_data<- read.csv("biomass/lpi_files/fmsy0_lpi.csv")
 
 #Read MPA
