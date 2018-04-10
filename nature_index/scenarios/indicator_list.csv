@@ -1,0 +1,56 @@
+indicatorID,indicator_name,model_group
+1,Greenland halibut,GRH
+2,Blue ling,DEO
+3,Blue mussel,BFF
+4,Tusk,DEO
+5,Fin whale,FWH
+6,Wolffish,DEL
+7,Hooded seal,HOS
+8,Haddock,HAD
+9,Blue whiting,BWH
+10,Atlantic halibut,DEL
+11,Atlantic salmon,PEL
+12,Ling,DEO
+13,Capelin,CAP
+14,Jellyfish,ZG
+15,Phytoplankton small,PS
+16,Phyoplankton large,PL
+17,Polar cod,PCO
+18,Northern deep sea shrimp,PWN
+19,Lumpfish,PES
+20,Sand gaper,BFF
+21,Herring,SSH
+22,Deep sea redfish,REO
+23,Cuvie,BFF
+24,Atlantic cod,NCO
+25,Golden redfish,RED
+26,Minke whale,MWH
+27,"Rays, skates",SSK
+28,Dogfish,SHO
+29,Northern fulmar,SBA
+30,Northern gannet,SBB
+31,Great cormorant,SBB
+32,European shag,SBB
+33,Great skua,SBA
+34,Black-legged kittiwake,SBB
+35,Arctic tern,SBB
+36,Razorbill,SBB
+37,Common guillemot,SBA
+38,Brünnich guillemot,SBA
+39,Atlantic puffin,SBB
+40,White-tailed eagle,SBB
+41,Common eider,SBA
+42,Hoppekreps,ZS
+43,Caryophyllia smithii,COR
+44,Cerianthus lloydii,BC
+45,Filograna implexa,BC
+46,Geodia spp,SPO
+47,Gorgonocephalus arcticus,BD
+48,Gorgonocephalus eucnemis,BD
+49,Gorgonocephalus lamarcki,BD
+50,Heliometra glacialis,BD
+51,Lophelia sp,COR
+52,Phakellia ventilabrum,COR
+53,Poliometra prolixa,BD
+54,Tentorium semisuberites,COR
+55,Umbellula encrinus,BD

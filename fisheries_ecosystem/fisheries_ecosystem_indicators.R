@@ -70,3 +70,53 @@ fmsy_bio %>% left_join(fmsy_pp) %>%
 
 biopp$year<- as.integer(biopp$year)
 ggplot(biopp, aes(year, BioPP)) +geom_line(aes(colour=scenario))
+
+##Dem/Pel
+fmsy0_biomass%>%
+  filter(Binomial %in% c('DEO', 'REO', 'DEL', 'FLA', 'LRD', 'SSK', 'GRH', 'HAD', 'RED','NCO', 'PCO'))%>%
+  group_by(year) %>% mutate(total_biomass_dem= sum(biomass)) %>% ungroup() %>%
+  select(year, total_biomass_dem) %>% unique() %>% mutate(scenario="fmsy0")->fmsy0_dem
+
+fmsy1_biomass%>%
+  filter(Binomial %in% c('DEO', 'REO', 'DEL', 'FLA', 'LRD', 'SSK', 'GRH', 'HAD', 'RED','NCO', 'PCO'))%>%
+  group_by(year) %>% mutate(total_biomass_dem= sum(biomass)) %>% ungroup() %>%
+  select(year, total_biomass_dem) %>% unique() %>% mutate(scenario="fmsy1")->fmsy1_dem
+
+fmsy2_biomass%>%
+  filter(Binomial %in% c('DEO', 'REO', 'DEL', 'FLA', 'LRD', 'SSK', 'GRH', 'HAD', 'RED','NCO', 'PCO'))%>%
+  group_by(year) %>% mutate(total_biomass_dem= sum(biomass)) %>% ungroup() %>%
+  select(year, total_biomass_dem) %>% unique() %>% mutate(scenario="fmsy2")->fmsy2_dem
+
+fmsy_dem<- rbind(fmsy0_dem, fmsy1_dem, fmsy2_dem)
+fmsy_pel%>% left_join(fmsy_dem) %>%
+  mutate(DemPel= total_biomass_dem/total_biomass_pel) -> DemPel
+DemPel$year<- as.integer(DemPel$year)
+ggplot(DemPel, aes(year, DemPel)) +geom_line(aes(colour=scenario))
+
+#Dem bio/PP
+fmsy_dem %>% left_join(fmsy_pp) %>% mutate(DemPP=total_biomass_dem/total_biomass_pp)-> DemPP
+DemPP$year<- as.integer(DemPP$year)
+ggplot(DemPP, aes(year, DemPP)) +geom_line(aes(colour=scenario))
+
+#PropPel
+fmsy0_biomass%>%
+  group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
+  select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy0")->fmsy0_total
+
+fmsy1_biomass%>%
+  group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
+  select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy1")->fmsy1_total
+
+fmsy2_biomass%>%
+  group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
+  select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy2")->fmsy2_total
+
+fmsy_total<- rbind(fmsy0_total, fmsy1_total, fmsy2_total)
+
+fmsy_pel%>% left_join(fmsy_total) %>%
+  mutate(PropPel= total_biomass_pel/total_biomass) -> PropPelCommunity
+
+PropPelCommunity$year<- as.integer(PropPelCommunity$year)
+ggplot(PropPelCommunity, aes(year, PropPel)) +geom_line(aes(colour=scenario))
+
+##PropPredCommunity
