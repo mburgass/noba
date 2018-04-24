@@ -1,6 +1,6 @@
 library(devtools)
 # Install from main ZSL repository online
-install_github("mburgass/rlpi", dependencies=TRUE)
+#install_github("mburgass/rlpi", dependencies=TRUE)
 library(ncdf4)
 library(readtext)
 library(tidyverse)
@@ -90,6 +90,31 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
 
 fmsy_lpis<- list(fmsy0_lpi,fmsy1_lpi,fmsy2_lpi)
 ggplot_multi_lpi(fmsy_lpis, names=c("FMSY0","FMSY1", "FMSY2"), xlims=c(1981, 2015), ylims=c(0, 2), facet=TRUE)
+
+test<- rbind(fmsy0_lpi,fmsy1_lpi,fmsy2_lpi)
+
+write.csv(fmsy0_lpi, "lpiscores_fmsy0.csv")
+write.csv(fmsy1_lpi, "lpiscores_fmsy1.csv")
+write.csv(fmsy2_lpi, "lpiscores_fmsy2.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #MPA10
 df<- mpa10_data %>% dplyr::filter(ID<36)

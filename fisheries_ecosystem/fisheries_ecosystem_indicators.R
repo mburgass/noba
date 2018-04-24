@@ -54,6 +54,7 @@ fmsy_pel%>% left_join(fmsy_pp) %>%
   mutate(PelBioPP= total_biomass_pel/total_biomass_pp) -> pelbiopp
 
 pelbiopp$year<- as.integer(pelbiopp$year)
+
 ggplot(pelbiopp, aes(year, PelBioPP)) +geom_line(aes(colour=scenario))
 
 ##Bio/PP
