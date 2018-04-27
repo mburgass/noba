@@ -188,6 +188,8 @@ tl_community<- rbind(TL_community_fmsy0, TL_community_fmsy1, TL_community_fmsy2)
 tl_community$year<- as.integer(tl_community$year)  
 
 ggplot(tl_community, aes(year, TL_all)) +geom_line(aes(colour=scenario))
+write.csv(tl_community, "stats/fisheries_ecosystem/tl_community.csv", row.names = F)
+
 ###IVI Landings#####
 ## sum of species(IVI of species * catch species)/sum(catch species) for each year
 

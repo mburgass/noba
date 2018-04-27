@@ -99,6 +99,9 @@ fmsy_dem %>% left_join(fmsy_pp) %>% mutate(DemPP=total_biomass_dem/total_biomass
 DemPP$year<- as.integer(DemPP$year)
 ggplot(DemPP, aes(year, DemPP)) +geom_line(aes(colour=scenario))
 
+dempp<- select(DemPP, year, DemPP, scenario)
+write.csv(dempp, "stats/fisheries_ecosystem/dempp.csv", row.names = F)
+
 #PropPel
 fmsy0_biomass%>%
   group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
@@ -119,5 +122,8 @@ fmsy_pel%>% left_join(fmsy_total) %>%
 
 PropPelCommunity$year<- as.integer(PropPelCommunity$year)
 ggplot(PropPelCommunity, aes(year, PropPel)) +geom_line(aes(colour=scenario))
+
+proppel<- select(PropPelCommunity, year, PropPel, scenario)
+write.csv(proppel, "stats/fisheries_ecosystem/proppel.csv", row.names = F)
 
 ##PropPredCommunity

@@ -341,33 +341,60 @@ nature.index_fmsy0 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy0
 nature.index_fmsy1 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy1
 nature.index_fmsy2 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy2
 
-as.data.frame(nature.index_fmsy0) %>% gather(year, biomass, 1:35) -> fmsy0
+as.data.frame(nature.index_fmsy0) %>% gather(year, score, 1:35) -> fmsy0
 fmsy0$scenario<- "fmsy0"
-as.data.frame(nature.index_fmsy1) %>% gather(year, biomass, 1:35) -> fmsy1
+as.data.frame(nature.index_fmsy1) %>% gather(year, score, 1:35) -> fmsy1
 fmsy1$scenario<- "fmsy1"
 
-as.data.frame(nature.index_fmsy2) %>% gather(year, biomass, 1:35) -> fmsy2
+as.data.frame(nature.index_fmsy2) %>% gather(year, score, 1:35) -> fmsy2
 fmsy2$scenario<- "fmsy2"
 
 index3<- rbind(fmsy0, fmsy1, fmsy2)
+index3$year<- as.integer(index3$year)
 
 plot(1981:2015,nature.index_fmsy2,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
 lines(1981:2015,nature.index_fmsy1,col="blue",lwd=2)
 lines(1981:2015,nature.index_fmsy0,col="black",lwd=2)
 title("Barents Sea")
 
+ggplot(index3, aes(year,score)) + geom_line(aes(colour=scenario)) + ylim(0,1)+ggtitle("Norway Nature Index for the Barents Sea")
+
 nature.index_fmsy0.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy0
 nature.index_fmsy1.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy1
 nature.index_fmsy2.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy2
+
+as.data.frame(nature.index_fmsy0.benthic) %>% gather(year, score, 1:35) -> fmsy0_benthic
+fmsy0_benthic$scenario<- "fmsy0"
+as.data.frame(nature.index_fmsy1.benthic) %>% gather(year, score, 1:35) -> fmsy1_benthic
+fmsy1_benthic$scenario<- "fmsy1"
+
+as.data.frame(nature.index_fmsy2.benthic) %>% gather(year, score, 1:35) -> fmsy2_benthic
+fmsy2_benthic$scenario<- "fmsy2"
+benthic_nni<- rbind(fmsy0_benthic, fmsy1_benthic, fmsy2_benthic)
+benthic_nni$year<- as.integer(benthic_nni$year)
 
 plot(1981:2015,nature.index_fmsy2.benthic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
 lines(1981:2015,nature.index_fmsy1.benthic,col="blue",lwd=2)
 lines(1981:2015,nature.index_fmsy0.benthic,col="black",lwd=2)
 title("Benthic")
+ggplot(benthic_nni, aes(year,score)) + geom_line(aes(colour=scenario)) + ylim(0,1)+ggtitle("Benthic Norway Nature Index for the Barents Sea")
 
 nature.index_fmsy0.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy0
 nature.index_fmsy1.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy1
 nature.index_fmsy2.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy2
+
+as.data.frame(nature.index_fmsy0.pelagic) %>% gather(year, score, 1:35) -> fmsy0_pelagic
+fmsy0_pelagic$scenario<- "fmsy0"
+as.data.frame(nature.index_fmsy1.pelagic) %>% gather(year, score, 1:35) -> fmsy1_pelagic
+fmsy1_pelagic$scenario<- "fmsy1"
+
+as.data.frame(nature.index_fmsy2.pelagic) %>% gather(year, score, 1:35) -> fmsy2_pelagic
+fmsy2_pelagic$scenario<- "fmsy2"
+pelagic_nni<- rbind(fmsy0_pelagic, fmsy1_pelagic, fmsy2_pelagic)
+pelagic_nni$year<- as.integer(pelagic_nni$year)
+
+ggplot(pelagic_nni, aes(year,score)) + geom_line(aes(colour=scenario)) + ylim(0,1)+ggtitle("Pelagic Norway Nature Index for the Barents Sea")
+
 
 plot(1981:2015,nature.index_fmsy2.pelagic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
 lines(1981:2015,nature.index_fmsy1.pelagic,col="blue",lwd=2)
