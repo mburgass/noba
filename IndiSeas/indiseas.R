@@ -184,7 +184,7 @@ read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("y
   mutate(TL_all= TL_biomass_year/biomass_year) %>% ungroup() %>% select(year, TL_all) %>%
   unique() %>% mutate(scenario='fmsy2')-> TL_community_fmsy2
 
-tl_community<- rbind(TL_community_fmsy0, TL_community_fmsy1, TL_community_fmsy2) %>% filter(year>1983)
+tl_community<- rbind(TL_community_fmsy0, TL_community_fmsy1, TL_community_fmsy2) #%>% filter(year>1983)
 tl_community$year<- as.integer(tl_community$year)  
 
 ggplot(tl_community, aes(year, TL_all)) +geom_line(aes(colour=scenario))

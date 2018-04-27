@@ -208,3 +208,43 @@ ggplot(new_intervals, aes(x =year, y = fit)) +
   xlab("Year") +
   ylab("PropPel") +
   ggtitle("Regressions of PropPel for three fishing scenarios; P= 2.554e-07, R2 0.371")
+
+
+#####MTLBio#########
+read.csv("stats/fisheries_ecosystem/tl_community.csv")  -> mtlbio
+#pelbiopp<- pelbiopp %>% filter(scenario %in% c("fmsy0", "fmsy2"))
+
+mtlbio0<- lm(TL_all ~ poly(year, 2), data=mtlbio)
+mtlbio1<- lm(TL_all ~ poly(year, 2) * scenario, data=mtlbio)
+#mtlbio2<- lm(TL_all ~ poly(year, 3) * scenario, data=mtlbio)
+
+anova(mtlbio0,mtlbio1)
+
+##Insignificant difference between regressions
+
+####Plotting regressions######
+dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
+intervals.a <- predict(mtlbio1,newdata = dat.a,interval='confidence',
+                       level=0.95)
+data.frame(intervals.a) -> intervals.a
+intervals.a%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy0')-> intervals.a
+
+dat.b = data.frame(year= 1981:2015, scenario='fmsy1')
+intervals.b<- predict(mtlbio1, newdata = dat.b, interval='confidence', level=0.95)
+data.frame(intervals.b) -> intervals.b
+intervals.b%>% mutate(year = 1981:2015) %>% select(year, everything())%>% mutate(scenario='fmsy1') -> intervals.b
+dat.c = data.frame(year= 1981:2015, scenario='fmsy2')
+intervals.c<- predict(mtlbio1, newdata = dat.c, interval='confidence', level=0.95)
+data.frame(intervals.c) -> intervals.c
+intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
+
+new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
+
+ggplot(new_intervals, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = mtlbio, aes(x = year, y = TL_all, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("MTLBio") +
+  ggtitle("Regressions of MTLBio for three fishing scenarios; P= 8.485e-06, R2 0.3171")
