@@ -5,27 +5,25 @@ read.csv("stats/lpi/adjusted/lpiscores_fmsy1_adjusted.csv") -> lpi_fmsy1
 lpi<- rbind(lpi_fmsy2, lpi_fmsy1, lpi_fmsy0)
 
 ##Fitting Models
-fit0 <- lm(LPI_final ~ poly(year, 4), data = lpi)
+fit0 <- lm(LPI_final ~ poly(year, 2), data = lpi)
 
-
-fit1 <- lm(LPI_final ~ poly(year, 4) * scenario, data = lpi)
-
+fit1 <- lm(LPI_final ~ poly(year, 2) * scenario, data = lpi)
 anova(fit0, fit1)
 ####Plotting regressions######
-dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
+dat.a = data.frame(year= 1980:2015, scenario='fmsy0')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',
                        level=0.95)
 data.frame(intervals.a) -> intervals.a
-intervals.a%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy0')-> intervals.a
+intervals.a%>% mutate(year = 1980:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy0')-> intervals.a
 
-dat.b = data.frame(year= 1981:2015, scenario='fmsy1')
+dat.b = data.frame(year= 1980:2015, scenario='fmsy1')
 intervals.b<- predict(fit1, newdata = dat.b, interval='confidence', level=0.95)
 data.frame(intervals.b) -> intervals.b
-intervals.b%>% mutate(year = 1981:2015) %>% select(year, everything())%>% mutate(scenario='fmsy1') -> intervals.b
-dat.c = data.frame(year= 1981:2015, scenario='fmsy2')
+intervals.b%>% mutate(year = 1980:2015) %>% select(year, everything())%>% mutate(scenario='fmsy1') -> intervals.b
+dat.c = data.frame(year= 1980:2015, scenario='fmsy2')
 intervals.c<- predict(fit1, newdata = dat.c, interval='confidence', level=0.95)
 data.frame(intervals.c) -> intervals.c
-intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
+intervals.c%>% mutate(year = 1980:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
 new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
 

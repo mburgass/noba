@@ -36,11 +36,11 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
 #BC
   df<- fmsy1_data %>% dplyr::filter(ID<36)
   index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-  index_vector[1:37] = TRUE #change to number of rows as above
+  index_vector[1:155] = TRUE #change to number of rows as above
   
   example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
   # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
+  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1980, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
   # Remove NAs (trailing years with no data)
   fmsy1_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
   # Plot the resulting index
@@ -55,7 +55,7 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
   
   example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
   # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
+  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1980, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
   # Remove NAs (trailing years with no data)
   fmsy0_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
   # Plot the resulting index
@@ -84,12 +84,12 @@ sb3_data<- read.csv("biomass/lpi_files/sb3_lpi.csv")
   
   example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
   # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
+  arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1980, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
   # Remove NAs (trailing years with no data)
   fmsy2_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
 fmsy_lpis<- list(fmsy0_lpi,fmsy1_lpi,fmsy2_lpi)
-ggplot_multi_lpi(fmsy_lpis, names=c("FMSY0","FMSY1", "FMSY2"), xlims=c(1981, 2015), ylims=c(0, 2), facet=TRUE)
+ggplot_multi_lpi(fmsy_lpis, names=c("FMSY0","FMSY1", "FMSY2"), xlims=c(1980, 2015), ylims=c(0, 2), facet=TRUE)
 
 test<- rbind(fmsy0_lpi,fmsy1_lpi,fmsy2_lpi)
 

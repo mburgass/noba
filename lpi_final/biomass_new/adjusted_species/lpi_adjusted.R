@@ -1,6 +1,6 @@
 library(devtools)
 # Install from main ZSL repository online
-#install_github("mburgass/rlpi", dependencies=TRUE)
+install_github("mburgass/rlpi", dependencies=TRUE)
 library(ncdf4)
 library(readtext)
 library(tidyverse)
@@ -8,46 +8,46 @@ library(rlpi)
 closeAllConnections()
 
 #Read base case
-fmsy1_data<- read.csv("lpi_final/biomass_new/adjusted_species/fmsy1_biomass_adjusted.csv")
+fmsy1_data<- read.csv("lpi_final/biomass_new/adjusted_species/fmsy1_biomass_adjusted2.csv")
 
 #Read fisheries scenarios
-fmsy2_data<- read.csv("lpi_final/biomass_new/adjusted_species/fmsy2_biomass_adjusted.csv")
+fmsy2_data<- read.csv("lpi_final/biomass_new/adjusted_species/fmsy2_biomass_adjusted2.csv")
 #fmsy05_data<- read.csv("biomass/lpi_files/fmsy05_lpi.csv")
-fmsy0_data<- read.csv("lpi_final/biomass_new/adjusted_species/fmsy0_biomass_adjusted.csv")
+fmsy0_data<- read.csv("lpi_final/biomass_new/adjusted_species/fmsy0_biomass_adjusted2.csv")
 
 #BC
 df<- fmsy1_data %>% dplyr::filter(ID<52)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-index_vector[1:51] = TRUE #change to number of rows as above
+index_vector[1:153] = TRUE #change to number of rows as above
 
 example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
 # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
+arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1980, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
 # Remove NAs (trailing years with no data)
 fmsy1_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
 
 df<- fmsy0_data %>% dplyr::filter(ID<52)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-index_vector[1:51] = TRUE #change to number of rows as above
+index_vector[1:153] = TRUE #change to number of rows as above
 
 example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
 # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
+arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1980, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
 # Remove NAs (trailing years with no data)
 fmsy0_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
 
 df<- fmsy2_data %>% dplyr::filter(ID<52)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-index_vector[1:51] = TRUE #change to number of rows as above
+index_vector[1:153] = TRUE #change to number of rows as above
 
 example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
 # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1981, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
+arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 1980, PLOT_MAX = 2015, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
 # Remove NAs (trailing years with no data)
 fmsy2_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]  
 
 fmsy_lpis<- list(fmsy0_lpi,fmsy1_lpi,fmsy2_lpi)
-ggplot_multi_lpi(fmsy_lpis, names=c("FMSY0","FMSY1", "FMSY2"), xlims=c(1981, 2015), ylims=c(0, 2), facet=T)
+ggplot_multi_lpi(fmsy_lpis, names=c("FMSY0","FMSY1", "FMSY2"), xlims=c(1980, 2015), ylims=c(0, 2), facet=T)
 
 write.csv(fmsy0_lpi, "lpi_final/biomass_new/adjusted_species/lpiscores_fmsy0_adjusted.csv")
 write.csv(fmsy1_lpi, "lpi_final/biomass_new/adjusted_species/lpiscores_fmsy1_adjusted.csv")

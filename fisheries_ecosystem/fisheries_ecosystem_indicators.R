@@ -14,14 +14,14 @@ closeAllConnections()
 #PelBio/PP
 
 read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>%
-  gather("year", "biomass", 3:155)%>%
-  filter(year<2016, year>1980)-> fmsy1_biomass
+  gather("year", "biomass", 3:153)%>%
+  filter(year<2016, year>1979)-> fmsy1_biomass
 read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>%
-  gather("year", "biomass", 3:155)%>%
-  filter(year<2016, year>1980)-> fmsy0_biomass
+  gather("year", "biomass", 3:153)%>%
+  filter(year<2016, year>1979)-> fmsy0_biomass
 read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>%
-  gather("year", "biomass", 3:155) %>%
-  filter(year<2016, year>1980)-> fmsy2_biomass
+  gather("year", "biomass", 3:153) %>%
+  filter(year<2016, year>1979)-> fmsy2_biomass
 
 fmsy1_biomass %>% filter(Binomial %in% c('PEL','PES', 'MES', 'MAC', 'SAI', 'BWH', 'SSH', 'CAP')) %>% group_by(year) %>% mutate(total_biomass_pel= sum(biomass)) %>% ungroup() %>%
   select(year, total_biomass_pel) %>% unique() %>% mutate(scenario="fmsy1")->fmsy1_pel
@@ -57,12 +57,15 @@ pelbiopp$year<- as.integer(pelbiopp$year)
 
 ggplot(pelbiopp, aes(year, PelBioPP)) +geom_line(aes(colour=scenario))
 
+pelbiopp<- select(pelbiopp, year, PelBioPP, scenario)
+write.csv(pelbiopp, "stats/fisheries_ecosystem/pelbiopp.csv", row.names = F)
+
 ##Bio/PP
-fmsy1_biomass %>% filter(!Binomial %in% c('DF', 'PS', 'PL')) %>% group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
+fmsy1_biomass %>% filter(!Binomial %in% c('DF', 'PS', 'PL', 'BB', 'PB', 'DL', 'DIN')) %>% group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
   select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy1")->fmsy1_bio
-fmsy0_biomass %>% filter(!Binomial %in% c('DF', 'PS', 'PL')) %>% group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
+fmsy0_biomass %>% filter(!Binomial %in% c('DF', 'PS', 'PL','BB', 'PB', 'DL', 'DIN')) %>% group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
   select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy0")->fmsy0_bio
-fmsy2_biomass %>% filter(!Binomial %in% c('DF', 'PS', 'PL')) %>% group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
+fmsy2_biomass %>% filter(!Binomial %in% c('DF', 'PS', 'PL','BB', 'PB', 'DL', 'DIN')) %>% group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
   select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy2")->fmsy2_bio
 
 fmsy_bio<- rbind(fmsy0_bio, fmsy1_bio, fmsy2_bio)
@@ -71,6 +74,8 @@ fmsy_bio %>% left_join(fmsy_pp) %>%
 
 biopp$year<- as.integer(biopp$year)
 ggplot(biopp, aes(year, BioPP)) +geom_line(aes(colour=scenario))
+biopp<- select(biopp, year, BioPP, scenario)
+write.csv(biopp, "stats/fisheries_ecosystem/biopp.csv", row.names = F)
 
 ##Dem/Pel
 fmsy0_biomass%>%
@@ -94,6 +99,8 @@ fmsy_pel%>% left_join(fmsy_dem) %>%
 DemPel$year<- as.integer(DemPel$year)
 ggplot(DemPel, aes(year, DemPel)) +geom_line(aes(colour=scenario))
 
+dempel<- select(DemPel, year, DemPel, scenario)
+write.csv(dempel, "stats/fisheries_ecosystem/dempel.csv", row.names = F)
 #Dem bio/PP
 fmsy_dem %>% left_join(fmsy_pp) %>% mutate(DemPP=total_biomass_dem/total_biomass_pp)-> DemPP
 DemPP$year<- as.integer(DemPP$year)
@@ -103,15 +110,15 @@ dempp<- select(DemPP, year, DemPP, scenario)
 write.csv(dempp, "stats/fisheries_ecosystem/dempp.csv", row.names = F)
 
 #PropPel
-fmsy0_biomass%>%
-  group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
+fmsy0_biomass%>%filter(!Binomial %in% c('BB', 'PB', 'DIN', 'DF')) %>%
+  group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup()%>%
   select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy0")->fmsy0_total
 
-fmsy1_biomass%>%
+fmsy1_biomass%>%filter(!Binomial %in% c('BB', 'PB', 'DIN', 'DF')) %>%
   group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
   select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy1")->fmsy1_total
 
-fmsy2_biomass%>%
+fmsy2_biomass%>%filter(!Binomial %in% c('BB', 'PB', 'DIN', 'DF')) %>%
   group_by(year) %>% mutate(total_biomass= sum(biomass)) %>% ungroup() %>%
   select(year, total_biomass) %>% unique() %>% mutate(scenario="fmsy2")->fmsy2_total
 

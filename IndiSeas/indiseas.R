@@ -5,23 +5,27 @@ closeAllConnections()
 #Total Biomass of surveyed species (PEL, REO, GRH, MAC, HAD,SAI, RED,BWH, SSH, NCO, PCO, CAP, PWN, KCR, SCR, ZL, ZM, ZS)
 
 #Read base case
-read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
   filter(year<2016, year>1980) %>% group_by(year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="fmsy1") ->bc_data
 
 #Read fisheries scenarios
-read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
-  filter(year<2016, year>1980) %>% group_by(year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
+  filter(year<2016, year>1979) %>% group_by(year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="fmsy2") ->fmsy2_data
 
-read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
-  filter(year<2016, year>1980) %>% group_by(year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
+  filter(year<2016, year>1979) %>% group_by(year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="fmsy0") ->fmsy0_data
 
 
+read.csv("lpi_final/biomass_new/fmsy05_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
+  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
+  filter(year<2016, year>1979) %>% group_by(year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
+  select(year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="fmsy05") ->fmsy05_data
 
 
 
@@ -30,58 +34,71 @@ surveyed_biomass<- rbind(bc_data, fmsy0_data, fmsy2_data)
 
 surveyed_biomass$year<- as.integer(surveyed_biomass$year)  
 
-ggplot(surveyed_biomass, aes(year, total_biomass_surveyed, group=1)) +geom_line()+
-  facet_wrap(~scenario)
+ggplot(surveyed_biomass, aes(year, total_biomass_surveyed)) +geom_line(aes(colour=scenario))
 
 ##Inverse fishing pressure 1/(landings/biomass) retained species
-read.csv("catch/bc_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
-  gather("species", "catch", 2:8) %>% group_by(Year) %>%
+read.csv("catch/fmsy1_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
+  gather("species", "catch", 2:7) %>% group_by(Year) %>%
   mutate(total_catch=sum(catch)) %>% ungroup() %>% select(Year, total_catch) %>%
-  unique()%>% mutate(scenario="fmsy1") %>% filter(Year<2016) -> fmsy1_catch  
+  unique()%>% mutate(scenario="fmsy1") %>% filter(Year<2016, Year>1980) -> fmsy1_catch  
 
-
-
-read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
-  gather("species", "catch", 2:8) %>% group_by(Year) %>%
+read.csv("catch/fmsy05_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
+  gather("species", "catch", 2:7) %>% group_by(Year) %>%
   mutate(total_catch=sum(catch)) %>% ungroup() %>% select(Year, total_catch) %>%
-  unique()%>% mutate(scenario="fmsy2") %>% filter(Year<2016) -> fmsy2_catch  
+  unique()%>% mutate(scenario="fmsy05") %>% filter(Year<2016, Year>1980) -> fmsy05_catch  
 
 
-read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("Year", "biomass", 3:155) %>%
-  filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
+read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
+  gather("species", "catch", 2:7) %>% group_by(Year) %>%
+  mutate(total_catch=sum(catch)) %>% ungroup() %>% select(Year, total_catch) %>%
+  unique()%>% mutate(scenario="fmsy2") %>% filter(Year<2016, Year>1980) -> fmsy2_catch  
+
+read.csv("lpi_final/biomass_new/fmsy05_biomass.csv", check.names=F) %>% gather("Year", "biomass", 3:153) %>%
+  filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO'))%>%
+  filter(Year<2016, Year>1980) %>% group_by(Year) %>% mutate(total_biomass_landings= sum(biomass)) %>% ungroup() %>%
+  select(Year, total_biomass_landings) %>% unique() %>% mutate(scenario="fmsy05") ->fmsy05_data
+
+
+read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("Year", "biomass", 3:153) %>%
+  filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO'))%>%
   filter(Year<2016, Year>1980) %>% group_by(Year) %>% mutate(total_biomass_landings= sum(biomass)) %>% ungroup() %>%
   select(Year, total_biomass_landings) %>% unique() %>% mutate(scenario="fmsy1") ->fmsy1_data
 
-read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("Year", "biomass", 3:155) %>%
-  filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
+read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("Year", "biomass", 3:153) %>%
+  filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO'))%>%
   filter(Year<2016, Year>1980) %>% group_by(Year) %>% mutate(total_biomass_landings= sum(biomass)) %>% ungroup() %>%
   select(Year, total_biomass_landings) %>% unique() %>% mutate(scenario="fmsy2") ->fmsy2_data
 
 fmsy1_data$Year<- as.integer(fmsy1_data$Year)
+fmsy05_data$Year<- as.integer(fmsy05_data$Year)
+
 fmsy2_data$Year<- as.integer(fmsy2_data$Year)
 
-fish_pressure_catch<- rbind(fmsy1_catch, fmsy2_catch)
-fish_pressure_biomass<- rbind(fmsy1_data, fmsy2_data)
+fish_pressure_catch<- rbind(fmsy05_catch, fmsy1_catch, fmsy2_catch)
+fish_pressure_biomass<- rbind(fmsy05_data, fmsy1_data, fmsy2_data)
 
 fish_pressure_catch%>% left_join(fish_pressure_biomass) %>%
-  mutate(inversepressure= 1/(total_catch/total_biomass_landings)) %>% filter(Year>1983)-> fish_pressure
+  mutate(inversepressure= 1/(total_catch/total_biomass_landings)) -> fish_pressure
 
 ggplot(fish_pressure, aes(Year, inversepressure)) +geom_line(aes(colour=scenario))
 
+
+write.csv(fish_pressure, "stats/indiseas/inverse_pressure_nocapelin.csv", row.names = F)
+
 ##Proportion Predatory Fish (classified as predatory and fish)
 #Read base case
-read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(Binomial %in% c('DEO','PEL', 'REO','DEL', 'LRD', 'SSK', 'GRH','HAD', 'SAI', 'NCO'))%>%
   filter(year<2016, year>1980) %>% group_by(year) %>% mutate(total_biomass_pred= mean(biomass)) %>% ungroup() %>%
   select(year, total_biomass_pred) %>% unique() %>% mutate(scenario="fmsy1") ->fmsy1_pred
 
 #Read fisheries scenarios
-read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(Binomial %in% c('DEO','PEL', 'REO','DEL', 'LRD', 'SSK', 'GRH','HAD', 'SAI', 'NCO'))%>%
   filter(year<2016, year>1980) %>% group_by(year) %>% mutate(total_biomass_pred= mean(biomass)) %>% ungroup() %>%
   select(year, total_biomass_pred) %>% unique() %>% mutate(scenario="fmsy2") ->fmsy2_pred
 
-read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(Binomial %in% c('DEO','PEL', 'REO','DEL', 'LRD', 'SSK', 'GRH','HAD', 'SAI', 'NCO'))%>%
   filter(year<2016, year>1980) %>% group_by(year) %>% mutate(total_biomass_pred= mean(biomass)) %>% ungroup() %>%
   select(year, total_biomass_pred) %>% unique() %>% mutate(scenario="fmsy0") ->fmsy0_pred
@@ -95,12 +112,15 @@ pred_fish<- pred_fish %>% group_by(year, scenario) %>% summarise(proppred= total
 
 ggplot(pred_fish, aes(year, proppred)) +geom_line(aes(colour=scenario))
 
+write.csv(pred_fish, "stats/indiseas/proppred_surveyed.csv", row.names = F)
+
+
 ###MEAN LIFESPAN##### All species with mean lifespan data
 #sum species(Max Age Species x Species Biomass) / Sum species (Species biomass) for each year
 
 max_age<- read.csv("species_max_age.csv")
 
-read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(year<2016, year>1980) %>%
   left_join(max_age, by='Binomial') %>% filter(!is.na(Max_age)) %>%
   group_by(Binomial, year) %>% mutate(max_age_biomass= Max_age*biomass)%>% ungroup() %>%
@@ -109,7 +129,7 @@ read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("y
   mutate(mean_life_span= max_age_biomass_year/biomass_year) %>% select(year, mean_life_span) %>% 
   unique()%>% mutate(scenario="fmsy1")->life_span_fmsy1
 
-read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(year<2016, year>1980) %>%
   left_join(max_age, by='Binomial') %>% filter(!is.na(Max_age)) %>%
   group_by(Binomial, year) %>% mutate(max_age_biomass= Max_age*biomass)%>% ungroup() %>%
@@ -118,7 +138,7 @@ read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("y
   mutate(mean_life_span= max_age_biomass_year/biomass_year) %>% select(year, mean_life_span) %>% 
   unique()%>% mutate(scenario="fmsy0")->life_span_fmsy0
 
-read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
+read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
   filter(year<2016, year>1980) %>%
   left_join(max_age, by='Binomial') %>% filter(!is.na(Max_age)) %>%
   group_by(Binomial, year) %>% mutate(max_age_biomass= Max_age*biomass)%>% ungroup() %>%
@@ -132,19 +152,30 @@ mean_lifespan$year<- as.integer(mean_lifespan$year)
 
 ggplot(mean_lifespan, aes(year, mean_life_span)) +geom_line(aes(colour=scenario))
 
+write.csv(mean_lifespan, "stats/indiseas/mean_life_span.csv", row.names = F)
+
+
 ## TROPHIC LEVEL LANDINGS#####
 
 ## sum of species(trophic level of species * catch species)/sum(catch species) for each year
 
 trophic_level<- read.csv("species_trophic_level.csv")
 
-read.csv("catch/bc_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
+read.csv("catch/fmsy1_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
   gather("species", "catch", 2:8)%>%
   filter(Year<2016, Year>1980) %>% left_join(trophic_level, by='species') %>%
   group_by(species, Year) %>% mutate(tl_catch=TL*catch) %>% ungroup() %>% group_by(Year) %>%
   mutate(catch_year=sum(catch)) %>% mutate(tl_catch_year= sum(tl_catch)) %>%
            mutate(trophic_level_landings= tl_catch_year/catch_year) %>% ungroup() %>% select(Year, trophic_level_landings) %>%
            unique() %>% mutate(scenario='fmsy1')-> tl_landings_fmsy1
+
+read.csv("catch/fmsy05_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
+  gather("species", "catch", 2:8)%>%
+  filter(Year<2016, Year>1980) %>% left_join(trophic_level, by='species') %>%
+  group_by(species, Year) %>% mutate(tl_catch=TL*catch) %>% ungroup() %>% group_by(Year) %>%
+  mutate(catch_year=sum(catch)) %>% mutate(tl_catch_year= sum(tl_catch)) %>%
+  mutate(trophic_level_landings= tl_catch_year/catch_year) %>% ungroup() %>% select(Year, trophic_level_landings) %>%
+  unique() %>% mutate(scenario='fmsy05')-> tl_landings_fmsy05
 
 read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
   gather("species", "catch", 2:8)%>%
@@ -154,31 +185,34 @@ read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, 
   mutate(trophic_level_landings= tl_catch_year/catch_year) %>% ungroup() %>% select(Year, trophic_level_landings) %>%
   unique() %>% mutate(scenario='fmsy2')-> tl_landings_fmsy2
 
-tl_landings<- rbind(tl_landings_fmsy1, tl_landings_fmsy2) %>% filter(Year>1983)
+tl_landings<- rbind(tl_landings_fmsy05, tl_landings_fmsy1, tl_landings_fmsy2)
 tl_landings$Year<- as.integer(tl_landings$Year)  
 
 ggplot(tl_landings, aes(Year, trophic_level_landings)) +geom_line(aes(colour=scenario))
+
+write.csv(tl_landings, "stats/indiseas/tl_landings.csv", row.names = F)
+
 
 
 ## TROPHIC LEVEL COMMUNITY#####
 read.csv("species_trophic_level.csv") %>% rename(Binomial=species)-> trophic_level
 
-read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
-  filter(year<2016, year>1980) %>% left_join(trophic_level, by='Binomial')%>% filter(!is.na(TL)) %>%
+read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
+  filter(year<2016, year>1979) %>% left_join(trophic_level, by='Binomial')%>% filter(!is.na(TL)) %>%
   group_by(Binomial, year) %>% mutate(tl_community=TL*biomass) %>% ungroup() %>% group_by(year) %>%
   mutate(biomass_year=sum(biomass)) %>% mutate(TL_biomass_year= sum(tl_community)) %>%
   mutate(TL_all= TL_biomass_year/biomass_year) %>% ungroup() %>% select(year, TL_all) %>%
   unique() %>% mutate(scenario='fmsy1')-> TL_community_fmsy1
 
-read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
-  filter(year<2016, year>1980) %>% left_join(trophic_level, by='Binomial')%>% filter(!is.na(TL)) %>%
+read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
+  filter(year<2016, year>1979) %>% left_join(trophic_level, by='Binomial')%>% filter(!is.na(TL)) %>%
   group_by(Binomial, year) %>% mutate(tl_community=TL*biomass) %>% ungroup() %>% group_by(year) %>%
   mutate(biomass_year=sum(biomass)) %>% mutate(TL_biomass_year= sum(tl_community)) %>%
   mutate(TL_all= TL_biomass_year/biomass_year) %>% ungroup() %>% select(year, TL_all) %>%
   unique() %>% mutate(scenario='fmsy0')-> TL_community_fmsy0
 
-read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
-  filter(year<2016, year>1980) %>% left_join(trophic_level, by='Binomial')%>% filter(!is.na(TL)) %>%
+read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names=F) %>% gather("year", "biomass", 3:153) %>%
+  filter(year<2016, year>1979) %>% left_join(trophic_level, by='Binomial')%>% filter(!is.na(TL)) %>%
   group_by(Binomial, year) %>% mutate(tl_community=TL*biomass) %>% ungroup() %>% group_by(year) %>%
   mutate(biomass_year=sum(biomass)) %>% mutate(TL_biomass_year= sum(tl_community)) %>%
   mutate(TL_all= TL_biomass_year/biomass_year) %>% ungroup() %>% select(year, TL_all) %>%
@@ -195,13 +229,21 @@ write.csv(tl_community, "stats/fisheries_ecosystem/tl_community.csv", row.names 
 
 ivi<- read.csv("species_ivi.csv")
 
-read.csv("catch/bc_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
+read.csv("catch/fmsy1_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
   gather("species", "catch", 2:8)%>%
   filter(Year<2016, Year>1980) %>% left_join(ivi, by='species') %>%
   group_by(species, Year) %>% mutate(ivi_catch=IVI*catch) %>% ungroup() %>% group_by(Year) %>%
   mutate(catch_year=sum(catch)) %>% mutate(ivi_catch_year= sum(ivi_catch)) %>%
   mutate(ivi_landings= ivi_catch_year/catch_year) %>% ungroup() %>% select(Year, ivi_landings) %>%
   unique() %>% mutate(scenario='fmsy1')-> ivi_landings_fmsy1
+
+read.csv("catch/fmsy05_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
+  gather("species", "catch", 2:8)%>%
+  filter(Year<2016, Year>1980) %>% left_join(ivi, by='species') %>%
+  group_by(species, Year) %>% mutate(ivi_catch=IVI*catch) %>% ungroup() %>% group_by(Year) %>%
+  mutate(catch_year=sum(catch)) %>% mutate(ivi_catch_year= sum(ivi_catch)) %>%
+  mutate(ivi_landings= ivi_catch_year/catch_year) %>% ungroup() %>% select(Year, ivi_landings) %>%
+  unique() %>% mutate(scenario='fmsy05')-> ivi_landings_fmsy05
 
 read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
   gather("species", "catch", 2:8)%>%
@@ -211,11 +253,12 @@ read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, 
   mutate(ivi_landings= ivi_catch_year/catch_year) %>% ungroup() %>% select(Year, ivi_landings) %>%
   unique() %>% mutate(scenario='fmsy2')-> ivi_landings_fmsy2
 
-ivi_landings<- rbind(ivi_landings_fmsy1, ivi_landings_fmsy2) %>% filter(Year>1983)
+ivi_landings<- rbind(ivi_landings_fmsy1, ivi_landings_fmsy05, ivi_landings_fmsy2)
 ivi_landings$Year<- as.integer(ivi_landings$Year)  
 
 ggplot(ivi_landings, aes(Year, ivi_landings)) +geom_line(aes(colour=scenario))
 
+write.csv(ivi_landings, "stats/indiseas/ivi_landings.csv", row.names = F)
 #####OLD CODE######
 
 fmsy05_data<- read.csv("biomass/lpi_files/fmsy05_lpi.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%
