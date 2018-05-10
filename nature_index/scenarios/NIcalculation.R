@@ -404,4 +404,6 @@ title("Pelagic")
 # 
 
 
-
+write.csv(index3, "nature_index/ni_scores.csv", row.names=F)
+write.csv(benthic_nni, "nature_index/ni_benthic.csv", row.names = F)
+write.csv(pelagic_nni, "nature_index/ni_pelagic.csv", row.names = F)

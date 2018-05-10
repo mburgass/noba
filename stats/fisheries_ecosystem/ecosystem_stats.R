@@ -3,10 +3,11 @@ library(car)
 
 ##Explore data
 
-read.csv("stats/fisheries_ecosystem/biopp.csv")  %>% gather(scenario, biopp, 2:4) -> biopp
+read.csv("stats/fisheries_ecosystem/biopp.csv")   -> biopp
 
 
-
+biopp$scenario<- as.character(biopp$scenario)
+biopp<- rename(biopp, biopp=BioPP)
 
 fitpp0<- lm(biopp ~ poly(year,2), data=biopp)
 fitpp1<- lm(biopp ~ poly(year, 2) * scenario, data=biopp)
@@ -30,9 +31,9 @@ intervals.c<- predict(fitpp1, newdata = dat.c, interval='confidence', level=0.95
 data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
-new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
+new_intervals_biopp<- rbind(intervals.a, intervals.b, intervals.c)
 
-ggplot(new_intervals, aes(x =year, y = fit)) +
+legend_test<- ggplot(new_intervals_biopp, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
@@ -43,8 +44,10 @@ ggplot(new_intervals, aes(x =year, y = fit)) +
 
 
 ######## DemPel#############
-read.csv("stats/fisheries_ecosystem/dempel.csv")  %>% gather(scenario, dempel, 2:4) -> dempel
+read.csv("stats/fisheries_ecosystem/dempel.csv") -> dempel
 
+dempel$scenario<- as.character(dempel$scenario)
+dempel<- rename(dempel, dempel=DemPel)
 
 
 fitdp0<- lm(dempel ~ poly(year,5), data=dempel)
@@ -74,9 +77,9 @@ intervals.c<- predict(fitdp1, newdata = dat.c, interval='confidence', level=0.95
 data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
-new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
+new_intervals_dempel<- rbind(intervals.a, intervals.b, intervals.c)
 
-ggplot(new_intervals, aes(x =year, y = fit)) +
+ggplot(new_intervals_dempel, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
@@ -86,7 +89,11 @@ ggplot(new_intervals, aes(x =year, y = fit)) +
   ggtitle("Regressions of DemPel for three fishing scenarios; P<2.2e-16, R2=0.9396")
 
 #####PelBioPP######
-read.csv("stats/fisheries_ecosystem/pelbiopp.csv")  %>% gather(scenario, pelbiopp, 2:4) -> pelbiopp
+read.csv("stats/fisheries_ecosystem/pelbiopp.csv")-> pelbiopp
+
+pelbiopp$scenario<- as.character(pelbiopp$scenario)
+pelbiopp<- rename(pelbiopp, pelbiopp=PelBioPP)
+
 #pelbiopp<- pelbiopp %>% filter(scenario %in% c("fmsy0", "fmsy2"))
 
 fitpbp0<- lm(pelbiopp ~ poly(year, 2), data=pelbiopp)
@@ -118,9 +125,9 @@ intervals.c<- predict(fitpbp1, newdata = dat.c, interval='confidence', level=0.9
 data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
-new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
+new_intervals_pelbiopp<- rbind(intervals.a, intervals.b, intervals.c)
 
-ggplot(new_intervals, aes(x =year, y = fit)) +
+ggplot(new_intervals_pelbiopp, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
@@ -133,6 +140,8 @@ ggplot(new_intervals, aes(x =year, y = fit)) +
 #####DemPP#########
 read.csv("stats/fisheries_ecosystem/dempp.csv")  -> dempp
 #pelbiopp<- pelbiopp %>% filter(scenario %in% c("fmsy0", "fmsy2"))
+dempp$scenario<- as.character(dempp$scenario)
+
 
 fitdpp0<- lm(DemPP ~ poly(year, 3), data=dempp)
 fitdpp1<- lm(DemPP ~ poly(year, 3) * scenario, data=dempp)
@@ -154,9 +163,9 @@ intervals.c<- predict(fitdpp1, newdata = dat.c, interval='confidence', level=0.9
 data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
-new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
+new_intervals_dempp<- rbind(intervals.a, intervals.b, intervals.c)
 
-ggplot(new_intervals, aes(x =year, y = fit)) +
+ggplot(new_intervals_dempp, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
@@ -198,9 +207,9 @@ intervals.c<- predict(fitproppel1, newdata = dat.c, interval='confidence', level
 data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
-new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
+new_intervals_proppel<- rbind(intervals.a, intervals.b, intervals.c)
 
-ggplot(new_intervals, aes(x =year, y = fit)) +
+ggplot(new_intervals_proppel, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
@@ -238,9 +247,9 @@ intervals.c<- predict(mtlbio1, newdata = dat.c, interval='confidence', level=0.9
 data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
-new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
+new_intervals_mtlbio<- rbind(intervals.a, intervals.b, intervals.c)
 
-ggplot(new_intervals, aes(x =year, y = fit)) +
+ggplot(new_intervals_mtlbio, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
@@ -248,3 +257,59 @@ ggplot(new_intervals, aes(x =year, y = fit)) +
   xlab("Year") +
   ylab("MTLBio") +
   ggtitle("Regressions of MTLBio for three fishing scenarios; P= 8.485e-06, R2 0.3171")
+
+
+######PLOTS######
+
+biopp_plot<- ggplot(new_intervals_biopp, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = biopp, aes(x = year, y = biopp, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Biomass/Primary Productivity Ratio")+ theme(legend.position="none")
+
+dempel_plot<- ggplot(new_intervals_dempel, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = dempel, aes(x = year, y = dempel, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Demersal/Pelagic Ratio")+ theme(legend.position="none")
+
+pelbiopp_plot<- ggplot(new_intervals_pelbiopp, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = pelbiopp, aes(x = year, y = pelbiopp, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Pelagic/Primary Productivity Ratio")+ theme(legend.position="none")
+
+dempp_plot<- ggplot(new_intervals_dempp, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = dempp, aes(x = year, y = DemPP, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Demersal/Primary Productivity Ratio")+ theme(legend.position="none")
+
+proppel_plot<- ggplot(new_intervals_proppel, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = proppel, aes(x = year, y = PropPel, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Proportion Pelagic Species")+ theme(legend.position="none")
+
+mtlbio_plot<- ggplot(new_intervals_mtlbio, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = mtlbio, aes(x = year, y = TL_all, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Mean Trophic Level of Biomass")+ theme(legend.position="none")
+
+legend<- get_legend(legend_test)
+prow<- plot_grid(biopp_plot, dempel_plot, pelbiopp_plot, dempp_plot, proppel_plot, mtlbio_plot, labels = c("A", "B", "C", "D", "E", "F"), align = "h", ncol=3)
+
+prow_test<- plot_grid(prow, legend, rel_widths = c(3, .3))
