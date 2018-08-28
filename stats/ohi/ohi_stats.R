@@ -9,7 +9,7 @@ fit0 <- lm(status ~ poly(year, 2), data = ohi)
 
 fit1 <- lm(status ~ poly(year, 2) * scenario, data = ohi)
 #fit2<- lm(status ~ poly(year, 11) * scenario, data = ohi)
-anova(fit0, fit10)
+anova(fit0, fit0)
 ####Plotting regressions######
 dat.a = data.frame(year= 1985:2015, scenario='fmsy05')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',

@@ -13,6 +13,8 @@ fitpp0<- lm(biopp ~ poly(year,2), data=biopp)
 fitpp1<- lm(biopp ~ poly(year, 2) * scenario, data=biopp)
 fitpp2<- lm(biopp ~ poly(year, 3) * scenario, data=biopp)
 anova(fitpp0, fitpp1)
+
+###Use summary(fitpp1) to get R-squared and p-value of regression
 ##Non significant difference between 2 and 3. Non significant difference w/ or w/o scenario
 
 ####Plotting regressions######
@@ -40,7 +42,7 @@ legend_test<- ggplot(new_intervals_biopp, aes(x =year, y = fit)) +
   geom_point(data = biopp, aes(x = year, y = biopp, colour=scenario), size=1)+
   xlab("Year") +
   ylab("BioPP") +
-  ggtitle("Regressions of BioPP for three fishing scenarios; P<2.2e-16, R2=0.7514")
+  ggtitle("Regressions of BioPP for three fishing scenarios; P<2.2e-16, R2=0.9157")
 
 
 ######## DemPel#############
@@ -53,9 +55,9 @@ dempel<- rename(dempel, dempel=DemPel)
 fitdp0<- lm(dempel ~ poly(year,5), data=dempel)
 fitdp1<- lm(dempel ~ poly(year,5) * scenario, data=dempel)
 fitdp2<- lm(dempel ~ poly(year,6) * scenario, data=dempel)
-anova(fitdp1, fitdp2)
+anova(fitdp0, fitdp1)
 
-dempel_fmsy1<- filter(dempel, scenario %in% c("fmsy1", "fmsy2")) ###These lines distinguish whether 
+dempel_fmsy1<- filter(dempel, scenario %in% c("fmsy1",  "fmsy2")) ###These lines distinguish whether 
 #there is a difference between fmsy1 and fmsy2
 fitdpfm1<- lm(dempel~poly(year,3), data=dempel_fmsy1)
 fitdpfm2<- lm(dempel~poly(year,3) * scenario, data=dempel_fmsy1)

@@ -37,19 +37,19 @@ surveyed_biomass$year<- as.integer(surveyed_biomass$year)
 ggplot(surveyed_biomass, aes(year, total_biomass_surveyed)) +geom_line(aes(colour=scenario))
 
 ##Inverse fishing pressure 1/(landings/biomass) retained species
-read.csv("catch/fmsy1_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
-  gather("species", "catch", 2:7) %>% group_by(Year) %>%
+read.csv("catch/fmsy1_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
+  gather("species", "catch", 2:8) %>% group_by(Year) %>%
   mutate(total_catch=sum(catch)) %>% ungroup() %>% select(Year, total_catch) %>%
   unique()%>% mutate(scenario="fmsy1") %>% filter(Year<2016, Year>1980) -> fmsy1_catch  
 
-read.csv("catch/fmsy05_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
-  gather("species", "catch", 2:7) %>% group_by(Year) %>%
+read.csv("catch/fmsy05_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
+  gather("species", "catch", 2:8) %>% group_by(Year) %>%
   mutate(total_catch=sum(catch)) %>% ungroup() %>% select(Year, total_catch) %>%
   unique()%>% mutate(scenario="fmsy05") %>% filter(Year<2016, Year>1980) -> fmsy05_catch  
 
 
-read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
-  gather("species", "catch", 2:7) %>% group_by(Year) %>%
+read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO, CAP) %>% 
+  gather("species", "catch", 2:8) %>% group_by(Year) %>%
   mutate(total_catch=sum(catch)) %>% ungroup() %>% select(Year, total_catch) %>%
   unique()%>% mutate(scenario="fmsy2") %>% filter(Year<2016, Year>1980) -> fmsy2_catch  
 
@@ -76,6 +76,9 @@ fmsy2_data$Year<- as.integer(fmsy2_data$Year)
 
 fish_pressure_catch<- rbind(fmsy05_catch, fmsy1_catch, fmsy2_catch)
 fish_pressure_biomass<- rbind(fmsy05_data, fmsy1_data, fmsy2_data)
+ggplot(fish_pressure_catch, aes(Year, total_catch))+geom_line(aes(colour=scenario))
+
+write.csv(fish_pressure_catch, "catch/total_catch.csv")
 
 fish_pressure_catch%>% left_join(fish_pressure_biomass) %>%
   mutate(inversepressure= 1/(total_catch/total_biomass_landings)) -> fish_pressure
@@ -259,6 +262,41 @@ ivi_landings$Year<- as.integer(ivi_landings$Year)
 ggplot(ivi_landings, aes(Year, ivi_landings)) +geom_line(aes(colour=scenario))
 
 write.csv(ivi_landings, "stats/indiseas/ivi_landings.csv", row.names = F)
+
+#####IVI NO CAPELIN#######
+ivi<- read.csv("species_ivi.csv")
+
+read.csv("catch/fmsy1_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
+  gather("species", "catch", 2:7)%>%
+  filter(Year<2016, Year>1980) %>% left_join(ivi, by='species') %>%
+  group_by(species, Year) %>% mutate(ivi_catch=IVI*catch) %>% ungroup() %>% group_by(Year) %>%
+  mutate(catch_year=sum(catch)) %>% mutate(ivi_catch_year= sum(ivi_catch)) %>%
+  mutate(ivi_landings= ivi_catch_year/catch_year) %>% ungroup() %>% select(Year, ivi_landings) %>%
+  unique() %>% mutate(scenario='fmsy1')-> ivi_landings_fmsy1
+
+read.csv("catch/fmsy05_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
+  gather("species", "catch", 2:7)%>%
+  filter(Year<2016, Year>1980) %>% left_join(ivi, by='species') %>%
+  group_by(species, Year) %>% mutate(ivi_catch=IVI*catch) %>% ungroup() %>% group_by(Year) %>%
+  mutate(catch_year=sum(catch)) %>% mutate(ivi_catch_year= sum(ivi_catch)) %>%
+  mutate(ivi_landings= ivi_catch_year/catch_year) %>% ungroup() %>% select(Year, ivi_landings) %>%
+  unique() %>% mutate(scenario='fmsy05')-> ivi_landings_fmsy05
+
+read.csv("catch/fmsy2_catch.csv") %>%select(Year, REO, GRH, HAD, SAI, RED, NCO) %>% 
+  gather("species", "catch", 2:7)%>%
+  filter(Year<2016, Year>1980) %>% left_join(ivi, by='species') %>%
+  group_by(species, Year) %>% mutate(ivi_catch=IVI*catch) %>% ungroup() %>% group_by(Year) %>%
+  mutate(catch_year=sum(catch)) %>% mutate(ivi_catch_year= sum(ivi_catch)) %>%
+  mutate(ivi_landings= ivi_catch_year/catch_year) %>% ungroup() %>% select(Year, ivi_landings) %>%
+  unique() %>% mutate(scenario='fmsy2')-> ivi_landings_fmsy2
+
+ivi_landings<- rbind(ivi_landings_fmsy1, ivi_landings_fmsy05, ivi_landings_fmsy2)
+ivi_landings$Year<- as.integer(ivi_landings$Year)  
+
+ggplot(ivi_landings, aes(Year, ivi_landings)) +geom_line(aes(colour=scenario))
+
+write.csv(ivi_landings, "stats/indiseas/ivi_landings_nocapelin.csv", row.names = F)
+
 #####OLD CODE######
 
 fmsy05_data<- read.csv("biomass/lpi_files/fmsy05_lpi.csv", check.names=F) %>% gather("year", "biomass", 3:155) %>%

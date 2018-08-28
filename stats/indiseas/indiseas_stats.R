@@ -121,6 +121,13 @@ ivi1<- lm(ivi_landings ~ poly(year, 2) * scenario, data=ivi)
 anova(ivi0,ivi1)
 ##Significant difference between regressions
 
+##Test for significance between all
+ivi_fmsy1<- filter(ivi, scenario %in% c("fmsy1", "fmsy05")) ###These lines distinguish whether 
+#there is a difference between fmsy1 and fmsy2
+fitivifm1<- lm(ivi_landings~poly(year,2), data=ivi_fmsy1)
+fitivifm2<- lm(ivi_landings~poly(year,2) * scenario, data=ivi_fmsy1)
+anova(fitivifm1, fitivifm2)
+
 #Plotting regressions#
 dat.a = data.frame(year= 1981:2015, scenario='fmsy05')
 intervals.a <- predict(ivi1,newdata = dat.a,interval='confidence',
@@ -145,17 +152,17 @@ ggplot(new_intervals_ivi, aes(x =year, y = fit)) +
   geom_point(data = ivi, aes(x = year, y = ivi_landings, colour=scenario), size=1)+
   xlab("Year") +
   ylab("IVI Landings") +
-  ggtitle("Regressions of IVI Landings for three fishing scenarios; P= 2.258e-08, R2 0.4051", size=1)
+  ggtitle("Regressions of IVI Landings for three fishing scenarios; P= 2.258e-08, R2 0.4051")
 
 #ivi_test<- filter(ivi, scenario %in% c("fmsy05", "fmsy2"))
 ##When filtering out fmsy1 and comparing anova with and without scenario, there is no significant difference between fmsy2
 #and fmsy05
 
-###INVERSE PRESSURE#######
-read.csv("stats/indiseas/inverse_pressure_nocapelin.csv")  -> invp
+###INVERSE PRESSURE NO CAPELIN#######
+read.csv("stats/indiseas/inverse_pressure_nocapelin.csv")  -> invp_ncap
 
-invp0<- lm(inversepressure ~ poly(year, 6), data=invp)
-invp1<- lm(inversepressure ~ poly(year, 6) * scenario, data=invp)
+invp0<- lm(inversepressure ~ poly(year, 6), data=invp_ncap)
+invp1<- lm(inversepressure ~ poly(year, 6) * scenario, data=invp_ncap)
 #invp2<- lm(inversepressure ~ poly(year, 7) * scenario, data=invp)
 
 anova(invp0,invp1)
@@ -178,11 +185,11 @@ data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
 new_intervals_invp_ncap<- rbind(intervals.a, intervals.b, intervals.c)
-ggplot(new_intervals_invp_ncap, aes(x =year, y = fit)) +
+legend_test2<- ggplot(new_intervals_invp_ncap, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
-  geom_point(data = invp, aes(x = year, y = inversepressure, colour=scenario), size=1)+
+  geom_point(data = invp_ncap, aes(x = year, y = inversepressure, colour=scenario), size=1)+
   xlab("Year") +
   ylab("Inverse Pressure") +
   ggtitle("Regressions of Inverse Fishing Pressure (no capelin) for three fishing scenarios; P= <2.2e-16, R2 0.6125")
@@ -259,41 +266,42 @@ ggplot(new_intervals_tl, aes(x =year, y = fit)) +
   ggtitle("Regressions of Trophic Level of Landings for three fishing scenarios; P= 3.58e-08, R2 0.399")+ 
   theme(plot.title = element_text(size = 10, face = "bold"))
 
-####TL LANDINGS NO CAPELINE######
-read.csv("stats/indiseas/tl_landings_nocapelin.csv")  -> tll
+####IVI LANDINGS NO CAPELINE######
+read.csv("stats/indiseas/ivi_landings_nocapelin.csv")  -> ivi_ncap
+ivi_ncap<- rename(ivi_ncap, year=Year)
 
-tll0<- lm(trophic_level_landings ~ poly(year, 6), data=tll)
-tll1<- lm(trophic_level_landings ~ poly(year, 6) * scenario, data=tll)
-#tll2<- lm(trophic_level_landings ~ poly(year, 7) * scenario, data=tll)
+ivi0<- lm(ivi_landings ~ poly(year, 6), data=ivi_ncap)
+ivi1<- lm(ivi_landings ~ poly(year, 6) * scenario, data=ivi_ncap)
+#ivi2<- lm(trophic_level_landings ~ poly(year, 7) * scenario, data=ivi)
 
-anova(tll0,tll1)
+anova(ivi0,ivi1)
 ##Significant difference between regressions
 
 #Plotting regressions#
 dat.a = data.frame(year= 1981:2015, scenario='fmsy05')
-intervals.a <- predict(tll1,newdata = dat.a,interval='confidence',
+intervals.a <- predict(ivi1,newdata = dat.a,interval='confidence',
                        level=0.95)
 data.frame(intervals.a) -> intervals.a
 intervals.a%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy05')-> intervals.a
 
 dat.b = data.frame(year= 1981:2015, scenario='fmsy1')
-intervals.b<- predict(tll1, newdata = dat.b, interval='confidence', level=0.95)
+intervals.b<- predict(ivi1, newdata = dat.b, interval='confidence', level=0.95)
 data.frame(intervals.b) -> intervals.b
 intervals.b%>% mutate(year = 1981:2015) %>% select(year, everything())%>% mutate(scenario='fmsy1') -> intervals.b
 dat.c = data.frame(year= 1981:2015, scenario='fmsy2')
-intervals.c<- predict(tll1, newdata = dat.c, interval='confidence', level=0.95)
+intervals.c<- predict(ivi1, newdata = dat.c, interval='confidence', level=0.95)
 data.frame(intervals.c) -> intervals.c
 intervals.c%>% mutate(year = 1981:2015) %>% select(year, everything()) %>% mutate(scenario='fmsy2') -> intervals.c
 
-new_intervals_tl_ncap<- rbind(intervals.a, intervals.b, intervals.c)
-legend_test2<- ggplot(new_intervals_tl_ncap, aes(x =year, y = fit)) +
+new_intervals_ivi_ncap<- rbind(intervals.a, intervals.b, intervals.c)
+ggplot(new_intervals_ivi_ncap, aes(x =year, y = fit)) +
   theme_bw() +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
-  geom_point(data = tll, aes(x = year, y = trophic_level_landings, colour=scenario), size=1)+
+  geom_point(data = ivi_ncap, aes(x = year, y = ivi_landings, colour=scenario), size=1)+
   xlab("Year") +
-  ylab("Trophic level") +
-  ggtitle("Regressions of Trophic Level of Landings (no capelin) for three fishing scenarios; P= <2.2e-16, R2 0.9732")
+  ylab("IVI") +
+  ggtitle("Regressions of IVI of Landings (no capelin) for three fishing scenarios; P= <2.2e-16, R2 0.971")
 
 
 ##########PLOTS############
@@ -355,3 +363,45 @@ prow2<- plot_grid(ivi_plot, invp_plot, labels = c("D", "E"), align = "h", ncol=2
 final<- plot_grid(prow2, legend2, rel_widths = c(3, .3))
 
 plot_grid(prow_test, final, nrow=2)
+
+
+####NO CAPELIN PLOTS####
+ivi_ncap_plot<- ggplot(new_intervals_ivi_ncap, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = ivi_ncap, aes(x = year, y = ivi_landings, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("IVI Landings") + theme(legend.position="none")
+
+ivi_plot<- ggplot(new_intervals_ivi, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = ivi, aes(x = year, y = ivi_landings, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("IVI Landings") + theme(legend.position="none")
+
+invp_plot<- ggplot(new_intervals_invp, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = invp, aes(x = year, y = inversepressure, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Inverse Pressure")+ theme(legend.position="none")
+
+invp_ncap_plot<- ggplot(new_intervals_invp_ncap, aes(x =year, y = fit)) +
+  theme_bw() +
+  geom_line(aes(colour=scenario)) +
+  geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
+  geom_point(data = invp_ncap, aes(x = year, y = inversepressure, colour=scenario), size=1)+
+  xlab("Year") +
+  ylab("Inverse Pressure")+ theme(legend.position="none")
+
+legend2<- get_legend(legend_test2)
+prow<- plot_grid(ivi_plot, invp_plot, ivi_ncap_plot, invp_ncap_plot, labels = c("A", "B"), align = "h", ncol=2)
+
+prow_test<- plot_grid(prow, legend2, rel_widths = c(3, .3))
+
+plot_grid(prow_test)
+
