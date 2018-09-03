@@ -4,7 +4,15 @@ fit0 <- lm(score ~ poly(year, 2), data = ni_scores)
 
 fit1 <- lm(score ~ poly(year, 2) * scenario, data = ni_scores)
 #fit2<- lm(score ~ poly(year, 3) * scenario, data = ni_scores)
-anova(fit0, fit1)
+#anova(fit0, fit1)
+anova(fit1, fit2)##ANOVA between fit0 and fit1 establishes whether adding scenario makes a difference to the regression
+ni_fmsy1<- filter(ni_scores, scenario %in% c("fmsy0", "fmsy1")) ###These lines distinguish whether 
+#there is a difference between fmsy1 and fmsy2
+nifm1<- lm(score~poly(year,2), data=ni_fmsy1)
+nifm2<- lm(score~poly(year,2) * scenario, data=ni_fmsy1)
+anova(nifm1, nifm2)
+
+## NO SIGNIFICANT DIFFERENCE BETWEEN FMSY0 and FMSY1 OVERALL
 
 dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',
@@ -40,8 +48,16 @@ ni_scores<- ni_pelagic
 fit0 <- lm(score ~ poly(year, 2), data = ni_scores)
 
 fit1 <- lm(score ~ poly(year, 2) * scenario, data = ni_scores)
-#fit2<- lm(score ~ poly(year, 3) * scenario, data = ni_scores)
-anova(fit2, fit1)
+fit2<- lm(score ~ poly(year, 3) * scenario, data = ni_scores)
+#anova(fit0, fit1)
+#anova(fit1, fit2)
+
+ni_fmsy1<- filter(ni_pelagic, scenario %in% c("fmsy0", "fmsy1")) ###These lines distinguish whether 
+#there is a difference between fmsy1 and fmsy2
+nifm1<- lm(score~poly(year,2), data=ni_fmsy1)
+nifm2<- lm(score~poly(year,2) * scenario, data=ni_fmsy1)
+anova(nifm1, nifm2)
+#NO SIGNIFICANT DIFFERENCE BETWEEN FMSY0 and FMSY1
 
 dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',
@@ -69,16 +85,25 @@ ggplot(new_intervals_nipelagic, aes(x =year, y = fit)) +
   ylab("Norway Nature Index Score") +
   ggtitle("Regressions of Pelagic Norway Nature Index for three fishing scenarios")
 
+summary(fit1)
 
 #####BENTHIC NNI#######
 read.csv("stats/nature_index/ni_benthic.csv") -> ni_benthic
 ni_benthic$scenario<- as.character(ni_benthic$scenario)
 ni_scores<- ni_benthic
-fit0 <- lm(score ~ poly(year, 3), data = ni_scores)
+fit0 <- lm(score ~ poly(year, 2), data = ni_scores)
 
-fit1 <- lm(score ~ poly(year, 3) * scenario, data = ni_scores)
-#fit2<- lm(score ~ poly(year, 8) * scenario, data = ni_scores)
-anova(fit0, fit1)
+fit1 <- lm(score ~ poly(year, 2) * scenario, data = ni_scores)
+#fit2<- lm(score ~ poly(year, 6) * scenario, data = ni_scores)
+#anova(fit0, fit1)
+anova(fit1, fit2)
+
+ni_fmsy1<- filter(ni_benthic, scenario %in% c("fmsy0", "fmsy1")) ###These lines distinguish whether 
+#there is a difference between fmsy1 and fmsy2
+nifm1<- lm(score~poly(year,2), data=ni_fmsy1)
+nifm2<- lm(score~poly(year,2) * scenario, data=ni_fmsy1)
+anova(nifm1, nifm2)
+##SIGNIFICANT DIFFERENCE BETWEEN FMSY0 and FMSY1
 
 dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',
@@ -104,7 +129,7 @@ ggplot(new_intervals_nibenthic, aes(x =year, y = fit)) +
   geom_point(data = ni_scores, aes(x = year, y = score, colour=scenario), size=1)+
   xlab("Year") +
   ylab("Norway Nature Index Score") +
-  ggtitle("Regressions of Pelagic Norway Nature Index for three fishing scenarios")
+  ggtitle("Regressions of Benthic Norway Nature Index for three fishing scenarios")+ylim(0.6,1.01)
 
 
 #####PLOTTING NNI########
@@ -116,9 +141,12 @@ ni_plot<- ggplot(new_intervals_ni, aes(x =year, y = fit)) +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = ni_scores, aes(x = year, y = score, colour=scenario), size=1)+
-  xlab("Year") +
+  xlab("") +
   ylab("Norway Nature Index Score")+ theme(legend.position="none")+
-  ggtitle("Overall")
+  ggtitle("Overall")+ ylim(0.6,1.01)+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12),
+                 axis.text.y = ggplot2::element_text(size=12))
 
 
 pelagic_plot<- ggplot(new_intervals_nipelagic, aes(x =year, y = fit)) +
@@ -126,9 +154,12 @@ pelagic_plot<- ggplot(new_intervals_nipelagic, aes(x =year, y = fit)) +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = ni_pelagic, aes(x = year, y = score, colour=scenario), size=1)+
-  xlab("Year") +
-  ylab("Norway Nature Index Score")+ theme(legend.position="none")+
-  ggtitle("Pelagic")
+  xlab("") + ylab("")+
+  theme(legend.position="none")+
+  ggtitle("Pelagic")+ ylim(0.6,1.01)+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12),
+                 axis.text.y = ggplot2::element_text(size=12))
 
 
 benthic_plot<- ggplot(new_intervals_nibenthic, aes(x =year, y = fit)) +
@@ -137,8 +168,11 @@ benthic_plot<- ggplot(new_intervals_nibenthic, aes(x =year, y = fit)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = ni_benthic, aes(x = year, y = score, colour=scenario), size=1)+
   xlab("Year") +
-  ylab("Norway Nature Index Score")+ theme(legend.position="none")+
-  ggtitle("Benthic")
+  ylab("")+ theme(legend.position="none")+
+  ggtitle("Benthic")+ ylim(0.6,1.01)+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12),
+                 axis.text.y = ggplot2::element_text(size=12))
 
 legend<- get_legend(legend_test)
 prow<- plot_grid(ni_plot, benthic_plot, pelagic_plot, labels = c("A", "B", "C"), align = "h", ncol=3)

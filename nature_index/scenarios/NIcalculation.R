@@ -1,3 +1,4 @@
+library(tidyverse)
 # The script calculates the Nature Index from the output of model simulations of the Barents Sea.
 # Barent Sea model ....
 #
@@ -239,13 +240,13 @@ valuemat_fmsy2 <- as.matrix(fmsy2_natureindex[,4:38])
 dimnames(valuemat_fmsy2)[[1]] <- fmsy2_natureindex[,2]
 dimnames(valuemat_fmsy2)[[2]] <- 1981:2015
 
-valuemat_virgin<- as.matrix(virgin_biomass_natureindex[,5]) #4=VB, 5=2100
+valuemat_virgin<- as.matrix(virgin_biomass_natureindex[,4]) #4=VB, 5=2100
 dimnames(valuemat_virgin)[[1]]<- virgin_biomass_natureindex[,2]
 
 # Read or calculate reference values
 
 
-refmat <- matrix(rep(virgin_biomass_natureindex[,5],dim(valuemat_virgin)[2]), #also change here for 2100
+refmat <- matrix(rep(virgin_biomass_natureindex[,4],dim(valuemat_virgin)[2]), #also change here for 2100
                  nrow = dim(valuemat_virgin)[1], ncol=dim(valuemat_virgin)[2])
 
 refmat<- as.vector(refmat)
@@ -308,7 +309,7 @@ NIunits <- as.matrix(1)
 dimnames(NIunits)[[1]] <- as.list(dimnames(ICunits)[[1]])
 dimnames(NIunits)[[2]] <- as.list("Barents Sea")
 
-w = 0.5 # The total weight given to key indicators, when key indicators are present in the data.
+w = 0.50 # The total weight given to key indicators, when key indicators are present in the data.
 
 Indicator.weights.whole.ecosystem <- calculate.BSunit.weights(fidelity.whole.ecosystem,
                          functional.group, 
@@ -343,11 +344,15 @@ nature.index_fmsy2 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy2
 
 as.data.frame(nature.index_fmsy0) %>% gather(year, score, 1:35) -> fmsy0
 fmsy0$scenario<- "fmsy0"
+#fmsy0<- fmsy0[c(TRUE,rep(FALSE,4)), ]
+
 as.data.frame(nature.index_fmsy1) %>% gather(year, score, 1:35) -> fmsy1
 fmsy1$scenario<- "fmsy1"
+#fmsy1<- fmsy1[c(TRUE,rep(FALSE,4)), ]
 
 as.data.frame(nature.index_fmsy2) %>% gather(year, score, 1:35) -> fmsy2
 fmsy2$scenario<- "fmsy2"
+#fmsy2<- fmsy2[c(TRUE,rep(FALSE,4)), ]
 
 index3<- rbind(fmsy0, fmsy1, fmsy2)
 index3$year<- as.integer(index3$year)
@@ -357,7 +362,14 @@ lines(1981:2015,nature.index_fmsy1,col="blue",lwd=2)
 lines(1981:2015,nature.index_fmsy0,col="black",lwd=2)
 title("Barents Sea")
 
-ggplot(index3, aes(year,score)) + geom_line(aes(colour=scenario)) + ylim(0,1)+ggtitle("Norway Nature Index for the Barents Sea")
+a<- ggplot(index3, aes(year,score)) + 
+  geom_line(aes(colour=scenario)) + 
+  ylim(0.6,1)+ggtitle("Overall")+
+  theme_bw()+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12))+
+  xlab("")+
+  ylab("Norway Nature Index Score")+ theme(legend.position="none")
 
 nature.index_fmsy0.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy0
 nature.index_fmsy1.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy1
@@ -365,11 +377,13 @@ nature.index_fmsy2.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy2
 
 as.data.frame(nature.index_fmsy0.benthic) %>% gather(year, score, 1:35) -> fmsy0_benthic
 fmsy0_benthic$scenario<- "fmsy0"
+#fmsy0_benthic<- fmsy0_benthic[c(TRUE,rep(FALSE,4)), ]
 as.data.frame(nature.index_fmsy1.benthic) %>% gather(year, score, 1:35) -> fmsy1_benthic
 fmsy1_benthic$scenario<- "fmsy1"
-
+#fmsy1_benthic<- fmsy1_benthic[c(TRUE,rep(FALSE,4)), ]
 as.data.frame(nature.index_fmsy2.benthic) %>% gather(year, score, 1:35) -> fmsy2_benthic
 fmsy2_benthic$scenario<- "fmsy2"
+#fmsy2_benthic<- fmsy2_benthic[c(TRUE,rep(FALSE,4)), ]
 benthic_nni<- rbind(fmsy0_benthic, fmsy1_benthic, fmsy2_benthic)
 benthic_nni$year<- as.integer(benthic_nni$year)
 
@@ -377,7 +391,15 @@ plot(1981:2015,nature.index_fmsy2.benthic,ylim = c(0,1),type="l",col="red",lwd=2
 lines(1981:2015,nature.index_fmsy1.benthic,col="blue",lwd=2)
 lines(1981:2015,nature.index_fmsy0.benthic,col="black",lwd=2)
 title("Benthic")
-ggplot(benthic_nni, aes(year,score)) + geom_line(aes(colour=scenario)) + ylim(0,1)+ggtitle("Benthic Norway Nature Index for the Barents Sea")
+
+b<- ggplot(benthic_nni, aes(year,score)) +
+  geom_line(aes(colour=scenario)) +
+  ylim(0.6,1)+ggtitle("Benthic")+
+  theme_bw()+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12))+
+  xlab("Year")+
+  ylab("")+ theme(legend.position="none")
 
 nature.index_fmsy0.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy0
 nature.index_fmsy1.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy1
@@ -385,16 +407,38 @@ nature.index_fmsy2.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy2
 
 as.data.frame(nature.index_fmsy0.pelagic) %>% gather(year, score, 1:35) -> fmsy0_pelagic
 fmsy0_pelagic$scenario<- "fmsy0"
+#fmsy0_pelagic<- fmsy0_pelagic[c(TRUE,rep(FALSE,4)), ]
+
 as.data.frame(nature.index_fmsy1.pelagic) %>% gather(year, score, 1:35) -> fmsy1_pelagic
 fmsy1_pelagic$scenario<- "fmsy1"
+#fmsy1_pelagic<- fmsy1_pelagic[c(TRUE,rep(FALSE,4)), ]
 
 as.data.frame(nature.index_fmsy2.pelagic) %>% gather(year, score, 1:35) -> fmsy2_pelagic
 fmsy2_pelagic$scenario<- "fmsy2"
+#fmsy2_pelagic<- fmsy2_pelagic[c(TRUE,rep(FALSE,4)), ]
+
 pelagic_nni<- rbind(fmsy0_pelagic, fmsy1_pelagic, fmsy2_pelagic)
 pelagic_nni$year<- as.integer(pelagic_nni$year)
 
-ggplot(pelagic_nni, aes(year,score)) + geom_line(aes(colour=scenario)) + ylim(0,1)+ggtitle("Pelagic Norway Nature Index for the Barents Sea")
+c<- ggplot(pelagic_nni, aes(year,score)) + 
+  geom_line(aes(colour=scenario)) + ylim(0.6,1)+
+  xlim(1981, 2015)+
+  ggtitle("Pelagic")+
+  theme_bw()+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12))+
+  xlab("")+
+  ylab("")+ theme(legend.position="none")+ theme(legend.position="none")
 
+legend<- ggplot(pelagic_nni, aes(year,score)) + 
+  geom_line(aes(colour=scenario)) + ylim(0.25,1)+
+  xlim(1981, 2015)+
+  ggtitle("Pelagic Norway Nature Index for the Barents Sea")+
+  theme_bw()+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12))+
+  xlab("Year")+
+  ylab("Score")
 
 plot(1981:2015,nature.index_fmsy2.pelagic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
 lines(1981:2015,nature.index_fmsy1.pelagic,col="blue",lwd=2)
@@ -402,7 +446,15 @@ lines(1981:2015,nature.index_fmsy0.pelagic,col="black",lwd=2)
 title("Pelagic")
 
 # 
+prow<- plot_grid(a, b, c, labels = c("A", "B", "C"), align = "h", ncol=3)
+legend<- get_legend(legend)
+plot_grid(prow, legend, rel_widths = c(3, .3))
 
+benthic_nni$type<- "benthic"
+index3$type<- "overall"
+pelagic_nni$type<- "pelagic"
+nni<- rbind(index3, benthic_nni, pelagic_nni)
+write.csv(nni, "nature_index/scenarios/nni_scores.csv")
 
 write.csv(index3, "nature_index/ni_scores.csv", row.names=F)
 write.csv(benthic_nni, "nature_index/ni_benthic.csv", row.names = F)

@@ -8,8 +8,9 @@ lpi<- rbind(lpi_fmsy2, lpi_fmsy1, lpi_fmsy0)
 fit0 <- lm(LPI_final ~ poly(year, 2), data = lpi)
 
 fit1 <- lm(LPI_final ~ poly(year, 2) * scenario, data = lpi)
+fit2 <- lm(LPI_final ~ poly(year, 3) * scenario, data = lpi)
 
-anova(fit0, fit1)
+anova(fit1, fit2)
 ####Plotting regressions######
 dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',
@@ -34,5 +35,7 @@ ggplot(new_intervals, aes(x =year, y = fit)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = lpi, aes(x = year, y = LPI_final, colour=scenario), size=1)+
   xlab("Year") +
-  ylab("LPI Score") +
-  ggtitle("Regressions of Living Planet Index Score for three fishing scenarios")
+  ylab("LPI Score")+
+  ggplot2::theme(text = ggplot2::element_text(size=14),
+                 axis.text.x = ggplot2::element_text(size=12),
+                 axis.text.y = ggplot2::element_text(size=12))
