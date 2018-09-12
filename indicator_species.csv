@@ -1,53 +1,53 @@
-Functional Groups,LPI,NNI
-BB,,
-BC,,BC
-BD,,
-BES,BES,HOS
-BFF,,BFF
-BWH,BWH,BWH
-CAP,CAP,CAP
-CEP,CEP,
-COR,,COR
-DC,,
-DEL,DEL,DEL
-DEO,DEO,DEO
-DF,,
-DIN,,
-DL,,
-DR,,
-FLA,FLA,
-FWH,FWH,FWH
-GRH,GRH,GRH
-HAD,HAD,HAD
-HOS,HOS,
-KCR,KCR,
-KWH,KWH,
-LRD,LRD,
-MAC,MAC,
-MES,MES,
-MWH,MWH,MWH
-NCO,NCO,NCO
-PB,,
-PCO,PCO,
-PEL,PEL,PCO
-PES,PES,PES
-PL,,PL
-POB,POB,
-PS,,PS
-PWN,PWN,PWN
-RED,RED,RED
-REO,REO,REO
-RIS,RIS,
-SAI,SAI,
-SBA,SBA,SBA
-SBB,SBB,SBB
-SCR,SCR,
-SHO,SHO,SHO
-SPO,,SPO
-SSH,SSH,SSH
-SSK,SSK,SSK
-SWH,SWH,
-ZG,,ZG
-ZL,,
-ZM,,
-ZS,,ZS
+Functional Groups,LPI,NNI,Type,,,,Invertebrate,Pelagic Fish,Demersal Fish,mammal
+DEL,DEL,DEL,Demersal Fish,,,NNI,9,4,8,3
+DEO,DEO,DEO,Demersal Fish,,,LPI,4,7,11,7
+GRH,GRH,GRH,Demersal Fish,,,,,,,
+HAD,HAD,HAD,Demersal Fish,,,,,,,
+NCO,NCO,NCO,Demersal Fish,,,,,,,
+PCO,PCO,PCO,Demersal Fish,,,,,,,
+RED,RED,RED,Demersal Fish,,,,,,,
+REO,REO,REO,Demersal Fish,,,,,,,
+FLA,FLA,,Demersal Fish,,,,,,,
+LRD,LRD,,Demersal Fish,,,,,,,
+SAI,SAI,,Demersal Fish,,,,,,,
+BC,,BC,Invertebrate,,,,,,,
+BFF,,BFF,Invertebrate,,,,,,,
+COR,,COR,Invertebrate,,,,,,,
+PL,,PL,Invertebrate,,,,,,,
+PS,,PS,Invertebrate,,,,,,,
+PWN,PWN,PWN,Invertebrate,,,,,,,
+SPO,,SPO,Invertebrate,,,,,,,
+ZG,,ZG,Invertebrate,,,,,,,
+ZS,,ZS,Invertebrate,,,,,,,
+CEP,CEP,,Invertebrate,,,,,,,
+KCR,KCR,,Invertebrate,,,,,,,
+SCR,SCR,,Invertebrate,,,,,,,
+FWH,FWH,FWH,Marine Mammal,,,,,,,
+HOS,HOS,HOS,Marine Mammal,,,,,,,
+MWH,MWH,MWH,Marine Mammal,,,,,,,
+KWH,KWH,,Marine Mammal,,,,,,,
+POB,POB,,Marine Mammal,,,,,,,
+RIS,RIS,,Marine Mammal,,,,,,,
+SWH,SWH,,Marine Mammal,,,,,,,
+BWH,BWH,BWH,Pelagic Fish,,,,,,,
+CAP,CAP,CAP,Pelagic Fish,,,,,,,
+PES,PES,PES,Pelagic Fish,,,,,,,
+SSH,SSH,SSH,Pelagic Fish,,,,,,,
+MAC,MAC,,Pelagic Fish,,,,,,,
+MES,MES,,Pelagic Fish,,,,,,,
+PEL,PEL,,Pelagic Fish,,,,,,,
+SBA,SBA,SBA,Seabird,,,,,,,
+SBB,SBB,SBB,Seabird,,,,,,,
+SHO,SHO,SHO,Sharks,,,,,,,
+SSK,SSK,SSK,Sharks,,,,,,,
+BB,,,,,,,,,,
+BD,,,,,,,,,,
+BES,BES,,,,,,,,,
+DC,,,,,,,,,,
+DF,,,,,,,,,,
+DIN,,,,,,,,,,
+DL,,,,,,,,,,
+DR,,,,,,,,,,
+PB,,,,,,,,,,
+ZL,,,,,,,,,,
+ZM,,,,,,,,,,

@@ -2,15 +2,20 @@ read.csv("stats/lpi/adjusted/81/lpiscores_fmsy0_adjusted81.csv")  -> lpi_fmsy0
 read.csv("stats/lpi/adjusted/81/lpiscores_fmsy2_adjusted81.csv") -> lpi_fmsy2
 read.csv("stats/lpi/adjusted/81/lpiscores_fmsy1_adjusted81.csv") -> lpi_fmsy1
 
+read.csv("stats/lpi/adjusted/81/lpiscores_fmsy0_no_invert.csv")  -> lpi_fmsy0
+read.csv("stats/lpi/adjusted/81/lpiscores_fmsy2_no_invert.csv") -> lpi_fmsy2
+read.csv("stats/lpi/adjusted/81/lpiscores_fmsy1_no_invert.csv") -> lpi_fmsy1
+
+
 lpi<- rbind(lpi_fmsy2, lpi_fmsy1, lpi_fmsy0)
 
 ##Fitting Models
-fit0 <- lm(LPI_final ~ poly(year, 2), data = lpi)
+fit0 <- lm(LPI_final ~ poly(year, 3), data = lpi)
 
-fit1 <- lm(LPI_final ~ poly(year, 2) * scenario, data = lpi)
-fit2 <- lm(LPI_final ~ poly(year, 3) * scenario, data = lpi)
+fit1 <- lm(LPI_final ~ poly(year, 3) * scenario, data = lpi)
+#fit2 <- lm(LPI_final ~ poly(year, 4) * scenario, data = lpi)
 
-anova(fit1, fit2)
+anova(fit0, fit1)
 ####Plotting regressions######
 dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',
