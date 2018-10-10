@@ -1,0 +1,56 @@
+indicatorID,indicator_name,model_group,virgin_biomass
+1,Greenland halibut,GRH,990237.3517
+2,Blue ling,DEO,1366487.636
+3,Blue mussel,BFF,15740528.1
+4,Tusk,DEO,1366487.636
+5,Fin whale,FWH,700244.9743
+6,Wolffish,DEL,73447.72227
+7,Hooded seal,HOS,72992.35045
+8,Haddock,HAD,369734.7765
+9,Blue whiting,BWH,8671927.345
+10,Atlantic halibut,DEL,73447.72227
+11,Atlantic salmon,PEL,1439818.968
+12,Ling,DEO,1366487.636
+13,Capelin,CAP,4978697.639
+14,Jellyfish,ZG,8714332.062
+15,Phytoplankton small,PS,286252451.8
+16,Phyoplankton large,PL,11276307994
+17,Polar cod,PCO,3687947.357
+18,Northern deep sea shrimp,PWN,9361958.591
+19,Lumpfish,PES,857619.0775
+20,Sand gaper,BFF,15740528.1
+21,Herring,SSH,1741122.773
+22,Deep sea redfish,REO,62184.65978
+23,Cuvie,BFF,15740528.1
+24,Atlantic cod,NCO,5971311.916
+25,Golden redfish,RED,3320413.326
+26,Minke whale,MWH,703344.1608
+27,"Rays, skates",SSK,561561.3041
+28,Dogfish,SHO,23139.93452
+29,Northern fulmar,SBA,1271.036918
+30,Northern gannet,SBB,16703.54745
+31,Great cormorant,SBB,16703.54745
+32,European shag,SBB,16703.54745
+33,Great skua,SBA,1271.036918
+34,Black-legged kittiwake,SBB,16703.54745
+35,Arctic tern,SBB,16703.54745
+36,Razorbill,SBB,16703.54745
+37,Common guillemot,SBA,1271.036918
+38,Brünnich guillemot,SBA,1271.036918
+39,Atlantic puffin,SBB,16703.54745
+40,White-tailed eagle,SBB,16703.54745
+41,Common eider,SBA,1271.036918
+42,Hoppekreps,ZS,79411204.61
+43,Caryophyllia smithii,COR,15493329.07
+44,Cerianthus lloydii,BC,5217747.263
+45,Filograna implexa,BC,5217747.263
+46,Geodia spp,SPO,10259733.46
+47,Gorgonocephalus arcticus,BD,5217747.263
+48,Gorgonocephalus eucnemis,BD,5217747.263
+49,Gorgonocephalus lamarcki,BD,5217747.263
+50,Heliometra glacialis,BD,5217747.263
+51,Lophelia sp,COR,15493329.07
+52,Phakellia ventilabrum,COR,15493329.07
+53,Poliometra prolixa,BD,5217747.263
+54,Tentorium semisuberites,COR,15493329.07
+55,Umbellula encrinus,BD,5217747.263
