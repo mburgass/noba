@@ -9,12 +9,42 @@ closeAllConnections()
 
 
 #Read base case
-local_data<- read.csv("chapter_4/local_stewardship_lpi.csv")
-national_data<- read.csv("chapter_4/national_enterprise_lpi.csv")
-world_data<- read.csv("chapter_4/world_market_lpi.csv")
-global_data<- read.csv("chapter_4/global_sustainability_lpi.csv")
+fmsy1_data<- read.csv("chapter_4/fmsy1_lpi.csv")
+fmsy11_data<- read.csv("chapter_4/fmsy11_lpi.csv")
+fmsy08_data<- read.csv("chapter_4/fmsy08_market_lpi.csv")
+fmsy06_data<- read.csv("chapter_4/fmsy06_lpi.csv")
 
-df<- local_data %>% dplyr::filter(ID<50)
+df<- fmsy1_data %>% dplyr::filter(ID<50)
+index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
+index_vector[1:121] = TRUE #change to number of rows as above
+
+example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
+# An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
+arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2017, PLOT_MAX = 2068, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
+# Remove NAs (trailing years with no data)
+fmsy1_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
+
+df<- fmsy11_data %>% dplyr::filter(ID<50)
+index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
+index_vector[1:121] = TRUE #change to number of rows as above
+
+example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
+# An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
+arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2017, PLOT_MAX = 2068, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
+# Remove NAs (trailing years with no data)
+fmsy11_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
+
+df<- fmsy08_data %>% dplyr::filter(ID<50)
+index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
+index_vector[1:121] = TRUE #change to number of rows as above
+
+example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
+# An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
+arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2017, PLOT_MAX = 2068, BOOT_STRAP_SIZE = 10000, VERBOSE=FALSE)
+# Remove NAs (trailing years with no data)
+fmsy08_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
+
+df<- fmsy06_data %>% dplyr::filter(ID<50)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:121] = TRUE #change to number of rows as above
 
@@ -22,39 +52,9 @@ example_infile_name <- create_infile(df, index_vector=index_vector, name="exampl
 # An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
 arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2017, PLOT_MAX = 2068, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
 # Remove NAs (trailing years with no data)
-local_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
-
-df<- national_data %>% dplyr::filter(ID<50)
-index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-index_vector[1:121] = TRUE #change to number of rows as above
-
-example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
-# An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2017, PLOT_MAX = 2068, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
-# Remove NAs (trailing years with no data)
-national_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
-
-df<- world_data %>% dplyr::filter(ID<50)
-index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-index_vector[1:121] = TRUE #change to number of rows as above
-
-example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
-# An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2017, PLOT_MAX = 2068, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
-# Remove NAs (trailing years with no data)
-world_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
-
-df<- global_data %>% dplyr::filter(ID<50)
-index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
-index_vector[1:121] = TRUE #change to number of rows as above
-
-example_infile_name <- create_infile(df, index_vector=index_vector, name="example_data")
-# An index can be created using this infile, for the period 1970 to 2014 with 100 bootstraps.
-arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2017, PLOT_MAX = 2068, BOOT_STRAP_SIZE = 100, VERBOSE=FALSE)
-# Remove NAs (trailing years with no data)
-global_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
+fmsy06_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
 
 #########
 
-lpis<- list(local_lpi,national_lpi,world_lpi, global_lpi)
-ggplot_multi_lpi(lpis, names=c("local","national", "world", "global"), xlims=c(2017, 2068), ylims=c(0.4, 1.4), facet = T)
+lpis<- list(fmsy1_lpi,fmsy11_lpi,fmsy08_lpi, fmsy06_lpi)
+ggplot_multi_lpi(lpis, names=c("fmsy1","fmsy11", "fmsy08", "fmsy06"), xlims=c(2017, 2068), ylims=c(0.4, 1.4), facet = T)
