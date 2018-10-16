@@ -93,3 +93,15 @@ proppel<- select(PropPelCommunity, year, PropPel, scenario)
 write.csv(proppel, "chapter_4/fisheries_ecosystem/proppel.csv", row.names = F)
 
 ##PropPredCommunity
+fmsy_biomass%>%filter(!Binomial %in% c('PES', 'FLA', 'MES', 'MAC', 'RED', 'BWH', 'SSH', 'CAP', 'PWN', 'CEP', 'KCR', 'SCR', 'ZG', 'ZL', 'ZS', 'ZM')) %>%
+  group_by(year, scenario) %>% mutate(total_biomass_pred= sum(biomass)) %>% ungroup()%>%
+  select(year, scenario, total_biomass_pred) %>% unique() ->fmsy_pred
+
+fmsy_pred%>% left_join(fmsy_total) %>%
+  mutate(PropPred= total_biomass_pred/total_biomass) -> PropPred
+
+PropPred$year<- as.integer(PropPred$year)
+ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario))
+
+proppred<- select(PropPred, year, PropPred, scenario)
+write.csv(proppel, "chapter_4/fisheries_ecosystem/proppred.csv", row.names = F)
