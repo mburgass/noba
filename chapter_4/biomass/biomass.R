@@ -1,15 +1,15 @@
-local_data<- read.csv("chapter_4/biomass/local_stewardship_total.csv")
-national_data<- read.csv("chapter_4/biomass/national_enterprise_total.csv")
-world_data<- read.csv("chapter_4/biomass/world_market_total.csv")
-global_data<- read.csv("chapter_4/biomass/global_sustainability_total.csv")
+fmsy1_data<- read.csv("chapter_4/biomass/fmsy1_biomass.csv")
+fmsy11_data<- read.csv("chapter_4/biomass/fmsy11_biomass.csv")
+fmsy08_data<- read.csv("chapter_4/biomass/fmsy08_biomass.csv")
+fmsy06_data<- read.csv("chapter_4/biomass/fmsy06_biomass.csv")
 
-local_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="local")->local_data
-national_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="national")->national_data
-world_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="world")->world_data
-global_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="global")->global_data
+fmsy1_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="fmsy1")->fmsy1_data
+fmsy11_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="fmsy11")->fmsy11_data
+fmsy08_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="fmsy08")->fmsy08_data
+fmsy06_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="fmsy06")->fmsy06_data
 
 
-biomass<- rbind(local_data, national_data, world_data, global_data)
+biomass<- rbind(fmsy1_data, fmsy11_data, fmsy08_data, fmsy06_data)
 
 ggplot(biomass, aes(Year, biomass)) +geom_line(aes(colour=scenario))+
   facet_wrap(~species, scales = "free")
