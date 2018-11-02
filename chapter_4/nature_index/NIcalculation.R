@@ -222,28 +222,34 @@ calculate.BSunit.weights <- function(fidelity,
 # REFERENCE VALUES CONSTANT, REFERENCE VALUES READ FROM "virgin_biomass_natureindex"
 
 # Read input data
-local_natureindex<- read.csv("chapter_4/nature_index/local_natureindex.csv")
-world_natureindex<- read.csv("chapter_4/nature_index/world_natureindex.csv")
-national_natureindex<- read.csv("chapter_4/nature_index/national_natureindex.csv")
-global_natureindex<- read.csv("chapter_4/nature_index/global_natureindex.csv")
+fmsy0_natureindex<- read.csv("chapter_4/nature_index/fmsy0_natureindex.csv")
+
+fmsy1_natureindex<- read.csv("chapter_4/nature_index/fmsy1_natureindex.csv")
+fmsy08_natureindex<- read.csv("chapter_4/nature_index/fmsy08_natureindex.csv")
+fmsy11_natureindex<- read.csv("chapter_4/nature_index/fmsy11_natureindex.csv")
+fmsy06_natureindex<- read.csv("chapter_4/nature_index/fmsy06_natureindex.csv")
 virgin_biomass_natureindex<- read.csv("chapter_4/nature_index/virgin_biomass_natureindex.csv")
 ni_indicators_noba<- read.csv("chapter_4/nature_index/ni_indicators_noba.csv")
 
-valuemat_local <- as.matrix(local_natureindex[,4:92])
-dimnames(valuemat_local)[[1]] <- local_natureindex[,2]
-dimnames(valuemat_local)[[2]] <- 1980:2068
+valuemat_fmsy0 <- as.matrix(fmsy0_natureindex[,4:92])
+dimnames(valuemat_fmsy0)[[1]] <- fmsy0_natureindex[,2]
+dimnames(valuemat_fmsy0)[[2]] <- 1980:2068
 
-valuemat_world <- as.matrix(world_natureindex[,4:92])
-dimnames(valuemat_world)[[1]] <- world_natureindex[,2]
-dimnames(valuemat_world)[[2]] <- 1980:2068
+valuemat_fmsy1 <- as.matrix(fmsy1_natureindex[,4:92])
+dimnames(valuemat_fmsy1)[[1]] <- fmsy1_natureindex[,2]
+dimnames(valuemat_fmsy1)[[2]] <- 1980:2068
 
-valuemat_national <- as.matrix(national_natureindex[,4:92])
-dimnames(valuemat_national)[[1]] <- national_natureindex[,2]
-dimnames(valuemat_national)[[2]] <- 1980:2068
+valuemat_fmsy08 <- as.matrix(fmsy08_natureindex[,4:92])
+dimnames(valuemat_fmsy08)[[1]] <- fmsy08_natureindex[,2]
+dimnames(valuemat_fmsy08)[[2]] <- 1980:2068
 
-valuemat_global <- as.matrix(global_natureindex[,4:92])
-dimnames(valuemat_global)[[1]] <- global_natureindex[,2]
-dimnames(valuemat_global)[[2]] <- 1980:2068
+valuemat_fmsy11 <- as.matrix(fmsy11_natureindex[,4:92])
+dimnames(valuemat_fmsy11)[[1]] <- fmsy11_natureindex[,2]
+dimnames(valuemat_fmsy11)[[2]] <- 1980:2068
+
+valuemat_fmsy06 <- as.matrix(fmsy06_natureindex[,4:92])
+dimnames(valuemat_fmsy06)[[1]] <- fmsy06_natureindex[,2]
+dimnames(valuemat_fmsy06)[[2]] <- 1980:2068
 
 valuemat_virgin<- as.matrix(virgin_biomass_natureindex[,4]) #4=VB, 5=2100
 dimnames(valuemat_virgin)[[1]]<- virgin_biomass_natureindex[,2]
@@ -256,22 +262,25 @@ refmat <- matrix(rep(virgin_biomass_natureindex[,4],dim(valuemat_virgin)[2]), #a
 
 refmat<- as.vector(refmat)
 # Scale indicators according to the LOW model
+scaled.bootmat_fmsy0 <- valuemat_fmsy0/refmat
+scaled.bootmat_fmsy0[scaled.bootmat_fmsy0 < 0] <- 0.0
+scaled.bootmat_fmsy0[scaled.bootmat_fmsy0 > 1] <- 1.0
   
-scaled.bootmat_local <- valuemat_local/refmat
-scaled.bootmat_local[scaled.bootmat_local < 0] <- 0.0
-scaled.bootmat_local[scaled.bootmat_local > 1] <- 1.0
+scaled.bootmat_fmsy1 <- valuemat_fmsy1/refmat
+scaled.bootmat_fmsy1[scaled.bootmat_fmsy1 < 0] <- 0.0
+scaled.bootmat_fmsy1[scaled.bootmat_fmsy1 > 1] <- 1.0
 
-scaled.bootmat_world <- valuemat_world/refmat
-scaled.bootmat_world[scaled.bootmat_world < 0] <- 0.0
-scaled.bootmat_world[scaled.bootmat_world > 1] <- 1.0
+scaled.bootmat_fmsy08 <- valuemat_fmsy08/refmat
+scaled.bootmat_fmsy08[scaled.bootmat_fmsy08 < 0] <- 0.0
+scaled.bootmat_fmsy08[scaled.bootmat_fmsy08 > 1] <- 1.0
 
-scaled.bootmat_national <- valuemat_national/refmat
-scaled.bootmat_national[scaled.bootmat_national < 0] <- 0.0
-scaled.bootmat_national[scaled.bootmat_national > 1] <- 1.0
+scaled.bootmat_fmsy11 <- valuemat_fmsy11/refmat
+scaled.bootmat_fmsy11[scaled.bootmat_fmsy11 < 0] <- 0.0
+scaled.bootmat_fmsy11[scaled.bootmat_fmsy11 > 1] <- 1.0
 
-scaled.bootmat_global <- valuemat_global/refmat
-scaled.bootmat_global[scaled.bootmat_global < 0] <- 0.0
-scaled.bootmat_global[scaled.bootmat_global > 1] <- 1.0
+scaled.bootmat_fmsy06 <- valuemat_fmsy06/refmat
+scaled.bootmat_fmsy06[scaled.bootmat_fmsy06 < 0] <- 0.0
+scaled.bootmat_fmsy06[scaled.bootmat_fmsy06 > 1] <- 1.0
 
 # CALCULATE WEIGHTS.
 
@@ -346,35 +355,38 @@ Indicator.weights.benthic <- calculate.BSunit.weights(fidelity.benthic,
 # the matrix product between Indicator,weights (1 x n.ind matrix) and 
 # scaled.bootmat (n.ind x n.time matrix)
 
+nature.index_fmsy0 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy0
+nature.index_fmsy1 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy1
+nature.index_fmsy08 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy08
+nature.index_fmsy11 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy11
+nature.index_fmsy06 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy06
 
-nature.index_local <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_local
-nature.index_world <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_world
-nature.index_national <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_national
-nature.index_global <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_global
+as.data.frame(nature.index_fmsy0) %>% gather(year, score, 1:89) -> fmsy0
+fmsy0$scenario<- "fmsy0"
+#fmsy0<- fmsy0[c(TRUE,rep(FALSE,4)), ]
 
+as.data.frame(nature.index_fmsy1) %>% gather(year, score, 1:89) -> fmsy1
+fmsy1$scenario<- "fmsy1"
+#fmsy1<- fmsy1[c(TRUE,rep(FALSE,4)), ]
 
-as.data.frame(nature.index_local) %>% gather(year, score, 1:89) -> local
-local$scenario<- "local"
-#local<- local[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy08) %>% gather(year, score, 1:89) -> fmsy08
+fmsy08$scenario<- "fmsy08"
+#fmsy08<- fmsy08[c(TRUE,rep(FALSE,4)), ]
 
-as.data.frame(nature.index_world) %>% gather(year, score, 1:89) -> world
-world$scenario<- "world"
-#world<- world[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy11) %>% gather(year, score, 1:89) -> fmsy11
+fmsy11$scenario<- "fmsy11"
+#fmsy11<- fmsy11[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy06) %>% gather(year, score, 1:89) -> fmsy06
+fmsy06$scenario<- "fmsy06"
+#fmsy11<- fmsy11[c(TRUE,rep(FALSE,4)), ]
 
-as.data.frame(nature.index_national) %>% gather(year, score, 1:89) -> national
-national$scenario<- "national"
-#national<- national[c(TRUE,rep(FALSE,4)), ]
-as.data.frame(nature.index_global) %>% gather(year, score, 1:89) -> global
-global$scenario<- "global"
-#national<- national[c(TRUE,rep(FALSE,4)), ]
-
-index3<- rbind(local, world, national, global)
+index3<- rbind(fmsy0, fmsy1, fmsy08, fmsy11, fmsy06)
 index3$year<- as.integer(index3$year)
 
-plot(1980:2068,nature.index_national,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
-lines(1980:2068,nature.index_world,col="blue",lwd=2)
-lines(1980:2068,nature.index_local,col="black",lwd=2)
-lines(1980:2068,nature.index_global,col="black",lwd=2)
+plot(1980:2068,nature.index_fmsy11,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
+lines(1980:2068,nature.index_fmsy08,col="blue",lwd=2)
+lines(1980:2068,nature.index_fmsy1,col="black",lwd=2)
+lines(1980:2068,nature.index_fmsy06,col="black",lwd=2)
 
 title("Barents Sea")
 
@@ -388,31 +400,36 @@ a<- ggplot(index3, aes(year,score)) +
   xlab("")+
   ylab("Norway Nature Index Score")+ theme(legend.position="none")
 
-nature.index_local.benthic <- Indicator.weights.benthic %*% scaled.bootmat_local
-nature.index_world.benthic <- Indicator.weights.benthic %*% scaled.bootmat_world
-nature.index_national.benthic <- Indicator.weights.benthic %*% scaled.bootmat_national
-nature.index_global.benthic <- Indicator.weights.benthic %*% scaled.bootmat_global
+nature.index_fmsy0.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy0
+nature.index_fmsy1.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy1
+nature.index_fmsy08.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy08
+nature.index_fmsy11.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy11
+nature.index_fmsy06.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy06
 
 
-as.data.frame(nature.index_local.benthic) %>% gather(year, score, 1:89) -> local_benthic
-local_benthic$scenario<- "local"
-#local_benthic<- local_benthic[c(TRUE,rep(FALSE,4)), ]
-as.data.frame(nature.index_world.benthic) %>% gather(year, score, 1:89) -> world_benthic
-world_benthic$scenario<- "world"
-#world_benthic<- world_benthic[c(TRUE,rep(FALSE,4)), ]
-as.data.frame(nature.index_national.benthic) %>% gather(year, score, 1:89) -> national_benthic
-national_benthic$scenario<- "national"
+as.data.frame(nature.index_fmsy0.benthic) %>% gather(year, score, 1:89) -> fmsy0_benthic
+fmsy0_benthic$scenario<- "fmsy0"
+#fmsy0_benthic<- fmsy0_benthic[c(TRUE,rep(FALSE,4)), ]
 
-as.data.frame(nature.index_global.benthic) %>% gather(year, score, 1:89) -> global_benthic
-global_benthic$scenario<- "global"
-#national_benthic<- national_benthic[c(TRUE,rep(FALSE,4)), ]
-benthic_nni<- rbind(local_benthic, world_benthic, national_benthic, global_benthic)
+as.data.frame(nature.index_fmsy1.benthic) %>% gather(year, score, 1:89) -> fmsy1_benthic
+fmsy1_benthic$scenario<- "fmsy1"
+#fmsy1_benthic<- fmsy1_benthic[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy08.benthic) %>% gather(year, score, 1:89) -> fmsy08_benthic
+fmsy08_benthic$scenario<- "fmsy08"
+#fmsy08_benthic<- fmsy08_benthic[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy11.benthic) %>% gather(year, score, 1:89) -> fmsy11_benthic
+fmsy11_benthic$scenario<- "fmsy11"
+
+as.data.frame(nature.index_fmsy06.benthic) %>% gather(year, score, 1:89) -> fmsy06_benthic
+fmsy06_benthic$scenario<- "fmsy06"
+#fmsy11_benthic<- fmsy11_benthic[c(TRUE,rep(FALSE,4)), ]
+benthic_nni<- rbind(fmsy0_benthic, fmsy1_benthic, fmsy08_benthic, fmsy11_benthic, fmsy06_benthic)
 benthic_nni$year<- as.integer(benthic_nni$year)
 
-plot(1980:2068,nature.index_national.benthic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
-lines(1980:2068,nature.index_world.benthic,col="blue",lwd=2)
-lines(1980:2068,nature.index_local.benthic,col="black",lwd=2)
-lines(1980:2068,nature.index_global.benthic,col="black",lwd=2)
+plot(1980:2068,nature.index_fmsy11.benthic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
+lines(1980:2068,nature.index_fmsy08.benthic,col="blue",lwd=2)
+lines(1980:2068,nature.index_fmsy1.benthic,col="black",lwd=2)
+lines(1980:2068,nature.index_fmsy06.benthic,col="black",lwd=2)
 
 title("Benthic")
 
@@ -427,27 +444,32 @@ ggtitle("Benthic")+
   xlab("Year")+
   ylab("")+ theme(legend.position="none")
 
-nature.index_local.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_local
-nature.index_world.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_world
-nature.index_national.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_national
-nature.index_global.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_global
+nature.index_fmsy0.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy0
+nature.index_fmsy1.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy1
+nature.index_fmsy08.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy08
+nature.index_fmsy11.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy11
+nature.index_fmsy06.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy06
 
 
-as.data.frame(nature.index_local.pelagic) %>% gather(year, score, 1:89) -> local_pelagic
-local_pelagic$scenario<- "local"
-#local_pelagic<- local_pelagic[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy0.pelagic) %>% gather(year, score, 1:89) -> fmsy0_pelagic
+fmsy0_pelagic$scenario<- "fmsy0"
+#fmsy0_pelagic<- fmsy0_pelagic[c(TRUE,rep(FALSE,4)), ]
 
-as.data.frame(nature.index_world.pelagic) %>% gather(year, score, 1:89) -> world_pelagic
-world_pelagic$scenario<- "world"
-#world_pelagic<- world_pelagic[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy1.pelagic) %>% gather(year, score, 1:89) -> fmsy1_pelagic
+fmsy1_pelagic$scenario<- "fmsy1"
+#fmsy1_pelagic<- fmsy1_pelagic[c(TRUE,rep(FALSE,4)), ]
 
-as.data.frame(nature.index_national.pelagic) %>% gather(year, score, 1:89) -> national_pelagic
-national_pelagic$scenario<- "national"
-#national_pelagic<- national_pelagic[c(TRUE,rep(FALSE,4)), ]
-as.data.frame(nature.index_global.pelagic) %>% gather(year, score, 1:89) -> global_pelagic
-global_pelagic$scenario<- "global"
+as.data.frame(nature.index_fmsy08.pelagic) %>% gather(year, score, 1:89) -> fmsy08_pelagic
+fmsy08_pelagic$scenario<- "fmsy08"
+#fmsy08_pelagic<- fmsy08_pelagic[c(TRUE,rep(FALSE,4)), ]
 
-pelagic_nni<- rbind(local_pelagic, world_pelagic, national_pelagic, global_pelagic)
+as.data.frame(nature.index_fmsy11.pelagic) %>% gather(year, score, 1:89) -> fmsy11_pelagic
+fmsy11_pelagic$scenario<- "fmsy11"
+#fmsy11_pelagic<- fmsy11_pelagic[c(TRUE,rep(FALSE,4)), ]
+as.data.frame(nature.index_fmsy06.pelagic) %>% gather(year, score, 1:89) -> fmsy06_pelagic
+fmsy06_pelagic$scenario<- "fmsy06"
+
+pelagic_nni<- rbind(fmsy0_pelagic, fmsy1_pelagic, fmsy08_pelagic, fmsy11_pelagic, fmsy06_pelagic)
 pelagic_nni$year<- as.integer(pelagic_nni$year)
 
 c<- ggplot(pelagic_nni, aes(year,score)) + 
@@ -470,9 +492,9 @@ legend<- ggplot(pelagic_nni, aes(year,score)) +
   xlab("Year")+
   ylab("Score")
 
-plot(1980:2068,nature.index_national.pelagic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
-lines(1980:2068,nature.index_world.pelagic,col="blue",lwd=2)
-lines(1980:2068,nature.index_local.pelagic,col="black",lwd=2)
+plot(1980:2068,nature.index_fmsy11.pelagic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
+lines(1980:2068,nature.index_fmsy08.pelagic,col="blue",lwd=2)
+lines(1980:2068,nature.index_fmsy1.pelagic,col="black",lwd=2)
 title("Pelagic")
 
 # 
