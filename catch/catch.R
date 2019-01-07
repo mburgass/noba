@@ -20,21 +20,29 @@ ggplot(fmsy_catch, aes(Year, catch)) + geom_line(aes(colour=scenario)) +
   facet_wrap(~species, scales="free")
 
 ###Commercial fish biomass (filter hashed out for all)
-read.csv("lpi_final/biomass_new/fmsy2_biomass.csv", check.names = F)%>% gather("Year", "biomass", 3:155) %>% 
-  filter(Year<2016, Year>1980) %>% #filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
+read.csv("lpi_final/biomass_new/adjusted_species/fmsy2_biomass_adjusted2.csv", check.names = F)%>% gather("Year", "biomass", 3:153) %>% 
+  filter(Year<2016, Year>1980) %>% filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
   select(-ID) %>% mutate(scenario="fmsy2")-> fmsy2_biomass
-read.csv("lpi_final/biomass_new/fmsy1_biomass.csv", check.names = F)%>% gather("Year", "biomass", 3:155) %>% 
-  filter(Year<2016, Year>1980) %>% #filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
+read.csv("lpi_final/biomass_new/adjusted_species/fmsy1_biomass_adjusted2.csv", check.names = F)%>% gather("Year", "biomass", 3:153) %>% 
+  filter(Year<2016, Year>1980) %>% filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
   select(-ID)%>% mutate(scenario="fmsy1")-> fmsy1_biomass
-read.csv("lpi_final/biomass_new/fmsy0_biomass.csv", check.names = F)%>% gather("Year", "biomass", 3:155) %>% 
-  filter(Year<2016, Year>1980) %>% #filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
+read.csv("lpi_final/biomass_new/adjusted_species/fmsy0_biomass_adjusted2.csv", check.names = F)%>% gather("Year", "biomass", 3:153) %>% 
+  filter(Year<2016, Year>1980) %>% filter(Binomial %in% c('REO', 'GRH', 'HAD', 'SAI', 'RED', 'NCO', 'CAP'))%>%
   select(-ID)%>% mutate(scenario="fmsy0")-> fmsy0_biomass
 
 rbind(fmsy0_biomass, fmsy1_biomass, fmsy2_biomass) %>% rename(species=Binomial) ->fmsy_biomass
 fmsy_biomass$Year<- as.integer(fmsy_biomass$Year)
 
-ggplot(fmsy_biomass, aes(Year, biomass)) + geom_line(aes(colour=scenario)) +
-  facet_wrap(~species, scales="free")
+fmsy_biomass %>% spread(species, biomass) %>% rename("Capelin"="CAP", "Greenland Halibut"="GRH", "Haddock"="HAD", 
+                                                     "North-East Atlantic Cod"="NCO", "Redfish" = "RED", "Golden Redfish"="REO",
+                                                     "Saithe"="SAI") %>%
+  gather(species, biomass, 3:9)->fmsy_biomass_new
+
+ggplot(fmsy_biomass_new, aes(Year, biomass)) + geom_line(aes(colour=scenario), lwd=2) +
+  facet_wrap(~species, scales="free")+
+  xlab("Year") +
+  ylab("Biomass")+
+  scale_color_brewer(palette="Dark2")
 
 
 

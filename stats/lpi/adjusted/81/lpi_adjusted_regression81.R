@@ -36,11 +36,12 @@ new_intervals<- rbind(intervals.a, intervals.b, intervals.c)
 
 ggplot(new_intervals, aes(x =year, y = fit)) +
   theme_bw() +
-  geom_line(aes(colour=scenario)) +
+  geom_line(aes(colour=scenario), lwd=2) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = lpi, aes(x = year, y = LPI_final, colour=scenario), size=1)+
   xlab("Year") +
   ylab("LPI Score")+
+  scale_color_brewer(palette="Dark2")+
   ggplot2::theme(text = ggplot2::element_text(size=14),
                  axis.text.x = ggplot2::element_text(size=12),
                  axis.text.y = ggplot2::element_text(size=12))

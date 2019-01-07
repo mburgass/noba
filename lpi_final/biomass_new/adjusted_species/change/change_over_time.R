@@ -17,3 +17,19 @@ fmsy0_change[is.na(fmsy0_change)] <- 0
 ggplot(fmsy0_change, aes(year,pct_change)) + 
   geom_point()+
   geom_line(aes(colour=Group))
+
+
+fmsy2_change %>% select(Group, 4:38) %>% gather("year", "biomass", 2:36)->fmsy2_change
+fmsy2_change %>% group_by(Group, year) %>% summarize(biomass = sum(biomass, na.rm=T))%>%
+  ungroup()-> fmsy2_change
+fmsy2_change %>% group_by(Group) %>% mutate(pct_change = (biomass/lag(biomass) - 1) * 100) %>% ungroup() ->fmsy2_change
+fmsy2_change$scenario<- "fmsy2"
+fmsy2_change$Group<- as.character(fmsy2_change$Group)
+fmsy2_change$year<- as.numeric(fmsy2_change$year)
+fmsy2_change$biomass<- as.numeric(fmsy2_change$biomass)
+fmsy2_change$pct_change<- as.numeric(fmsy2_change$pct_change)
+fmsy2_change[is.na(fmsy2_change)] <- 0
+
+ggplot(fmsy2_change, aes(year,pct_change)) + 
+  geom_point()+
+  geom_line(aes(colour=Group))+ ylim(-10,10)

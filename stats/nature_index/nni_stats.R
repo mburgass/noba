@@ -142,8 +142,9 @@ ni_plot<- ggplot(new_intervals_ni, aes(x =year, y = fit)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = ni_scores, aes(x = year, y = score, colour=scenario), size=1)+
   xlab("") +
-  ylab("Norway Nature Index Score")+ theme(legend.position="none")+
-  ggtitle("Overall")+ ylim(0.6,1.01)+
+  ylab("")+ theme(legend.position="none")+
+  ggtitle("Overall")+ ylim(0.7,1.01)+
+  scale_color_brewer(palette="Dark2")+
   ggplot2::theme(text = ggplot2::element_text(size=14),
                  axis.text.x = ggplot2::element_text(size=12),
                  axis.text.y = ggplot2::element_text(size=12))
@@ -154,9 +155,10 @@ pelagic_plot<- ggplot(new_intervals_nipelagic, aes(x =year, y = fit)) +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = ni_pelagic, aes(x = year, y = score, colour=scenario), size=1)+
-  xlab("") + ylab("")+
+  xlab("Year") + ylab("")+
   theme(legend.position="none")+
-  ggtitle("Pelagic")+ ylim(0.6,1.01)+
+  ggtitle("Pelagic")+ ylim(0.7,1.01)+
+  scale_color_brewer(palette="Dark2")+
   ggplot2::theme(text = ggplot2::element_text(size=14),
                  axis.text.x = ggplot2::element_text(size=12),
                  axis.text.y = ggplot2::element_text(size=12))
@@ -167,14 +169,15 @@ benthic_plot<- ggplot(new_intervals_nibenthic, aes(x =year, y = fit)) +
   geom_line(aes(colour=scenario)) +
   geom_smooth(aes(ymin = lwr, ymax = upr, colour=scenario), stat = "identity") +
   geom_point(data = ni_benthic, aes(x = year, y = score, colour=scenario), size=1)+
-  xlab("Year") +
-  ylab("")+ theme(legend.position="none")+
-  ggtitle("Benthic")+ ylim(0.6,1.01)+
+  xlab("") +
+  ylab("NNI Score")+ theme(legend.position="none")+
+  ggtitle("Benthic")+ ylim(0.7,1.01)+
+  scale_color_brewer(palette="Dark2")+
   ggplot2::theme(text = ggplot2::element_text(size=14),
                  axis.text.x = ggplot2::element_text(size=12),
                  axis.text.y = ggplot2::element_text(size=12))
 
 legend<- get_legend(legend_test)
-prow<- plot_grid(ni_plot, benthic_plot, pelagic_plot, labels = c("A", "B", "C"), align = "h", ncol=3)
+prow<- plot_grid(ni_plot, benthic_plot, pelagic_plot, labels = c("A", "B", "C"), align = "v", ncol=1)
 
 plot_grid(prow, legend, rel_widths = c(3, .3))
