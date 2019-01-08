@@ -314,4 +314,4 @@ mtlbio_plot<- ggplot(new_intervals_mtlbio, aes(x =year, y = fit)) +
 legend<- get_legend(legend_test)
 prow<- plot_grid(biopp_plot, dempel_plot, pelbiopp_plot, dempp_plot, proppel_plot, mtlbio_plot, labels = c("A", "B", "C", "D", "E", "F"), align = "h", ncol=3)
 
-prow_test<- plot_grid(prow, legend, rel_widths = c(3, .3))
+prow_test<- plot_grid(prow, legend, rel_widths = c(3, .3), label_size = 8)
