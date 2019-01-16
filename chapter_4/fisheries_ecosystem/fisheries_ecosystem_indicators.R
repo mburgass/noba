@@ -106,13 +106,13 @@ proppred<- select(PropPred, year, PropPred, scenario)
 
 ###### plot together
 
-a<- ggplot(pelbiopp, aes(year, PelBioPP)) +geom_line(aes(colour=scenario))+ theme(legend.position="none")
-b<- ggplot(biopp, aes(year, BioPP)) +geom_line(aes(colour=scenario))+ theme(legend.position="none")
-c<- ggplot(DemPel, aes(year, DemPel)) +geom_line(aes(colour=scenario))+ theme(legend.position="none")
-d<- ggplot(DemPP, aes(year, DemPP)) +geom_line(aes(colour=scenario))+ theme(legend.position="none")
-e<- ggplot(PropPelCommunity, aes(year, PropPel)) +geom_line(aes(colour=scenario))+ theme(legend.position="none")
-f<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario))+ theme(legend.position="none")
-legend<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario))
+a<- ggplot(pelbiopp, aes(year, PelBioPP)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
+b<- ggplot(biopp, aes(year, BioPP)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
+c<- ggplot(DemPel, aes(year, DemPel)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
+d<- ggplot(DemPP, aes(year, DemPP)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
+e<- ggplot(PropPelCommunity, aes(year, PropPel)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
+f<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
+legend<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario), lwd=1.5)
 legend<- get_legend(legend)
 
 
