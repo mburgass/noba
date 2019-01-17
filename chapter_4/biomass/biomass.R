@@ -14,5 +14,7 @@ fmsy06_data %>% gather("species", "biomass", 2:55) %>% mutate(scenario="fmsy06")
 
 biomass<- rbind(fmsy0_data, fmsy1_data, fmsy11_data, fmsy08_data, fmsy06_data)
 
+biomass%>% filter(Year>2014)->biomass
+
 ggplot(biomass, aes(Year, biomass)) +geom_line(aes(colour=scenario))+
   facet_wrap(~species, scales = "free")

@@ -94,6 +94,10 @@ fish_pressure_biomass<- rbind(fmsy06_data, fmsy08_data, fmsy1_data, fmsy11_data)
 ggplot(fish_pressure_catch, aes(Year, total_catch))+geom_line(aes(colour=scenario), lwd=1.5)
 #write.csv(fish_pressure_catch, "chapter_4/catch/total_catch.csv", row.names = F)
 
+fish_pressure_catch%>% group_by(scenario) %>% mutate(catch=sum(total_catch)) %>% select(scenario, catch) %>% unique() -> scenario_catch
+
+ggplot(scenario_catch, aes(scenario, catch))+geom_bar(aes(fill=scenario), stat="identity")
+
 fish_pressure_catch%>% left_join(fish_pressure_biomass) %>%
   mutate(inversepressure= 1/(total_catch/total_biomass_landings)) -> fish_pressure
 
