@@ -1,26 +1,26 @@
 species,scenario,catch
-REO,historical catch,27411.36877
-REO,fmsy0.6,18924.70078
-GRH,historical catch,30273.27524
-GRH,fmsy0.6,55227.2786
-MAC,historical catch,200418.3101
-MAC,fmsy0.6,172390.2866
-HAD,historical catch,87460.76741
-HAD,fmsy0.6,92747.26253
-SAI,historical catch,181632.6185
-SAI,fmsy0.6,415392.2912
-RED,historical catch,47141.95797
-RED,fmsy0.6,81433.9075
-BWH,historical catch,998877.0317
-BWH,fmsy0.6,958615.2836
-SSH,historical catch,210045.8017
-SSH,fmsy0.6,62047.34564
-NCO,historical catch,1596841.3
-NCO,fmsy0.6,1364421.755
-CAP,historical catch,373101.1046
-CAP,fmsy0.6,121785.2899
-PWN,historical catch,169982.2698
-PWN,fmsy0.6,369667.1905
+REO,Historical Catch,27411.36877
+REO,Precautionary Fishing,18924.70078
+GRH,Historical Catch,30273.27524
+GRH,Precautionary Fishing,55227.2786
+MAC,Historical Catch,200418.3101
+MAC,Precautionary Fishing,172390.2866
+HAD,Historical Catch,87460.76741
+HAD,Precautionary Fishing,92747.26253
+SAI,Historical Catch,181632.6185
+SAI,Precautionary Fishing,415392.2912
+RED,Historical Catch,47141.95797
+RED,Precautionary Fishing,81433.9075
+BWH,Historical Catch,998877.0317
+BWH,Precautionary Fishing,958615.2836
+SSH,Historical Catch,210045.8017
+SSH,Precautionary Fishing,62047.34564
+NCO,Historical Catch,1596841.3
+NCO,Precautionary Fishing,1364421.755
+CAP,Historical Catch,373101.1046
+CAP,Precautionary Fishing,121785.2899
+PWN,Historical Catch,169982.2698
+PWN,Precautionary Fishing,369667.1905
 REO,fmsy0.8,18012.75395
 GRH,fmsy0.8,66906.10651
 MAC,fmsy0.8,211695.6934
@@ -32,17 +32,17 @@ SSH,fmsy0.8,75976.34164
 NCO,fmsy0.8,1604008.76
 CAP,fmsy0.8,129099.7005
 PWN,fmsy0.8,376362.8985
-REO,fmsy1,15907.58548
-GRH,fmsy1,75591.82431
-MAC,fmsy1,244453.1841
-HAD,fmsy1,73720.94712
-SAI,fmsy1,478185.3856
-RED,fmsy1,80112.29972
-BWH,fmsy1,1119326.918
-SSH,fmsy1,91802.40746
-NCO,fmsy1,1779571.434
-CAP,fmsy1,135367.5741
-PWN,fmsy1,381811.5269
+REO,Global Sustainability,15907.58548
+GRH,Global Sustainability,75591.82431
+MAC,Global Sustainability,244453.1841
+HAD,Global Sustainability,73720.94712
+SAI,Global Sustainability,478185.3856
+RED,Global Sustainability,80112.29972
+BWH,Global Sustainability,1119326.918
+SSH,Global Sustainability,91802.40746
+NCO,Global Sustainability,1779571.434
+CAP,Global Sustainability,135367.5741
+PWN,Global Sustainability,381811.5269
 REO,fmsy1.1,14593.78912
 GRH,fmsy1.1,78883.07395
 MAC,fmsy1.1,259052.1091

@@ -24,7 +24,13 @@ read.csv("chapter_4/biomass/fmsy06_biomass.csv", check.names=F) %>%
   gather("Binomial", "biomass", 2:55) %>% rename(year=Year)%>% mutate(scenario="fmsy06") -> fmsy06_biomass
 read.csv("chapter_4/biomass/fmsy0_biomass.csv", check.names=F) %>%
   gather("Binomial", "biomass", 2:55) %>% rename(year=Year)%>% mutate(scenario="fmsy0") -> fmsy0_biomass
-rbind(fmsy1_biomass, fmsy11_biomass, fmsy08_biomass, fmsy06_biomass, fmsy0_biomass) %>% filter(year>2015) ->fmsy_biomass
+rbind(fmsy1_biomass, fmsy06_biomass, fmsy0_biomass) %>% filter(year>2014) ->fmsy_biomass
+
+fmsy_biomass$scenario[fmsy_biomass$scenario=="fmsy1"]<- "Global Sustainability" 
+fmsy_biomass$scenario[fmsy_biomass$scenario=="fmsy0"]<- "Strict Conservation"
+fmsy_biomass$scenario[fmsy_biomass$scenario=="fmsy06"]<- "Precautionary Fishing" 
+
+
 
 fmsy_biomass %>% filter(Binomial %in% c('PEL','PES', 'MES', 'MAC', 'SAI', 'BWH', 'SSH', 'CAP')) %>% group_by(year, scenario) %>% mutate(total_biomass_pel= sum(biomass)) %>% ungroup() %>%
   select(year, scenario, total_biomass_pel) %>% unique() ->fmsy_pel
@@ -35,7 +41,7 @@ fmsy_biomass %>% filter(Binomial %in% c('DF', 'PS', 'PL'))%>%group_by(year, scen
 
 
 fmsy_pel%>% left_join(fmsy_pp) %>%
-  mutate(PelBioPP= total_biomass_pel/total_biomass_pp) %>% filter(year>2015) -> pelbiopp
+  mutate(PelBioPP= total_biomass_pel/total_biomass_pp) %>% filter(year>2014) -> pelbiopp
 
 pelbiopp$year<- as.integer(pelbiopp$year)
 
@@ -49,7 +55,7 @@ fmsy_biomass %>% filter(!Binomial %in% c('DF', 'PS', 'PL', 'BB', 'BC', 'BD', 'PB
   select(year, scenario, total_biomass) %>% unique() -> fmsy_bio
 
 fmsy_bio %>% left_join(fmsy_pp) %>%
-  mutate(BioPP=total_biomass/total_biomass_pp) %>% filter(year>2015) ->biopp
+  mutate(BioPP=total_biomass/total_biomass_pp) %>% filter(year>2014) ->biopp
 
 biopp$year<- as.integer(biopp$year)
 biopp<- select(biopp, year, BioPP, scenario)
@@ -67,7 +73,7 @@ fmsy_pel%>% left_join(fmsy_dem) %>%
 DemPel$year<- as.integer(DemPel$year)
 
 dempel<- select(DemPel, year, DemPel, scenario)
-write.csv(dempel, "chapter_4/fisheries_ecosystem/dempel.csv", row.names = F)
+#write.csv(dempel, "chapter_4/fisheries_ecosystem/dempel.csv", row.names = F)
 #Dem bio/PP
 fmsy_dem %>% left_join(fmsy_pp) %>% mutate(DemPP=total_biomass_dem/total_biomass_pp)-> DemPP
 DemPP$year<- as.integer(DemPP$year)
@@ -106,16 +112,52 @@ proppred<- select(PropPred, year, PropPred, scenario)
 
 ###### plot together
 
-a<- ggplot(pelbiopp, aes(year, PelBioPP)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
-b<- ggplot(biopp, aes(year, BioPP)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
-c<- ggplot(DemPel, aes(year, DemPel)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
-d<- ggplot(DemPP, aes(year, DemPP)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
-e<- ggplot(PropPelCommunity, aes(year, PropPel)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
-f<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario), lwd=1.5)+ theme(legend.position="none")
-legend<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario), lwd=1.5)
+a<- ggplot(pelbiopp, aes(year, PelBioPP)) +geom_line(aes(colour=scenario), lwd=1.5)+
+  theme(legend.position="none")+ scale_color_brewer(palette = "Dark2")+ylab("Ratio of Pelagic Biomass to Primary Production")+
+  theme(axis.title.y = element_text(size=12))
+b<- ggplot(biopp, aes(year, BioPP)) +geom_line(aes(colour=scenario), lwd=1.5)+
+  theme(legend.position="none")+ scale_color_brewer(palette = "Dark2")+ylab("Ratio of Total Biomass to Primary Production")+
+  theme(axis.title.y = element_text(size=12))
+c<- ggplot(DemPel, aes(year, DemPel)) +geom_line(aes(colour=scenario), lwd=1.5)+
+  theme(legend.position="none")+ scale_color_brewer(palette = "Dark2")+ylab("Ratio of Demersal to Pelagic Fish Biomass")+
+  theme(axis.title.y = element_text(size=12))
+d<- ggplot(DemPP, aes(year, DemPP)) +geom_line(aes(colour=scenario), lwd=1.5)+
+  theme(legend.position="none")+ scale_color_brewer(palette = "Dark2")+ylab("Ratio of Demersal Biomass to Primary Production")+
+  theme(axis.title.y = element_text(size=12))
+e<- ggplot(PropPelCommunity, aes(year, PropPel)) +geom_line(aes(colour=scenario), lwd=1.5)+
+  theme(legend.position="none")+ scale_color_brewer(palette = "Dark2")+ylab("Proportion of Pelagics in the Community")+
+  theme(axis.title.y = element_text(size=12))
+f<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario), lwd=1.5)+
+  theme(legend.position="none")+ scale_color_brewer(palette = "Dark2")+ylab("Proportion of Predators in the Community")+
+  theme(axis.title.y = element_text(size=12))
+legend<-ggplot(PropPred, aes(year, PropPred)) +geom_line(aes(colour=scenario), lwd=1.5)+
+  scale_color_brewer(palette = "Dark2")
 legend<- get_legend(legend)
 
 
 
-prow<- plot_grid(a, b, c, d, e, f, labels = c("PelBioPP", "BioPP", "DemPel", "DemBioPP", "PropPelCommunity", "PropPredCommunity"), align = "v", ncol=3)
-plot_grid(prow, legend, rel_widths = c(3, .3), label_size = 8)
+prow<- plot_grid(a, b, c, d, e, f, labels = c("A", "B", "C", "D", "E", "F"), align = "v", ncol=3)
+plot_grid(prow, legend, rel_widths = c(3, .4), label_size = 8)
+
+
+######% Calcs####
+
+fish_eco2<- pelbiopp %>% left_join(biopp) %>% left_join(dempel) %>% left_join(dempp) %>% left_join(proppel) %>% left_join(proppred)
+fish_eco<- fish_eco2 %>% select(year, scenario, PelBioPP, BioPP, DemPel, DemPP, PropPel, PropPred)
+
+fish_eco_2030<- fish_eco %>% filter(between(year, 2025, 2029)) %>% group_by(scenario) %>% summarise_all(mean) %>% select(-year)
+fish_eco_2030$value<- "2030"
+
+fish_eco_2050<- fish_eco %>% filter(between(year, 2045, 2049)) %>% group_by(scenario) %>% summarise_all(mean) %>% select(-year)
+fish_eco_2050$value<- "2050"
+
+fish_eco_2068<- fish_eco %>% filter(between(year, 2063, 2067)) %>% group_by(scenario) %>% summarise_all(mean) %>% select(-year)
+fish_eco_2068$value<- "2068"
+
+final<- rbind(fish_eco3, fish_eco_2030, fish_eco_2050, fish_eco_2068)
+
+final<- final %>% select(value, scenario, PelBioPP, BioPP, DemPel, DemPP, PropPel, PropPred)
+
+write.csv(final, "chapter_4/fisheries_ecosystem/final_fish_eco.csv", row.names=F)
+
+#write.csv(fish_eco, "chapter_4/fisheries_ecosystem/fish_eco.csv", row.names = F)

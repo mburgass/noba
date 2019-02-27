@@ -228,7 +228,7 @@ fmsy1_natureindex<- read.csv("chapter_4/nature_index/fmsy1_natureindex.csv")
 fmsy08_natureindex<- read.csv("chapter_4/nature_index/fmsy08_natureindex.csv")
 fmsy11_natureindex<- read.csv("chapter_4/nature_index/fmsy11_natureindex.csv")
 fmsy06_natureindex<- read.csv("chapter_4/nature_index/fmsy06_natureindex.csv")
-virgin_biomass_natureindex<- read.csv("chapter_4/nature_index/virgin_biomass_natureindex.csv")
+virgin_biomass_natureindex<- read.csv("chapter_4/nature_index/virgin_biomass_natureindex2.csv")
 ni_indicators_noba<- read.csv("chapter_4/nature_index/ni_indicators_noba.csv")
 
 valuemat_fmsy0 <- as.matrix(fmsy0_natureindex[,4:92])
@@ -362,11 +362,11 @@ nature.index_fmsy11 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy
 nature.index_fmsy06 <- Indicator.weights.whole.ecosystem %*% scaled.bootmat_fmsy06
 
 as.data.frame(nature.index_fmsy0) %>% gather(year, score, 1:89) -> fmsy0
-fmsy0$scenario<- "fmsy0"
+fmsy0$scenario<- "Strict Conservation"
 #fmsy0<- fmsy0[c(TRUE,rep(FALSE,4)), ]
 
 as.data.frame(nature.index_fmsy1) %>% gather(year, score, 1:89) -> fmsy1
-fmsy1$scenario<- "fmsy1"
+fmsy1$scenario<- "Global Sustainability"
 #fmsy1<- fmsy1[c(TRUE,rep(FALSE,4)), ]
 
 as.data.frame(nature.index_fmsy08) %>% gather(year, score, 1:89) -> fmsy08
@@ -377,10 +377,10 @@ as.data.frame(nature.index_fmsy11) %>% gather(year, score, 1:89) -> fmsy11
 fmsy11$scenario<- "fmsy11"
 #fmsy11<- fmsy11[c(TRUE,rep(FALSE,4)), ]
 as.data.frame(nature.index_fmsy06) %>% gather(year, score, 1:89) -> fmsy06
-fmsy06$scenario<- "fmsy06"
+fmsy06$scenario<- "Precautionary Fishing"
 #fmsy11<- fmsy11[c(TRUE,rep(FALSE,4)), ]
 
-index3<- rbind(fmsy0, fmsy1, fmsy08, fmsy11, fmsy06)
+index3<- rbind(fmsy0, fmsy06, fmsy1)
 index3$year<- as.integer(index3$year)
 
 plot(1980:2068,nature.index_fmsy11,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
@@ -391,14 +391,15 @@ lines(1980:2068,nature.index_fmsy06,col="black",lwd=2)
 title("Barents Sea")
 
 a<- ggplot(index3, aes(year,score)) + 
-  geom_line(aes(colour=scenario)) + 
-  ylim(0.8,1)+
+  geom_line(aes(colour=scenario), lwd=1) +
+  scale_color_brewer(palette = "Dark2")+
+  ylim(0.75,0.95)+
   xlim(2015, 2068)+ggtitle("Overall")+
   theme_bw()+
   ggplot2::theme(text = ggplot2::element_text(size=14),
                  axis.text.x = ggplot2::element_text(size=12))+
   xlab("")+
-  ylab("Norway Nature Index Score")+ theme(legend.position="none")
+  ylab("")+ theme(legend.position="none")
 
 nature.index_fmsy0.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy0
 nature.index_fmsy1.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy1
@@ -408,11 +409,11 @@ nature.index_fmsy06.benthic <- Indicator.weights.benthic %*% scaled.bootmat_fmsy
 
 
 as.data.frame(nature.index_fmsy0.benthic) %>% gather(year, score, 1:89) -> fmsy0_benthic
-fmsy0_benthic$scenario<- "fmsy0"
+fmsy0_benthic$scenario<- "Strict Conservation"
 #fmsy0_benthic<- fmsy0_benthic[c(TRUE,rep(FALSE,4)), ]
 
 as.data.frame(nature.index_fmsy1.benthic) %>% gather(year, score, 1:89) -> fmsy1_benthic
-fmsy1_benthic$scenario<- "fmsy1"
+fmsy1_benthic$scenario<- "Global Sustainability"
 #fmsy1_benthic<- fmsy1_benthic[c(TRUE,rep(FALSE,4)), ]
 as.data.frame(nature.index_fmsy08.benthic) %>% gather(year, score, 1:89) -> fmsy08_benthic
 fmsy08_benthic$scenario<- "fmsy08"
@@ -421,9 +422,9 @@ as.data.frame(nature.index_fmsy11.benthic) %>% gather(year, score, 1:89) -> fmsy
 fmsy11_benthic$scenario<- "fmsy11"
 
 as.data.frame(nature.index_fmsy06.benthic) %>% gather(year, score, 1:89) -> fmsy06_benthic
-fmsy06_benthic$scenario<- "fmsy06"
+fmsy06_benthic$scenario<- "Precautionary Fishing"
 #fmsy11_benthic<- fmsy11_benthic[c(TRUE,rep(FALSE,4)), ]
-benthic_nni<- rbind(fmsy0_benthic, fmsy1_benthic, fmsy08_benthic, fmsy11_benthic, fmsy06_benthic)
+benthic_nni<- rbind(fmsy0_benthic, fmsy06_benthic, fmsy1_benthic)
 benthic_nni$year<- as.integer(benthic_nni$year)
 
 plot(1980:2068,nature.index_fmsy11.benthic,ylim = c(0,1),type="l",col="red",lwd=2,ylab="Nature index")
@@ -434,15 +435,16 @@ lines(1980:2068,nature.index_fmsy06.benthic,col="black",lwd=2)
 title("Benthic")
 
 b<- ggplot(benthic_nni, aes(year,score)) +
-  geom_line(aes(colour=scenario)) +
+  geom_line(aes(colour=scenario), lwd=1) +
+  scale_color_brewer(palette = "Dark2")+
   ylim(0.9,1)+
   xlim(2015, 2068)+
 ggtitle("Benthic")+
   theme_bw()+
   ggplot2::theme(text = ggplot2::element_text(size=14),
                  axis.text.x = ggplot2::element_text(size=12))+
-  xlab("Year")+
-  ylab("")+ theme(legend.position="none")
+  xlab("")+
+  ylab("Norway Nature Index Score")+ theme(legend.position="none")
 
 nature.index_fmsy0.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy0
 nature.index_fmsy1.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy1
@@ -452,11 +454,11 @@ nature.index_fmsy06.pelagic <- Indicator.weights.pelagic %*% scaled.bootmat_fmsy
 
 
 as.data.frame(nature.index_fmsy0.pelagic) %>% gather(year, score, 1:89) -> fmsy0_pelagic
-fmsy0_pelagic$scenario<- "fmsy0"
+fmsy0_pelagic$scenario<- "Strict Conservation"
 #fmsy0_pelagic<- fmsy0_pelagic[c(TRUE,rep(FALSE,4)), ]
 
 as.data.frame(nature.index_fmsy1.pelagic) %>% gather(year, score, 1:89) -> fmsy1_pelagic
-fmsy1_pelagic$scenario<- "fmsy1"
+fmsy1_pelagic$scenario<- "Global Sustainability"
 #fmsy1_pelagic<- fmsy1_pelagic[c(TRUE,rep(FALSE,4)), ]
 
 as.data.frame(nature.index_fmsy08.pelagic) %>% gather(year, score, 1:89) -> fmsy08_pelagic
@@ -467,23 +469,25 @@ as.data.frame(nature.index_fmsy11.pelagic) %>% gather(year, score, 1:89) -> fmsy
 fmsy11_pelagic$scenario<- "fmsy11"
 #fmsy11_pelagic<- fmsy11_pelagic[c(TRUE,rep(FALSE,4)), ]
 as.data.frame(nature.index_fmsy06.pelagic) %>% gather(year, score, 1:89) -> fmsy06_pelagic
-fmsy06_pelagic$scenario<- "fmsy06"
+fmsy06_pelagic$scenario<- "Precautionary Fishing"
 
-pelagic_nni<- rbind(fmsy0_pelagic, fmsy1_pelagic, fmsy08_pelagic, fmsy11_pelagic, fmsy06_pelagic)
+pelagic_nni<- rbind(fmsy0_pelagic, fmsy06_pelagic, fmsy1_pelagic)
 pelagic_nni$year<- as.integer(pelagic_nni$year)
 
 c<- ggplot(pelagic_nni, aes(year,score)) + 
-  geom_line(aes(colour=scenario)) + ylim(0.6,1)+
+  geom_line(aes(colour=scenario), lwd=1) +
+  scale_color_brewer(palette="Dark2")+ylim(0.6,0.95)+
   xlim(2015, 2068)+
   ggtitle("Pelagic")+
   theme_bw()+
   ggplot2::theme(text = ggplot2::element_text(size=14),
                  axis.text.x = ggplot2::element_text(size=12))+
-  xlab("")+
+  xlab("Year")+
   ylab("")+ theme(legend.position="none")+ theme(legend.position="none")
 
 legend<- ggplot(pelagic_nni, aes(year,score)) + 
-  geom_line(aes(colour=scenario)) + ylim(0.7,1)+
+  geom_line(aes(colour=scenario), lwd=1) + 
+  scale_colour_brewer(palette = "Dark2")+ ylim(0.7,1)+
   xlim(1980, 2068)+
   ggtitle("Pelagic Norway Nature Index for the Barents Sea")+
   theme_bw()+
@@ -496,11 +500,11 @@ plot(1980:2068,nature.index_fmsy11.pelagic,ylim = c(0,1),type="l",col="red",lwd=
 lines(1980:2068,nature.index_fmsy08.pelagic,col="blue",lwd=2)
 lines(1980:2068,nature.index_fmsy1.pelagic,col="black",lwd=2)
 title("Pelagic")
-
+library(cowplot)
 # 
 prow<- plot_grid(a, b, c, labels = c("A", "B", "C"), align = "v", ncol=1)
 legend<- get_legend(legend)
-plot_grid(prow, legend, rel_widths = c(3, .3))
+plot_grid(prow, legend, rel_widths = c(2, .4))
 
 benthic_nni$type<- "benthic"
 index3$type<- "overall"

@@ -35,6 +35,8 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2015, 
 # Remove NAs (trailing years with no data)
 fmsy1_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
 
+####hide##############
+
 df<- fmsy11_data %>% dplyr::filter(ID<50)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:121] = TRUE #change to number of rows as above
@@ -55,6 +57,8 @@ arctic_lpi <- LPIMain(example_infile_name, use_weightings = 0, REF_YEAR = 2015, 
 # Remove NAs (trailing years with no data)
 fmsy08_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
 
+######hide##########
+
 df<- fmsy06_data %>% dplyr::filter(ID<50)
 index_vector = rep(FALSE, nrow(df)) #next row reliant on how many rows - need to change if not working
 index_vector[1:121] = TRUE #change to number of rows as above
@@ -67,5 +71,18 @@ fmsy06_lpi <- arctic_lpi[complete.cases(arctic_lpi), ]
 
 #########
 
-lpis<- list(fmsy0_lpi, fmsy06_lpi,fmsy08_lpi, fmsy1_lpi,fmsy11_lpi)
-ggplot_multi_lpi(lpis, names=c("fmsy0","fmsy0.6", "fmsy0.8", "fmsy1", "fmsy1.1"), xlims=c(2015, 2068), ylims=c(0.7, 1.2), facet = T)
+lpis<- list(fmsy1_lpi,fmsy06_lpi, fmsy0_lpi)
+ggplot_multi_lpi(lpis, names=c("Global Sustainability","Precautionary Fishing", "Strict Conservation"), xlims=c(2015, 2068), ylims=c(0.7, 1.2), facet = T)
+
+
+
+
+
+
+fmsy06_lpi$scenario<- "Precautionary Fishing"
+fmsy1_lpi$scenario<- "Global Sustainability"
+fmsy0_lpi$scenario<- "Strict Conservation"
+fmsy_lpis2<- rbind(fmsy0_lpi,fmsy1_lpi,fmsy06_lpi)
+fmsy_lpis2<- select(fmsy_lpis2, LPI_final, scenario)
+write.csv(fmsy_lpis2, "chapter_4/lpi/lpi_scores.csv")
+
