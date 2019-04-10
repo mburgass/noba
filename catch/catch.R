@@ -41,8 +41,12 @@ fmsy_biomass %>% spread(species, biomass) %>% rename("Capelin"="CAP", "Greenland
 ggplot(fmsy_biomass_new, aes(Year, biomass)) + geom_line(aes(colour=scenario), lwd=2) +
   facet_wrap(~species, scales="free")+
   xlab("Year") +
-  ylab("Biomass")+
-  scale_color_brewer(palette="Dark2")
+  ylab("Biomass (tonnes)")+
+  scale_color_brewer(palette="Dark2")+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+ 
+  theme(strip.text.x = element_text(size = 15))
 
 
 

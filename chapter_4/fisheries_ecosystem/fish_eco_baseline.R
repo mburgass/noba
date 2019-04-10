@@ -55,10 +55,10 @@ fmsy_biomass%>%
 
 
 fmsy_pel%>% left_join(fmsy_dem) %>%
-  mutate(DemPel= total_biomass_dem/total_biomass_pel) -> DemPel
-DemPel$year<- as.integer(DemPel$year)
+  mutate(PelDem= total_biomass_pel/total_biomass_dem) -> PelDem
+PelDem$year<- as.integer(PelDem$year)
 
-dempel<- select(DemPel, year, DemPel, scenario)
+peldem<- select(PelDem, year, PelDem, scenario)
 #write.csv(dempel, "chapter_4/fisheries_ecosystem/dempel.csv", row.names = F)
 #Dem bio/PP
 fmsy_dem %>% left_join(fmsy_pp) %>% mutate(DemPP=total_biomass_dem/total_biomass_pp)-> DemPP
@@ -83,7 +83,7 @@ proppel<- select(PropPelCommunity, year, PropPel, scenario)
 #write.csv(proppel, "chapter_4/fisheries_ecosystem/proppel.csv", row.names = F)
 
 ##PropPredCommunity
-fmsy_biomass%>%filter(!Binomial %in% c('PES', 'FLA', 'MES', 'MAC', 'RED', 'BWH', 'SSH', 'CAP', 'PWN', 'CEP', 'KCR', 'SCR', 'ZG', 'ZL', 'ZS', 'ZM')) %>%
+fmsy_biomass%>%filter(!Binomial %in% c('PES', 'FLA', 'MES', 'MAC', 'RED', 'BWH', 'SSH', 'CAP', 'PWN', 'CEP', 'KCR', 'SCR', 'ZG', 'ZL', 'ZS', 'ZM', 'DF',	'PS',	'PL',	'BC',	'BD',	'BFF',	'SPO',	'COR',	'PB',	'BB',	'DR',	'DL',	'DC', 'DIN'))%>%
   group_by(year, scenario) %>% mutate(total_biomass_pred= sum(biomass)) %>% ungroup()%>%
   select(year, scenario, total_biomass_pred) %>% unique() ->fmsy_pred
 
@@ -104,10 +104,10 @@ proppred<- select(PropPred, year, PropPred, scenario)
 
 ######% Calcs####
 
-fish_eco2<- pelbiopp %>% left_join(biopp) %>% left_join(dempel) %>% left_join(dempp) %>% left_join(proppel) %>% left_join(proppred)
-fish_eco<- fish_eco2 %>% select(year, scenario, PelBioPP, BioPP, DemPel, DemPP, PropPel, PropPred) %>% filter(year<2015) %>% filter(year>2009)
+fish_eco2<- pelbiopp %>% left_join(biopp) %>% left_join(peldem) %>% left_join(dempp) %>% left_join(proppel) %>% left_join(proppred)
+fish_eco<- fish_eco2 %>% select(year, scenario, PelBioPP, BioPP, PelDem, DemPP, PropPel, PropPred) %>% filter(year<2015) %>% filter(year>2009)
 
-#write.csv(fish_eco, "chapter_4/fisheries_ecosystem/fish_eco_baseline.csv", row.names = F)
+write.csv(fish_eco, "chapter_4/fisheries_ecosystem/fish_eco_baseline3.csv", row.names = F)
 
 fish_eco3<- fish_eco %>% group_by(scenario) %>% summarise_all(mean) %>% select(-year)
 fish_eco3$value<- "2015"

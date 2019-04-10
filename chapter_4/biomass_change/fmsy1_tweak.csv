@@ -1,0 +1,41 @@
+Group,biomass,year,pct_change,scenario
+Demersal Fish,19838649.28,2015,NA,Global Sustainability
+Epibenthos,18372407.83,2015,NA,Global Sustainability
+Filter Feeder,40127243.67,2015,NA,Global Sustainability
+Mammals,1780998.721,2015,NA,Global Sustainability
+Pelagic Fish,60825485.97,2015,NA,Global Sustainability
+Primary Producer,12094277354,2015,NA,Global Sustainability
+Seabirds,17856.74702,2015,NA,Global Sustainability
+Sharks and Rays,3931348.031,2015,NA,Global Sustainability
+Squid,60953338.81,2015,NA,Global Sustainability
+Zooplankton,2149521202,2015,NA,Global Sustainability
+Demersal Fish,18197893.96,2030,-8.270499155,Global Sustainability
+Epibenthos,16833177.72,2030,-8.377944388,Global Sustainability
+Filter Feeder,49780391.98,2030,24.05634534,Global Sustainability
+Mammals,1678416.589,2030,-5.759809445,Global Sustainability
+Pelagic Fish,65436347.15,2030,7.580475701,Global Sustainability
+Primary Producer,9448541757,2030,-21.87592958,Global Sustainability
+Seabirds,17822.02259,2030,-0.194461116,Global Sustainability
+Sharks and Rays,4138031.075,2030,5.257307225,Global Sustainability
+Squid,57133708.1,2030,-6.266483157,Global Sustainability
+Zooplankton,2323414092,2030,8.089843011,Global Sustainability
+Demersal Fish,17990059.38,2050,-9.318123783,Global Sustainability
+Epibenthos,46125524.08,2050,151.0586773,Global Sustainability
+Filter Feeder,66189844.73,2050,64.94989111,Global Sustainability
+Mammals,1589876.581,2050,-10.73117785,Global Sustainability
+Pelagic Fish,72444470.99,2050,19.10216555,Global Sustainability
+Primary Producer,9416649439,2050,-22.13962717,Global Sustainability
+Seabirds,17185.14935,2050,-3.761030336,Global Sustainability
+Sharks and Rays,4225159.124,2050,7.473545711,Global Sustainability
+Squid,58592176.63,2050,-3.873720823,Global Sustainability
+Zooplankton,2183771778,2050,1.593404899,Global Sustainability
+Demersal Fish,18642765.13,2068,-6.028052306,Global Sustainability
+Epibenthos,58909517.56,2068,220.641247,Global Sustainability
+Filter Feeder,84625400.31,2068,110.892632,Global Sustainability
+Mammals,1523909.688,2068,-14.43510485,Global Sustainability
+Pelagic Fish,76948316.42,2068,26.50670224,Global Sustainability
+Primary Producer,12529010815,2068,3.594538544,Global Sustainability
+Seabirds,17367.45944,2068,-2.740071187,Global Sustainability
+Sharks and Rays,4251179.548,2068,8.135415999,Global Sustainability
+Squid,59602107.1,2068,-2.216829677,Global Sustainability
+Zooplankton,2014944361,2068,-6.260782182,Global Sustainability

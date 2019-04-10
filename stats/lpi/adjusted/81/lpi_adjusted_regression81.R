@@ -15,7 +15,7 @@ fit0 <- lm(LPI_final ~ poly(year, 3), data = lpi)
 fit1 <- lm(LPI_final ~ poly(year, 3) * scenario, data = lpi)
 #fit2 <- lm(LPI_final ~ poly(year, 4) * scenario, data = lpi)
 
-anova(fit0, fit1)
+test<- anova(fit0,fit1)
 ####Plotting regressions######
 dat.a = data.frame(year= 1981:2015, scenario='fmsy0')
 intervals.a <- predict(fit1,newdata = dat.a,interval='confidence',
@@ -42,6 +42,6 @@ ggplot(new_intervals, aes(x =year, y = fit)) +
   xlab("Year") +
   ylab("LPI Score")+
   scale_color_brewer(palette="Dark2")+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12),
-                 axis.text.y = ggplot2::element_text(size=12))
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))

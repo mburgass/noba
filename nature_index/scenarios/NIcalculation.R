@@ -366,8 +366,9 @@ a<- ggplot(index3, aes(year,score)) +
   geom_line(aes(colour=scenario), lwd=2) + 
   ylim(0.7,1)+ggtitle("Overall")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("")+ ylab("")+
   theme(legend.position="none")+
   scale_color_brewer(palette="Dark2")
@@ -397,8 +398,9 @@ b<- ggplot(benthic_nni, aes(year,score)) +
   geom_line(aes(colour=scenario), lwd=2) +
   ylim(0.7,1)+ggtitle("Benthic")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("")+ylab("NNI Score")+ theme(legend.position="none")+
   scale_color_brewer(palette="Dark2")
 
@@ -426,8 +428,9 @@ c<- ggplot(pelagic_nni, aes(year,score)) +
   xlim(1981, 2015)+
   ggtitle("Pelagic")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("Year")+
   ylab("")+ theme(legend.position="none")+ theme(legend.position="none")+
   scale_color_brewer(palette="Dark2")
@@ -437,8 +440,9 @@ legend<- ggplot(pelagic_nni, aes(year,score)) +
   xlim(1981, 2015)+
   ggtitle("Pelagic Norway Nature Index for the Barents Sea")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("Year")+
   ylab("Score")+
   scale_color_brewer(palette="Dark2")

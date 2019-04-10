@@ -7,35 +7,74 @@ closeAllConnections()
 
 #Read base case
 read.csv("chapter_4/biomass/fmsy1_biomass.csv", check.names=F)  %>% gather("Binomial", "biomass", 3:55)%>%
-  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
+  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR'))%>%
   filter(Year>2014) %>% group_by(Year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(Year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="Global Sustainability") ->fmsy1_data
 
 #Read fisheries scenarios
 read.csv("chapter_4/biomass/fmsy11_biomass.csv", check.names=F) %>% gather("Binomial", "biomass", 3:55) %>%
-  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
+  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR'))%>%
   filter(Year>2014) %>% group_by(Year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(Year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="fmsy11") ->fmsy11_data
 
 read.csv("chapter_4/biomass/fmsy0_biomass.csv", check.names=F) %>% gather("Binomial", "biomass", 3:55) %>%
-  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
+  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR'))%>%
   filter(Year>2014) %>% group_by(Year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(Year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="Strict Conservation") ->fmsy0_data
 
 
 read.csv("chapter_4/biomass/fmsy06_biomass.csv", check.names=F) %>% gather("Binomial", "biomass", 3:55) %>%
-  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
+  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR'))%>%
   filter(Year>2014) %>% group_by(Year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(Year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="Precautionary Fishing") -> fmsy06_data
 
 read.csv("chapter_4/biomass/fmsy08_biomass.csv", check.names=F) %>% gather("Binomial", "biomass", 3:55) %>%
-  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR', 'ZL', 'ZM', 'ZS'))%>%
+  filter(Binomial %in% c('CAP','PEL', 'REO', 'GRH', 'MAC', 'HAD','SAI', 'RED','BWH', 'SSH', 'NCO', 'PCO', 'PWN', 'KCR', 'SCR'))%>%
   filter(Year>2014) %>% group_by(Year) %>% mutate(total_biomass_surveyed= mean(biomass)) %>% ungroup() %>%
   select(Year, total_biomass_surveyed) %>% unique() %>% mutate(scenario="fmsy08") ->fmsy08_data
 
+surveyed_biomass_no_zoo<- rbind(fmsy0_data, fmsy06_data, fmsy1_data)
+
+surveyed_biomass_no_zoo$Year<- as.integer(surveyed_biomass_no_zoo$Year)
+surveyed_biomass_no_zoo$title<- "Excluding Zooplankton"
+
 surveyed_biomass<- rbind(fmsy0_data, fmsy06_data, fmsy1_data)
 
-surveyed_biomass$Year<- as.integer(surveyed_biomass$Year)  
+surveyed_biomass$Year<- as.integer(surveyed_biomass$Year)
+#surveyed_biomass$title<- "Including Zooplankton"
+
+#biomass<- rbind(surveyed_biomass, surveyed_biomass_no_zoo)
+
+ggplot(biomass, aes(Year, total_biomass_surveyed)) +geom_line(aes(colour=scenario), lwd=1)+ scale_color_brewer(palette = "Dark2") +
+  theme(legend.position="none")+
+  ylab("Total Surveyed Biomass (tonnes)")+theme_bw()+theme(axis.text=element_text(size=20))+theme(axis.title.x=element_text(size=20))+
+  theme(axis.title.y=element_text(size=20))+ theme(legend.text=element_text(size=20))+
+  theme(legend.title=element_text(size=20))+theme(strip.text.x = element_text(size = 20))+
+  facet_wrap(~title, scales="free", ncol = 1)
+
+a<- ggplot(surveyed_biomass, aes(Year, total_biomass_surveyed)) +geom_line(aes(colour=scenario), lwd=1)+ scale_color_brewer(palette = "Dark2") +
+  theme(legend.position="none")+
+  ylab("Total Surveyed Biomass (tonnes)")+theme_bw()+theme(axis.text=element_text(size=20))+theme(axis.title.x=element_text(size=20))+
+  theme(axis.title.y=element_text(size=15))+ theme(legend.text=element_text(size=20))+
+  theme(legend.title=element_text(size=20))+theme(strip.text.x = element_text(size = 20))+ 
+  theme(legend.position="none")
+
+b<- ggplot(surveyed_biomass_no_zoo, aes(Year, total_biomass_surveyed)) +geom_line(aes(colour=scenario), lwd=1)+ scale_color_brewer(palette = "Dark2") +
+  theme(legend.position="none")+
+  ylab("Total Surveyed Biomass (tonnes)")+theme_bw()+theme(axis.text=element_text(size=20))+theme(axis.title.x=element_text(size=20))+
+  theme(axis.title.y=element_text(size=15))+ theme(legend.text=element_text(size=20))+
+  theme(legend.title=element_text(size=20))+theme(strip.text.x = element_text(size = 20))+ 
+  theme(legend.position="none")
+
+legend_catch<-ggplot(surveyed_biomass_no_zoo, aes(Year, total_biomass_surveyed)) +geom_line(aes(colour=scenario), lwd=1)+ scale_color_brewer(palette = "Dark2") +
+  ylab("Total Surveyed Biomass (tonnes)")+theme_bw()+theme(axis.text=element_text(size=20))+theme(axis.title.x=element_text(size=20))+
+  theme(axis.title.y=element_text(size=15))+ theme(legend.text=element_text(size=20))+
+  theme(legend.title=element_text(size=20))+theme(strip.text.x = element_text(size = 20))+ theme(legend.position="bottom")
+
+legend_catch<- get_legend(legend_catch)
+
+prow<- plot_grid(a, b, labels = c("A", "B"), align = "v", ncol=1, rel_widths = c(1, 0.8))
+plot_grid(prow, legend_catch, rel_heights = c(1, .2), ncol=1, rel_widths = c(1, 0.8))
 
 #write.csv(surveyed_biomass, "chapter_4/indiseas/surveyed_biomass.csv", row.names = F)
 

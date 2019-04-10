@@ -1,0 +1,41 @@
+Group,biomass,year,pct_change,scenario
+Demersal Fish,19838649.28,2015,NA,Precautionary Fishing
+Epibenthos,18372407.83,2015,NA,Precautionary Fishing
+Filter Feeder,40127243.67,2015,NA,Precautionary Fishing
+Mammals,1780998.721,2015,NA,Precautionary Fishing
+Pelagic Fish,60825485.97,2015,NA,Precautionary Fishing
+Primary Producer,12094277354,2015,NA,Precautionary Fishing
+Seabirds,17856.74702,2015,NA,Precautionary Fishing
+Sharks and Rays,3931348.031,2015,NA,Precautionary Fishing
+Squid,60953338.81,2015,NA,Precautionary Fishing
+Zooplankton,2149521202,2015,NA,Precautionary Fishing
+Demersal Fish,19846054.81,2030,0.037328816,Precautionary Fishing
+Epibenthos,18352539.88,2030,-0.10814017,Precautionary Fishing
+Filter Feeder,50182255.71,2030,25.0578189,Precautionary Fishing
+Mammals,1677302.626,2030,-5.822356544,Precautionary Fishing
+Pelagic Fish,62058046.29,2030,2.026387953,Precautionary Fishing
+Primary Producer,8156860518,2030,-32.55603225,Precautionary Fishing
+Seabirds,17862.92565,2030,0.034601092,Precautionary Fishing
+Sharks and Rays,4143037.145,2030,5.384644442,Precautionary Fishing
+Squid,54210896.32,2030,-11.06164588,Precautionary Fishing
+Zooplankton,2161521778,2030,0.558290661,Precautionary Fishing
+Demersal Fish,19988781.9,2050,0.756768333,Precautionary Fishing
+Epibenthos,45698076.53,2050,148.7321039,Precautionary Fishing
+Filter Feeder,67190816.64,2050,67.44438566,Precautionary Fishing
+Mammals,1557629.733,2050,-12.54178265,Precautionary Fishing
+Pelagic Fish,71114977.34,2050,16.91641458,Precautionary Fishing
+Primary Producer,5844588029,2050,-51.67476437,Precautionary Fishing
+Seabirds,17235.98823,2050,-3.476326323,Precautionary Fishing
+Sharks and Rays,4215194.397,2050,7.220077282,Precautionary Fishing
+Squid,63647302.2,2050,4.419714232,Precautionary Fishing
+Zooplankton,2101003516,2050,-2.257139201,Precautionary Fishing
+Demersal Fish,19767951.96,2068,-0.356361556,Precautionary Fishing
+Epibenthos,58429455.27,2068,218.0282945,Precautionary Fishing
+Filter Feeder,86415714.14,2068,115.3542238,Precautionary Fishing
+Mammals,1480226.741,2068,-16.88782687,Precautionary Fishing
+Pelagic Fish,75463395.68,2068,24.06542172,Precautionary Fishing
+Primary Producer,5203936788,2068,-56.97190799,Precautionary Fishing
+Seabirds,16959.01723,2068,-5.027398292,Precautionary Fishing
+Sharks and Rays,4230755.31,2068,7.615893491,Precautionary Fishing
+Squid,57610965.23,2068,-5.483495476,Precautionary Fishing
+Zooplankton,2114550791,2068,-1.626893052,Precautionary Fishing

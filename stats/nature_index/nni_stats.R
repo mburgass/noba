@@ -38,7 +38,7 @@ legend_test<- ggplot(new_intervals_ni, aes(x =year, y = fit)) +
   geom_point(data = ni_scores, aes(x = year, y = score, colour=scenario), size=1)+
   xlab("Year") +
   ylab("Norway Nature Index Score") +
-  ggtitle("Regressions of Norway Nature Index for three fishing scenarios")
+  ggtitle("Regressions of Norway Nature Index for three fishing scenarios")+ theme(legend.text=element_text(size=25))
 
 ######PELAGIC NNI###########
 
@@ -145,9 +145,9 @@ ni_plot<- ggplot(new_intervals_ni, aes(x =year, y = fit)) +
   ylab("")+ theme(legend.position="none")+
   ggtitle("Overall")+ ylim(0.7,1.01)+
   scale_color_brewer(palette="Dark2")+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12),
-                 axis.text.y = ggplot2::element_text(size=12))
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))
 
 
 pelagic_plot<- ggplot(new_intervals_nipelagic, aes(x =year, y = fit)) +
@@ -159,10 +159,9 @@ pelagic_plot<- ggplot(new_intervals_nipelagic, aes(x =year, y = fit)) +
   theme(legend.position="none")+
   ggtitle("Pelagic")+ ylim(0.7,1.01)+
   scale_color_brewer(palette="Dark2")+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12),
-                 axis.text.y = ggplot2::element_text(size=12))
-
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))
 
 benthic_plot<- ggplot(new_intervals_nibenthic, aes(x =year, y = fit)) +
   theme_bw() +
@@ -173,9 +172,9 @@ benthic_plot<- ggplot(new_intervals_nibenthic, aes(x =year, y = fit)) +
   ylab("NNI Score")+ theme(legend.position="none")+
   ggtitle("Benthic")+ ylim(0.7,1.01)+
   scale_color_brewer(palette="Dark2")+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12),
-                 axis.text.y = ggplot2::element_text(size=12))
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))
 
 legend<- get_legend(legend_test)
 prow<- plot_grid(ni_plot, benthic_plot, pelagic_plot, labels = c("A", "B", "C"), align = "v", ncol=1)

@@ -1,0 +1,41 @@
+Group,biomass,year,pct_change,scenario
+Demersal Fish,19838649.28,2015,NA,Strict Conservation
+Epibenthos,18372407.83,2015,NA,Strict Conservation
+Filter Feeder,40127243.67,2015,NA,Strict Conservation
+Mammals,1780998.721,2015,NA,Strict Conservation
+Pelagic Fish,60825485.97,2015,NA,Strict Conservation
+Primary Producer,12094277354,2015,NA,Strict Conservation
+Seabirds,17856.74702,2015,NA,Strict Conservation
+Sharks and Rays,3931348.031,2015,NA,Strict Conservation
+Squid,60953338.81,2015,NA,Strict Conservation
+Zooplankton,2149521202,2015,NA,Strict Conservation
+Demersal Fish,24330879.38,2030,22.64383039,Strict Conservation
+Epibenthos,17283298.91,2030,-5.927959609,Strict Conservation
+Filter Feeder,50304719.47,2030,25.36300747,Strict Conservation
+Mammals,1682163.901,2030,-5.549404342,Strict Conservation
+Pelagic Fish,59494606.48,2030,-2.188029359,Strict Conservation
+Primary Producer,7073064402,2030,-41.51726312,Strict Conservation
+Seabirds,17970.44681,2030,0.636732933,Strict Conservation
+Sharks and Rays,4154231.987,2030,5.669402814,Strict Conservation
+Squid,54200695.17,2030,-11.07838187,Strict Conservation
+Zooplankton,2197345114,2030,2.2248635,Strict Conservation
+Demersal Fish,23720916.54,2050,19.56921163,Strict Conservation
+Epibenthos,45138429.2,2050,145.6859744,Strict Conservation
+Filter Feeder,68539699.02,2050,70.80589833,Strict Conservation
+Mammals,1571690.756,2050,-11.75228047,Strict Conservation
+Pelagic Fish,71488073.06,2050,17.52980173,Strict Conservation
+Primary Producer,3837676538,2050,-68.26865777,Strict Conservation
+Seabirds,17558.06275,2050,-1.672668983,Strict Conservation
+Sharks and Rays,4222482.539,2050,7.40546258,Strict Conservation
+Squid,57271402.06,2050,-6.040582554,Strict Conservation
+Zooplankton,2109068811,2050,-1.881925637,Strict Conservation
+Demersal Fish,23222314.1,2068,17.05592336,Strict Conservation
+Epibenthos,50491133.48,2068,174.8204479,Strict Conservation
+Filter Feeder,87582373.5,2068,118.2616235,Strict Conservation
+Mammals,1508030.41,2068,-15.32669887,Strict Conservation
+Pelagic Fish,74249140.66,2068,22.06912855,Strict Conservation
+Primary Producer,3148442767,2068,-73.96749987,Strict Conservation
+Seabirds,17610.16862,2068,-1.380869646,Strict Conservation
+Sharks and Rays,4242060.352,2068,7.903454955,Strict Conservation
+Squid,55273496.81,2068,-9.318344345,Strict Conservation
+Zooplankton,2005295441,2068,-6.70966915,Strict Conservation

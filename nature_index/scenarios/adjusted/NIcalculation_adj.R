@@ -362,8 +362,9 @@ a<- ggplot(index3, aes(year,score)) +
   geom_line(aes(colour=scenario)) + 
   ylim(0.25,1)+ggtitle("Norway Nature Index for the Barents Sea")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("Year")+
   ylab("Score")+ theme(legend.position="none")
 
@@ -389,8 +390,9 @@ b<- ggplot(benthic_nni, aes(year,score)) +
   geom_line(aes(colour=scenario)) +
   ylim(0.25,1)+ggtitle("Benthic Norway Nature Index for the Barents Sea")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("Year")+
   ylab("Score")+ theme(legend.position="none")
 
@@ -413,8 +415,9 @@ c<- ggplot(pelagic_nni, aes(year,score)) +
   xlim(1981, 2015)+
   ggtitle("Pelagic Norway Nature Index for the Barents Sea")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("Year")+
   ylab("Score")+ theme(legend.position="none")+ theme(legend.position="none")
 
@@ -423,8 +426,9 @@ legend<- ggplot(pelagic_nni, aes(year,score)) +
   xlim(1981, 2015)+
   ggtitle("Pelagic Norway Nature Index for the Barents Sea")+
   theme_bw()+
-  ggplot2::theme(text = ggplot2::element_text(size=14),
-                 axis.text.x = ggplot2::element_text(size=12))+
+  theme(axis.text=element_text(size=15))+theme(axis.title.x=element_text(size=25))+
+  theme(axis.title.y=element_text(size=25))+ theme(legend.text=element_text(size=25))+
+  theme(legend.title=element_text(size=25))+
   xlab("Year")+
   ylab("Score")
 
